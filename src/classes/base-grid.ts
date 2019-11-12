@@ -21,7 +21,6 @@ abstract class BaseGrid extends Grid {
         this.ctx.translate(.5,.5);
         this.drawLabels();
         this.setUpDrawArea();
-        this.drawBorder();
     }
 
     setUpDrawArea() {
@@ -49,7 +48,7 @@ abstract class BaseGrid extends Grid {
         this.ctx.translate(this.drawArea.startX, this.drawArea.startY);
     }
     
-    private drawBorder() {
+    drawBorder() {
         const {ctx} = this;
         const {width, height} = this.drawArea;
         const {left, bottom, top, right} = this.labels;

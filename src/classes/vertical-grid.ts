@@ -1,26 +1,26 @@
 import BaseGrid from "./base-grid";
 import { AllLabels, AnyLabel } from "../types/grids.types";
-import { COLUMN_CHART, OPOSITE_COLUMN_CHART, LINE_CHART } from "../types/chart-names";
 import Line from "./line";
+import { ROW_CHART, OPOSITE_ROW_CHART } from "../types/chart-names";
 
-class HorizontalGrid extends BaseGrid {
+class VerticalGrid extends BaseGrid {
 
     allowedCharts: string[];
     labels: AllLabels;
-    mainLabel: 'left' | 'right';
-    constructor(canvas: HTMLCanvasElement, labels: AllLabels, {mainLabel}: {mainLabel: 'left' | 'right'} = {mainLabel: 'left'}) {
+    mainLabel: 'top' | 'bottom';
+    constructor(canvas: HTMLCanvasElement, labels: AllLabels, {mainLabel}: {mainLabel: 'top' | 'bottom'} = {mainLabel: 'bottom'}) {
         super(canvas);
-        this.allowedCharts = [COLUMN_CHART, OPOSITE_COLUMN_CHART, LINE_CHART];
+        this.allowedCharts = [ROW_CHART, OPOSITE_ROW_CHART];
         this.mainLabel = mainLabel;
         //validate labels
         let valid = false
-        if(labels.left) {
-            if(labels.left.type !== 'string') {
+        if(labels.bottom) {
+            if(labels.bottom.type !== 'string') {
                 valid = true;
             }
         } else {
-            this.mainLabel = 'right';
-            if(labels.right && labels.right.type !== 'string') {
+            this.mainLabel = 'bottom';
+            if(labels.top && labels.top.type !== 'string') {
                 valid = true;
             }
         }
@@ -40,11 +40,11 @@ class HorizontalGrid extends BaseGrid {
 
     drawInnerGrid() {
         let len = ((<AnyLabel>this.labels[this.mainLabel]).values.length - 1) * 2;
-        let step = this.drawArea.height / len;
+        let step = this.drawArea.width / len;
         let curent = 0;
         this.ctx.strokeStyle = this.colors.secondary;
         for(let i = 0; i < len + 1; i++) {
-            new Line(this.ctx, [[0, curent],[this.drawArea.width, curent]]).draw();
+            new Line(this.ctx, [[curent, 0],[curent, this.drawArea.height]]).draw();
             curent += step;
         }
 
@@ -52,4 +52,4 @@ class HorizontalGrid extends BaseGrid {
 
 }
 
-export default HorizontalGrid;
+export default VerticalGrid;

@@ -20,6 +20,9 @@ abstract class Grid implements GridType {
     constructor(public canvas: HTMLCanvasElement, { margin, colors, font, labelPadding }: OptionsType = USE_DEFAULT_GRID()) {
         let ctx = this.canvas.getContext('2d');
         if (ctx) {
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.restore();
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             this.ctx = ctx;
         } else {
             throw new Error('Something went wrong while reading context');
