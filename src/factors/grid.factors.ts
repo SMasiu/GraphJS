@@ -10,5 +10,11 @@ export const USE_DEFAULT_GRID = (): OptionsType => ({
         right: 25,
         bottom: 25,
         left: 25
-    }
+    },
+    font: {
+        color: 'rgb(30, 30, 30)',
+        size: 10,
+        family: 'Montserrat'
+    },
+    labelPadding: 10
 });

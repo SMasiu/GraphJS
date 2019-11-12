@@ -8,14 +8,24 @@ export interface GridType {
     margin: MarginAll;
     colors: GridColors;
     drawArea: DrawArea;
-    labels: Label;
     allowedCharts: string[];
-    chartList: {[key: string]: Chart}
+    chartList: {[key: string]: Chart};
+    labels: Label | AllLabels;
+    font: FontOptions;
+    labelPadding: number;
+}
+
+export interface FontOptions {
+    size: number;
+    family: string;
+    color: string;
 }
 
 export interface OptionsType {
-    margin: MarginAll,
-    colors: GridColors
+    margin: MarginAll;
+    colors: GridColors;
+    font: FontOptions;
+    labelPadding: number;
 }
 
 export interface GridColors {
@@ -39,22 +49,19 @@ export interface DrawArea {
     centerY: number;
 }
 
+export interface AllLabels {
+    top?: AnyLabel;
+    right?: AnyLabel;
+    bottom?: AnyLabel;
+    left?: AnyLabel;
+}
+
 export interface HorizontalGridType {
-    labels: {
-        top: AnyLabel;
-        right: AnyLabel;
-        bottom: AnyLabel;
-        left: AnyLabel;
-    }
+    labels: AllLabels;
 }
 
 export interface VerticalGridType {
-    labels: {
-        top: AnyLabel;
-        right: AnyLabel;
-        bottom: AnyLabel;
-        left: AnyLabel;
-    }
+    labels: AllLabels;
 }
 
 export interface RoundGridType {
@@ -77,17 +84,18 @@ export interface Label {
     values: string[] | boolean[] | number[];
 }
 
-interface AnyLabel extends Label {
+export interface AnyLabel extends Label {
     type: 'percent' | 'value' | 'string';
+    width?: number;
     values: string[] | number[];
 }
 
-interface StringLabel extends Label {
+export interface StringLabel extends Label {
     type: 'string';
     values: string[];
 }
 
-interface NumberLabel extends Label {
+export interface NumberLabel extends Label {
     type: 'number';
     values: number[];
 }
