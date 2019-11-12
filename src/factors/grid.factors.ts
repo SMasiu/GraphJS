@@ -13,7 +13,7 @@ export const USE_DEFAULT_GRID = (): OptionsType => ({
     },
     font: {
         color: 'rgb(30, 30, 30)',
-        size: 12,
+        size: 11,
         family: 'Montserrat'
     },
     labelPadding: 10

@@ -6,20 +6,20 @@ if(canvas) {
 
     let grid = new HorizontalGrid(canvas, {
         left: {
-            type: 'string',
-            values: ['June', 'July', 'November', 'December']
+            type: 'value',
+            values: [100, 80, 60, 40, 20, 0]
         }, 
         right: {
-            type: 'string',
-            values: ['London', 'Warsaw', 'Gliwize', 'Zabrze']
+            type: 'value',
+            values: [100, 80, 60, 40, 20, 0]
         },
         top: {
-            type: 'string',
-            values: ['one','two','thre','four','five']
+            type: 'value',
+            values: [0, 20, 40, 60, 80, 100]
         },
         bottom: {
-            type: 'string',
-            values: ['June', 'July', 'November', 'December']
+            type: 'value',
+            values: [100, 80, 60, 40, 20, 0]
         }
     });
 

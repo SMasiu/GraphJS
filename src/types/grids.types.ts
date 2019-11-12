@@ -13,6 +13,7 @@ export interface GridType {
     labels: Label | AllLabels;
     font: FontOptions;
     labelPadding: number;
+    mainLabel: string;
 }
 
 export interface FontOptions {

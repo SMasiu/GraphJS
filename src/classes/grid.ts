@@ -12,6 +12,7 @@ abstract class Grid implements GridType {
     chartList: {[key: string]: Chart}
     font: FontOptions;
     labelPadding: number;
+    abstract mainLabel: string;
     abstract labels: Label | AllLabels;
     abstract drawArea: DrawArea;
     abstract allowedCharts: string[];
