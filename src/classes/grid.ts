@@ -1,4 +1,4 @@
-import { GridType, MarginAll, LabelType, DrawArea, GridColors, OptionsType, AllLabels, FontOptions } from "../types/grids.types";
+import { GridType, MarginAll, LabelType, DrawArea, GridColors, OptionsType, AllLabels, FontOptions, Label2dType } from "../types/grids.types";
 import { USE_DEFAULT_GRID } from "../factors/grid.factors";
 import { Chart } from "../types/charts.types";
 
@@ -17,7 +17,7 @@ abstract class Grid implements GridType {
     RAD_0: number = 0 - Math.PI / 2;
     
     abstract mainLabel: string;
-    abstract labels: LabelType | AllLabels;
+    abstract labels: LabelType | AllLabels | Label2dType;
     abstract drawArea: DrawArea;
     abstract allowedCharts: string[];
 

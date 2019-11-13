@@ -5,6 +5,7 @@ import ValueLabel from "./classes/value-label";
 import StringLabel from "./classes/string-label";
 import PercentLabel from "./classes/percent-label";
 import PolygonGrid from "./classes/polygon-grid";
+import CoordinateSystem2dGrid from "./classes/coordinate-system-2d-grid";
 
 let canvas1: HTMLCanvasElement | null = document.querySelector('#c1');
 let canvas2: HTMLCanvasElement | null = document.querySelector('#c2');
@@ -33,5 +34,12 @@ if(canvas2) {
 }
 if(canvas3) {
     let grid = new PolygonGrid(canvas3, new StringLabel(['June', 'July', 'May', 'November', 'December']));
+    grid.draw();
+}
+if(canvas4) {
+    let grid = new CoordinateSystem2dGrid(canvas4, {
+        x: new ValueLabel(-20, 100, 20),
+        y: new ValueLabel(-20, 100, 20, {reverse: true})
+    });
     grid.draw();
 }

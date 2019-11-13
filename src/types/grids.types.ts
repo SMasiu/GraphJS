@@ -12,7 +12,7 @@ export interface GridType {
     drawArea: DrawArea;
     allowedCharts: string[];
     chartList: {[key: string]: Chart};
-    labels: LabelType | AllLabels;
+    labels: LabelType | AllLabels | Label2dType;
     font: FontOptions;
     labelPadding: number;
     mainLabel: string;
@@ -71,11 +71,13 @@ export interface PolygonGridType {
     labels: StringLabelType;
 }
 
-export interface CoordinateGridType {
-    labels: {
-        vertical: NumberLabelType;
-        horizontal: NumberLabelType;
-    }
+export interface Coordinate2dGridType {
+    labels: Label2dType
+}
+
+export interface Label2dType {
+    y: NumberLabelType;
+    x: NumberLabelType;
 }
 
 export interface LabelType {
