@@ -6,11 +6,13 @@ import StringLabel from "./classes/string-label";
 import PercentLabel from "./classes/percent-label";
 import PolygonGrid from "./classes/polygon-grid";
 import CoordinateSystem2dGrid from "./classes/coordinate-system-2d-grid";
+import CoordinateSystem1dGrid from "./classes/coordinate-system-1d-grid";
 
 let canvas1: HTMLCanvasElement | null = document.querySelector('#c1');
 let canvas2: HTMLCanvasElement | null = document.querySelector('#c2');
 let canvas3: HTMLCanvasElement | null = document.querySelector('#c3');
 let canvas4: HTMLCanvasElement | null = document.querySelector('#c4');
+let canvas5: HTMLCanvasElement | null = document.querySelector('#c5');
 
 new ValueLabel(0, 100, 20);
 
@@ -38,8 +40,12 @@ if(canvas3) {
 }
 if(canvas4) {
     let grid = new CoordinateSystem2dGrid(canvas4, {
-        x: new ValueLabel(-20, 100, 20),
-        y: new ValueLabel(-20, 100, 20, {reverse: true})
+        x: new ValueLabel(-100, 100, 20),
+        y: new ValueLabel(-100, 100, 20, {reverse: true})
     });
+    grid.draw();
+}
+if(canvas5) {
+    let grid = new CoordinateSystem1dGrid(canvas5, new ValueLabel(-100, 100, 20));
     grid.draw();
 }

@@ -75,6 +75,10 @@ export interface Coordinate2dGridType {
     labels: Label2dType
 }
 
+export interface Coordinate1dGridType {
+    labels: NumberLabelType
+}
+
 export interface Label2dType {
     y: NumberLabelType;
     x: NumberLabelType;
