@@ -5,12 +5,14 @@ export interface GridType {
     ctx: CanvasRenderingContext2D;
     width: number;
     height: number;
+    centerX: number;
+    centerY: number;
     margin: MarginAll;
     colors: GridColors;
     drawArea: DrawArea;
     allowedCharts: string[];
     chartList: {[key: string]: Chart};
-    labels: Label | AllLabels;
+    labels: LabelType | AllLabels;
     font: FontOptions;
     labelPadding: number;
     mainLabel: string;
@@ -51,10 +53,10 @@ export interface DrawArea {
 }
 
 export interface AllLabels {
-    top?: AnyLabel;
-    right?: AnyLabel;
-    bottom?: AnyLabel;
-    left?: AnyLabel;
+    top?: AnyLabelType;
+    right?: AnyLabelType;
+    bottom?: AnyLabelType;
+    left?: AnyLabelType;
 }
 
 export interface HorizontalGridType {
@@ -65,38 +67,39 @@ export interface VerticalGridType {
     labels: AllLabels;
 }
 
-export interface RoundGridType {
-    labels: StringLabel;
-}
-
 export interface PolygonGridType {
-    labels: StringLabel;
+    labels: StringLabelType;
 }
 
 export interface CoordinateGridType {
     labels: {
-        vertical: NumberLabel;
-        horizontal: NumberLabel;
+        vertical: NumberLabelType;
+        horizontal: NumberLabelType;
     }
 }
 
-export interface Label {
+export interface LabelType {
     type: string;
     values: string[] | boolean[] | number[];
 }
 
-export interface AnyLabel extends Label {
+export interface AnyLabelType extends LabelType {
     type: 'percent' | 'value' | 'string';
     width?: number;
     values: string[] | number[];
 }
 
-export interface StringLabel extends Label {
+export interface StringLabelType extends LabelType {
     type: 'string';
     values: string[];
 }
 
-export interface NumberLabel extends Label {
-    type: 'number';
+export interface NumberLabelType extends LabelType {
+    type: 'value';
     values: number[];
+}
+
+export interface PercentLabelType extends LabelType {
+    type: 'percent';
+    values: string[];
 }

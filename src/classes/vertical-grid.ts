@@ -1,35 +1,38 @@
 import BaseGrid from "./base-grid";
-import { AllLabels, AnyLabel } from "../types/grids.types";
+import { AllLabels, AnyLabelType, VerticalGridType } from "../types/grids.types";
 import Line from "./line";
 import { ROW_CHART, OPOSITE_ROW_CHART } from "../types/chart-names";
+import { InputAllLabels } from "../types/input-labels.type";
 
-class VerticalGrid extends BaseGrid {
+class VerticalGrid extends BaseGrid implements VerticalGridType {
 
     allowedCharts: string[];
     labels: AllLabels;
     mainLabel: 'top' | 'bottom';
-    constructor(canvas: HTMLCanvasElement, labels: AllLabels, {mainLabel}: {mainLabel: 'top' | 'bottom'} = {mainLabel: 'bottom'}) {
+    constructor(canvas: HTMLCanvasElement, labels: InputAllLabels, {mainLabel}: {mainLabel: 'top' | 'bottom'} = {mainLabel: 'bottom'}) {
         super(canvas);
         this.allowedCharts = [ROW_CHART, OPOSITE_ROW_CHART];
         this.mainLabel = mainLabel;
-        //validate labels
+        //validate labels 
+        if(!this.validateLabels(labels)) {
+            throw new Error('No coresponding labels to values');
+        }   
+        this.labels = this.setLabels(labels);
+    }
+
+    validateLabels(labels: InputAllLabels) {
         let valid = false
         if(labels.bottom) {
-            if(labels.bottom.type !== 'string') {
+            if(labels.bottom.identifier !== 'string') {
                 valid = true;
             }
         } else {
-            this.mainLabel = 'bottom';
-            if(labels.top && labels.top.type !== 'string') {
+            this.mainLabel = 'top';
+            if(labels.top && labels.top.identifier !== 'string') {
                 valid = true;
             }
         }
-        if(!valid) {
-            throw new Error('No coresponding labels to values');
-        }
-
-        this.labels = labels;
-        
+        return valid;
     }
 
     draw() {
@@ -39,12 +42,11 @@ class VerticalGrid extends BaseGrid {
     }
 
     drawInnerGrid() {
-        let len = ((<AnyLabel>this.labels[this.mainLabel]).values.length - 1) * 2;
+        let len = ((<AnyLabelType>this.labels[this.mainLabel]).values.length - 1) * 2;
         let step = this.drawArea.width / len;
         let curent = 0;
-        this.ctx.strokeStyle = this.colors.secondary;
         for(let i = 0; i < len + 1; i++) {
-            new Line(this.ctx, [[curent, 0],[curent, this.drawArea.height]]).draw();
+            new Line(this.ctx, [[curent, 0],[curent, this.drawArea.height]], {color: this.colors.secondary}).draw();
             curent += step;
         }
 

@@ -6,15 +6,15 @@ export const USE_DEFAULT_GRID = (): OptionsType => ({
         secondary: 'rgb(204, 204, 204)'
     },
     margin: {
-        top: 25,
-        right: 25,
-        bottom: 25,
-        left: 25
+        top: 100,
+        right: 100,
+        bottom: 100,
+        left: 100
     },
     font: {
         color: 'rgb(30, 30, 30)',
         size: 11,
-        family: 'Montserrat'
+        family: 'Sans-Serif'
     },
     labelPadding: 10
 });

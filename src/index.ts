@@ -1,53 +1,37 @@
 import HorizontalGrid from "./classes/horizontal-grid";
 import VerticalGrid from "./classes/vertical-grid";
 import Grid from "./classes/grid";
+import ValueLabel from "./classes/value-label";
+import StringLabel from "./classes/string-label";
+import PercentLabel from "./classes/percent-label";
+import PolygonGrid from "./classes/polygon-grid";
 
 let canvas1: HTMLCanvasElement | null = document.querySelector('#c1');
 let canvas2: HTMLCanvasElement | null = document.querySelector('#c2');
+let canvas3: HTMLCanvasElement | null = document.querySelector('#c3');
+let canvas4: HTMLCanvasElement | null = document.querySelector('#c4');
+
+new ValueLabel(0, 100, 20);
 
 if(canvas1) {
-
     let grid: Grid = new HorizontalGrid(canvas1, {
-        left: {
-            type: 'value',
-            values: [100, 80, 60, 40, 20, 0]
-        }, 
-        right: {
-            type: 'value',
-            values: [100, 80, 60, 40, 20, 0]
-        },
-        top: {
-            type: 'value',
-            values: [0, 20, 40, 60, 80, 100]
-        },
-        bottom: {
-            type: 'value',
-            values: [100, 80, 60, 40, 20, 0]
-        }
+        top: new ValueLabel(0, 100, 20),
+        right: new PercentLabel(25, {reverse: true}),
+        bottom: new StringLabel(['June', 'July', 'May', 'November', 'December']),
+        left: new ValueLabel(0, 100, 20, {reverse: true})
     });
-
     grid.draw();
 }
 if(canvas2) {
     let grid = new VerticalGrid(canvas2, {
-        left: {
-            type: 'value',
-            values: [100, 80, 60, 40, 20, 0]
-        }, 
-        right: {
-            type: 'value',
-            values: [100, 80, 60, 40, 20, 0]
-        },
-        top: {
-            type: 'value',
-            values: [0, 20, 40, 60, 80, 100]
-        },
-        bottom: {
-            type: 'value',
-            values: [100, 80, 60, 40, 20, 0]
-        }
+        top: new PercentLabel(25, {reverse: true}),
+        right: new StringLabel(['June', 'July', 'May', 'November', 'December']),
+        bottom: new ValueLabel(0, 100, 20),
+        left: new ValueLabel(0, 100, 20, {reverse: true})
     });
-
     grid.draw();
-
+}
+if(canvas3) {
+    let grid = new PolygonGrid(canvas3, new StringLabel(['June', 'July', 'May', 'November', 'December']));
+    grid.draw();
 }

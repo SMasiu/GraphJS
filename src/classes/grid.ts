@@ -1,4 +1,4 @@
-import { GridType, MarginAll, Label, DrawArea, GridColors, OptionsType, AllLabels, FontOptions } from "../types/grids.types";
+import { GridType, MarginAll, LabelType, DrawArea, GridColors, OptionsType, AllLabels, FontOptions } from "../types/grids.types";
 import { USE_DEFAULT_GRID } from "../factors/grid.factors";
 import { Chart } from "../types/charts.types";
 
@@ -7,13 +7,17 @@ abstract class Grid implements GridType {
     ctx: CanvasRenderingContext2D;
     height: number;
     width: number;
+    centerX: number;
+    centerY: number;
     colors: GridColors;
     margin: MarginAll;
     chartList: {[key: string]: Chart}
     font: FontOptions;
     labelPadding: number;
+    RAD_0: number = 0 - Math.PI / 2;
+    
     abstract mainLabel: string;
-    abstract labels: Label | AllLabels;
+    abstract labels: LabelType | AllLabels;
     abstract drawArea: DrawArea;
     abstract allowedCharts: string[];
 
@@ -29,6 +33,8 @@ abstract class Grid implements GridType {
         }
         this.height = ctx.canvas.clientHeight;
         this.width = ctx.canvas.clientWidth;
+        this.centerX = this.width / 2;
+        this.centerY = this.height / 2;
         this.margin = margin;
         this.labelPadding = labelPadding;
         this.colors = colors;
@@ -38,10 +44,14 @@ abstract class Grid implements GridType {
 
     abstract draw(): void;
     abstract setUpDrawArea(): void;
-
+    abstract setLabels(labels: any): any;
+    validateLabels(labels: any): boolean {
+        return true;
+    };
+    
     setFont(align: string) {
         const {ctx} = this;
-        ctx.textAlign = 'right';
+        ctx.textAlign = <CanvasTextAlign>align;
         ctx.font = `bold ${this.font.size}px ${this.font.family}`;
         ctx.fillStyle = this.font.color;
     }
