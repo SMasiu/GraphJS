@@ -16,7 +16,7 @@ abstract class BaseGrid extends Grid {
         this.drawArea = clearDrawArea;
     }
 
-    abstract draw(): void;
+    abstract drawGrid(): void;
     abstract validateLabels(labels: InputAllLabels): boolean;
 
     setLabels(labels: InputAllLabels): AllLabels {
@@ -34,7 +34,6 @@ abstract class BaseGrid extends Grid {
     }
 
     drawOuter() {
-        this.ctx.translate(.5,.5);
         this.drawLabels();
         this.setUpDrawArea();
     }

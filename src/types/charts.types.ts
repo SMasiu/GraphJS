@@ -1,22 +1,25 @@
-export interface Chart {
-    title: string;
+import Grid from "../classes/grid";
+
+export interface ChartType {
     opacity: number;
     lineWidth: number;
     content: any[];
+    parent: Grid | null;
+    ctx: CanvasRenderingContext2D | null;
 }
 
-interface ValueColor {
+interface ValueColorType {
     color: string;
     value: number | string;
 }
 
-interface GroupItem {
+interface GroupItemType {
     type: string;
-    values: ValueColor | ValueColor[];
+    values: ValueColorType | ValueColorType[];
 }
 
-interface SingleItem {
-    values: ValueColor;
+interface SingleItemType {
+    values: ValueColorType;
 }
 
 interface MultipleValuesItem {
@@ -24,30 +27,35 @@ interface MultipleValuesItem {
     values: number[] | string[];
 }
 
-export interface ColumnChart extends Chart {
-    content: GroupItem[];
+export interface ColumnChart extends ChartType {
+    content: GroupItemType[];
 }
 
-export interface RowChart extends Chart {
-    content: GroupItem[];
+export interface RowChart extends ChartType {
+    content: GroupItemType[];
 }
 
-export interface OpositeColumnChart extends Chart {
-    content: GroupItem[];
+export interface OpositeColumnChart extends ChartType {
+    content: GroupItemType[];
 }
 
-export interface OpositeRowChart extends Chart {
-    content: GroupItem[];
+export interface OpositeRowChart extends ChartType {
+    content: GroupItemType[];
 }
 
-export interface PolygonChart extends Chart {
+export interface PolygonChart extends ChartType {
     content: MultipleValuesItem[];
 }
 
-export interface RoundChart extends Chart {
-    content: SingleItem[];
+export interface RoundChart extends ChartType {
+    content: SingleItemType[];
 }
 
-export interface LineChart extends Chart {
+export interface LineChart extends ChartType {
     content: MultipleValuesItem[];
+}
+
+export interface ChartOptions {
+    lineWidth: number;
+    opacity: number;
 }

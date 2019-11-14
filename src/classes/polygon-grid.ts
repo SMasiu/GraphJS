@@ -32,9 +32,8 @@ class PolygonGrid extends Grid implements PolygonGridType {
         }
     }
 
-    draw() {
+    drawGrid() {
         const {ctx} = this;
-        this.ctx.translate(.5,.5);
         let singleAngle = Math.PI * 2 / this.labels.values.length;
         let radius = this.radius;
         let step = radius / this.gridSize;
@@ -77,6 +76,7 @@ class PolygonGrid extends Grid implements PolygonGridType {
             width,
             height
         }
+        this.ctx.translate(this.drawArea.startX, this.drawArea.startY);
     }
 
 }

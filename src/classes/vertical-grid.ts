@@ -35,7 +35,7 @@ class VerticalGrid extends BaseGrid implements VerticalGridType {
         return valid;
     }
 
-    draw() {
+    drawGrid() {
         this.drawOuter();
         this.drawInnerGrid();
         this.drawBorder();

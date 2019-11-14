@@ -7,12 +7,15 @@ import PercentLabel from "./classes/percent-label";
 import PolygonGrid from "./classes/polygon-grid";
 import CoordinateSystem2dGrid from "./classes/coordinate-system-2d-grid";
 import CoordinateSystem1dGrid from "./classes/coordinate-system-1d-grid";
+import NoGrid from "./classes/no-grid";
+import SameDirectionRoundChart from "./classes/same-direction-round-chart";
 
 let canvas1: HTMLCanvasElement | null = document.querySelector('#c1');
 let canvas2: HTMLCanvasElement | null = document.querySelector('#c2');
 let canvas3: HTMLCanvasElement | null = document.querySelector('#c3');
 let canvas4: HTMLCanvasElement | null = document.querySelector('#c4');
 let canvas5: HTMLCanvasElement | null = document.querySelector('#c5');
+let canvas6: HTMLCanvasElement | null = document.querySelector('#c6');
 
 new ValueLabel(0, 100, 20);
 
@@ -47,5 +50,12 @@ if(canvas4) {
 }
 if(canvas5) {
     let grid = new CoordinateSystem1dGrid(canvas5, new ValueLabel(-100, 100, 20));
+    grid.draw();
+}
+if(canvas6) {
+    let grid = new NoGrid(canvas6, new StringLabel(['June', 'July', 'May', 'November', 'December']));
+    grid.addCharts({
+        animals: new SameDirectionRoundChart()
+    });
     grid.draw();
 }

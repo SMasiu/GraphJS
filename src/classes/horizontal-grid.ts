@@ -35,7 +35,7 @@ class HorizontalGrid extends BaseGrid implements HorizontalGridType {
         return valid;
     }
 
-    draw() {
+    drawGrid() {
         this.drawOuter();
         this.drawInnerGrid();
         this.drawBorder();

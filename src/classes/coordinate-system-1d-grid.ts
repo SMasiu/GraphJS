@@ -22,8 +22,7 @@ class CoordinateSystem1dGrid extends Grid implements CoordinateSystem1dGrid {
         this.x0position = 0;
     }
 
-    draw() {
-        this.ctx.translate(.5,.5);
+    drawGrid() {
         this.setUpDrawArea();
         const {centerY, width} = this.drawArea;
         new Line(this.ctx, [[0, centerY], [width, centerY]]).draw();

@@ -54,8 +54,7 @@ class CoordinateSystem2dGrid extends Grid implements Coordinate2dGridType {
         return x;
     }
 
-    draw() {
-        this.ctx.translate(.5,.5);
+    drawGrid() {
         this.setUpDrawArea();
         this.getZeroPosition();
         this.drawBorder();

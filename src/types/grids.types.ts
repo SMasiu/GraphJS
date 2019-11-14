@@ -1,4 +1,4 @@
-import { Chart } from "./charts.types";
+import Chart from "../classes/chart";
 
 export interface GridType {
     canvas: HTMLCanvasElement;
@@ -77,6 +77,10 @@ export interface Coordinate2dGridType {
 
 export interface Coordinate1dGridType {
     labels: NumberLabelType
+}
+
+export interface NoGridType {
+    labels: StringLabelType
 }
 
 export interface Label2dType {

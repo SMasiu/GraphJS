@@ -1,6 +1,6 @@
 import { GridType, MarginAll, LabelType, DrawArea, GridColors, OptionsType, AllLabels, FontOptions, Label2dType } from "../types/grids.types";
 import { USE_DEFAULT_GRID } from "../factors/grid.factors";
-import { Chart } from "../types/charts.types";
+import Chart from "./chart";
 
 abstract class Grid implements GridType {
     
@@ -42,12 +42,20 @@ abstract class Grid implements GridType {
         this.chartList = {};
     }
 
-    abstract draw(): void;
+    
     abstract setUpDrawArea(): void;
     abstract setLabels(labels: any): any;
+    abstract drawGrid(): void;
+
+    draw() {
+        this.ctx.translate(.5,.5);
+        this.drawGrid();
+        this.drawCharts();
+    }
+
     validateLabels(labels: any): boolean {
         return true;
-    };
+    }
     
     setFont(align: string) {
         const {ctx} = this;
@@ -68,10 +76,26 @@ abstract class Grid implements GridType {
         return max;
     }
 
-    addChart(): void {
+    addCharts(charts: {[key: string]: Chart}): void {
+
+        for(let name in charts) {
+            if(this.chartList[name]) {
+                throw new Error('This chart name is taken');
+            } else {
+                charts[name].ctx = this.ctx;
+                charts[name].parent = this;
+                this.chartList[name] = charts[name];
+            }
+        }
 
     }
     
+    drawCharts() {
+        for(let chart in this.chartList) {
+            this.chartList[chart].draw();
+        }
+    }
+
 }
 
 export default Grid;
