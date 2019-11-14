@@ -55,7 +55,19 @@ if(canvas5) {
 if(canvas6) {
     let grid = new NoGrid(canvas6, new StringLabel(['June', 'July', 'May', 'November', 'December']));
     grid.addCharts({
-        animals: new SameDirectionRoundChart()
+        animals: new SameDirectionRoundChart({
+            centerValue: 130,
+            values: [{
+                color: 'red',
+                value: 70
+            },{
+                color: 'orange',
+                value: 50
+            },{ 
+                color: 'gray',
+                value: 40
+            }]
+        })
     });
     grid.draw();
 }

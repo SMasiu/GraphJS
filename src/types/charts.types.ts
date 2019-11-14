@@ -5,12 +5,13 @@ export interface ChartType {
     lineWidth: number;
     content: any[];
     parent: Grid | null;
+    itemSize: number;
     ctx: CanvasRenderingContext2D | null;
 }
 
-interface ValueColorType {
+export interface ValueColorType {
     color: string;
-    value: number | string;
+    value: number;
 }
 
 interface GroupItemType {
@@ -51,6 +52,10 @@ export interface RoundChart extends ChartType {
     content: SingleItemType[];
 }
 
+export interface SameDirectionRoundChartType {
+    content: ValueColorType[];
+}
+
 export interface LineChart extends ChartType {
     content: MultipleValuesItem[];
 }
@@ -58,4 +63,10 @@ export interface LineChart extends ChartType {
 export interface ChartOptions {
     lineWidth: number;
     opacity: number;
+    itemSize: number;
+}
+
+export interface SameDirectionRoundChartInputType {
+    values?: ValueColorType[];
+    centerValue?: any;
 }
