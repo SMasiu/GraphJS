@@ -19,37 +19,33 @@ interface GroupItemType {
     values: ValueColorType | ValueColorType[];
 }
 
-interface SingleItemType {
-    values: ValueColorType;
-}
-
 interface MultipleValuesItem {
     color: string;
     values: number[] | string[];
 }
 
-export interface ColumnChart extends ChartType {
+export interface ColumnChartType extends ChartType {
     content: GroupItemType[];
 }
 
-export interface RowChart extends ChartType {
+export interface RowChartType extends ChartType {
     content: GroupItemType[];
 }
 
-export interface OpositeColumnChart extends ChartType {
+export interface OpositeColumnChartType extends ChartType {
     content: GroupItemType[];
 }
 
-export interface OpositeRowChart extends ChartType {
+export interface OpositeRowCharTypet extends ChartType {
     content: GroupItemType[];
 }
 
-export interface PolygonChart extends ChartType {
+export interface PolygonCharTypet extends ChartType {
     content: MultipleValuesItem[];
 }
 
-export interface RoundChart extends ChartType {
-    content: SingleItemType[];
+export interface RoundChartType extends ChartType {
+    content: ValueColorType[];
 }
 
 export interface SameDirectionRoundChartType {
@@ -69,4 +65,12 @@ export interface ChartOptions {
 export interface SameDirectionRoundChartInputType {
     values?: ValueColorType[];
     centerValue?: any;
+}
+
+export interface RoundChartInputType {
+    values?: ValueColorType[];
+    centerValue?: any;
+    changingSize?: boolean;
+    blankCenter?: boolean;
+    itemsMargin?: number;
 }

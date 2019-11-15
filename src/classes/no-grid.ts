@@ -32,7 +32,7 @@ class NoGrid extends Grid implements NoGridType {
             centerX: width / 2,
             centerY: height / 2,
             startX: left,
-            startY: right
+            startY: top
         }
         this.ctx.translate(this.drawArea.startX, this.drawArea.startY);
     }

@@ -7,9 +7,9 @@ export const USE_DEFAULT_GRID = (): OptionsType => ({
     },
     margin: {
         top: 50,
-        right: 50,
+        right: 200,
         bottom: 50,
-        left: 50
+        left: 200
     },
     font: {
         color: 'rgb(30, 30, 30)',

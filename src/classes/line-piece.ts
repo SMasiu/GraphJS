@@ -1,5 +1,3 @@
-import CirclePoint from "./circle-point";
-
 interface LinePieceOptions {
     color?: string;
     lineWidth?: number;
@@ -25,6 +23,7 @@ class LinePiece {
         this.opacity = options.opcaity || .75;
         this.offset = options.offset || 0 - Math.PI / 2;
         this.angle = options.angle || Math.PI * 2;
+        this.angle -= Math.PI * .5;
         this.size = options.size || 30;
     }
 

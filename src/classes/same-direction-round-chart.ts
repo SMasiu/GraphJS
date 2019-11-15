@@ -1,7 +1,7 @@
 import Chart from "./chart";
 import { SameDirectionRoundChartInputType, SameDirectionRoundChartType, ValueColorType } from "../types/charts.types";
 import LinePiece from "./line-piece";
-import Line from "./line";
+import { LabelType } from "../types/grids.types";
 
 class SameDirectionRoundChart extends Chart implements SameDirectionRoundChartType {
     content: ValueColorType[];
@@ -14,12 +14,12 @@ class SameDirectionRoundChart extends Chart implements SameDirectionRoundChartTy
 
     draw() {
         if(this.ctx && this.parent) {
-            const { width, height, centerX, centerY } = this.parent.drawArea;
+            const { centerX, centerY } = this.parent.drawArea;
             let radius = centerX;
             let margin = this.parent.labelPadding + this.itemSize;
             
             for(let item of this.content) {
-                let angle = Math.PI * (item.value / 100);
+                let angle = 2 * Math.PI * (item.value / 100);
                 new LinePiece(this.ctx, centerX, centerY, radius, {
                     opcaity: this.opacity,
                     angle,
@@ -32,7 +32,17 @@ class SameDirectionRoundChart extends Chart implements SameDirectionRoundChartTy
             if(this.centerValue) {
                 this.parent.setFont('center');
                 this.ctx.font = `${radius / 3}px ${this.parent.font.family}`;
-                this.ctx.fillText(this.centerValue, centerX, centerY + this.parent.font.size + 10);
+                this.ctx.textBaseline = 'middle';
+                this.ctx.fillText(this.centerValue, centerX, centerY);
+            }
+
+            let labels = (<LabelType>this.parent.labels).values;
+            let posY = 0 - this.itemSize + 30;
+            this.parent.setFont('right');
+            for(let label of labels) {
+                let posX = centerX - this.parent.labelPadding * 2;
+                this.ctx.fillText(label.toString(), posX, posY);
+                posY += this.itemSize + this.parent.labelPadding;
             }
 
         }
