@@ -33,7 +33,7 @@ class RoundChart extends Chart implements RoundChartType {
             let i = 0;
             for(let item of this.content) {
                 ctx.lineWidth = this.lineWidth;
-                let angle = 2 * Math.PI * (item.value / 100);
+                let angle = 2 * Math.PI * (item.values / 100);
                 //offset
                 let offsetAngle = offset + angle / 2;
                 let cPoint = new CirclePoint(this.itemsMargin + this.lineWidth - 1, offsetAngle, 0);

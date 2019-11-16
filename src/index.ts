@@ -13,6 +13,7 @@ import RoundChart from "./classes/round-chart";
 import RangeChart from "./classes/range-chart";
 import LineChart from "./classes/line-chart";
 import PolygonChart from "./classes/polygon-chart";
+import ColumnChart from "./classes/column-chart";
 
 let canvas1: HTMLCanvasElement | null = document.querySelector('#c1');
 let canvas2: HTMLCanvasElement | null = document.querySelector('#c2');
@@ -21,6 +22,7 @@ let canvas4: HTMLCanvasElement | null = document.querySelector('#c4');
 let canvas5: HTMLCanvasElement | null = document.querySelector('#c5');
 let canvas6: HTMLCanvasElement | null = document.querySelector('#c6');
 let canvas7: HTMLCanvasElement | null = document.querySelector('#c7');
+let canvas8: HTMLCanvasElement | null = document.querySelector('#c8');
 
 new ValueLabel(0, 100, 20);
 
@@ -29,7 +31,7 @@ if(canvas1) {
         // top: new ValueLabel(0, 100, 20),
         // right: new PercentLabel(25, {reverse: true}),
         bottom: new StringLabel(['June', 'July', 'May', 'November', 'December']),
-        left: new ValueLabel(0, 100, 20, {reverse: true})
+        left: new ValueLabel(-20, 100, 20, {reverse: true})
     });
     grid.addCharts({
         line: new LineChart({
@@ -113,13 +115,13 @@ if(canvas6) {
             centerValue: 130,
             values: [{
                 color: 'red',
-                value: 60
+                values: 60
             },{
                 color: 'orange',
-                value: 50
+                values: 50
             },{ 
                 color: 'gray',
-                value: 40
+                values: 40
             }]
         })
     });
@@ -135,15 +137,50 @@ if(canvas7) {
             itemsMargin: 5,
             values: [{
                 color: 'orange',
-                value: 40
+                values: 40
             },{
                 color: 'red',
-                value: 40
+                values: 40
             },{ 
                 color: 'gray',
-                value: 20
+                values: 20
             }]
         })
     });
+    grid.draw();
+}
+if(canvas8) {
+    let grid: Grid = new HorizontalGrid(canvas8, {
+        // top: new ValueLabel(0, 100, 20),
+        // right: new PercentLabel(25, {reverse: true}),
+        bottom: new StringLabel(['June', 'July', 'May', 'November', 'December']),
+        left: new ValueLabel(0, 100, 20, {reverse: true})
+    });
+    grid.addCharts({
+        column: new ColumnChart({
+            values: [{
+                type: 'simple',
+                color: 'red',
+                values: 50
+            },{
+                type: 'simple',
+                color: 'orange',
+                values: 60
+            },{
+                type: 'group',
+                color: ['gray', 'orange', 'red'],
+                values: [20, 50, 60]
+            },{
+                type: 'group',
+                color: ['gray', 'orange', 'red'],
+                values: [50, 30, 70],
+                margin: 'collapse'
+            },{
+                type: 'stacked-group',
+                color: ['gray', 'orange', 'red'],
+                values: [20, 30, 50]
+            }]
+        })
+    })
     grid.draw();
 }

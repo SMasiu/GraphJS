@@ -11,12 +11,15 @@ export interface ChartType {
 
 export interface ValueColorType {
     color: string;
-    value: number;
+    values: number;
 }
 
-interface GroupItemType {
+export interface GroupItemType {
     type: string;
-    values: ValueColorType | ValueColorType[];
+    color: string | string[];
+    values: number | number[];
+    margin?: string;
+    direction?: string;
 }
 
 export interface MultipleValuesItem {
@@ -98,4 +101,8 @@ export interface PolygonChartInputType {
     values?: MultipleValuesItem[];
     fill?: boolean;
     dots?: boolean;
+}
+
+export interface ColumnChartInputType {
+    values?: GroupItemType[];
 }

@@ -20,7 +20,7 @@ class SameDirectionRoundChart extends Chart implements SameDirectionRoundChartTy
             let margin = this.parent.labelPadding + this.itemSize;
             
             for(let item of this.content) {
-                let angle = 2 * Math.PI * (item.value / 100);
+                let angle = 2 * Math.PI * (item.values / 100);
                 new LinePiece(this.ctx, centerX, centerY, radius, {
                     opcaity: this.opacity,
                     angle,
