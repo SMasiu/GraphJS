@@ -54,8 +54,6 @@ class LineChart extends Chart implements LineCharType {
                 y0position = parent.y0position;
                 this.labelLen = parent.labels.x.values.length;
             }
-             
-            ctx.lineWidth = this.lineWidth;
             
             let originPosX = 0
             for(let item of this.content) {
@@ -84,6 +82,7 @@ class LineChart extends Chart implements LineCharType {
                     let minus = typeof item.values[item.values.length - 1] === 'number' ? step : innerStep;
                     points.push([posX - minus, y0position], [originPosX, y0position]);
                 }
+                ctx.lineWidth = this.lineWidth;
                 new Line(ctx, points, {color: item.color, close: this.fill}).draw();
                 ctx.fillStyle = item.color;
                 if(this.fill) {
@@ -97,11 +96,8 @@ class LineChart extends Chart implements LineCharType {
                     }
                     for(let [x ,y] of points) {                        
                         ctx.globalAlpha = 1;
-                        new Circle(ctx, x, y, 6, {color: '#fff'}).draw();
-                        ctx.fillStyle = '#fff';
-                        ctx.fill();
-
-                        new Circle(ctx, x, y, 3, {color: item.color}).draw();
+                        ctx.lineWidth = 6;
+                        new Circle(ctx, x, y, 3, {color: '#fff'}).draw();
                         ctx.fillStyle = item.color;
                         ctx.fill();
                     }

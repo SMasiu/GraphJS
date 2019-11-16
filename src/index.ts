@@ -181,6 +181,7 @@ if(canvas8) {
                 values: [20, 30, 50]
             }]
         })
-    })
+    });
+    
     grid.draw();
 }
