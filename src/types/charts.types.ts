@@ -21,7 +21,7 @@ interface GroupItemType {
 
 export interface MultipleValuesItem {
     color: string;
-    values: number[][]
+    values: any[];
 }
 
 export interface ColumnChartType extends ChartType {
@@ -91,4 +91,11 @@ export interface RangeChartInputType {
 export interface LineChartInputType {
     values?: MultipleValuesItem[];
     fill?: boolean;
+    dots?: boolean;
+}
+
+export interface PolygonChartInputType {
+    values?: MultipleValuesItem[];
+    fill?: boolean;
+    dots?: boolean;
 }

@@ -9,12 +9,14 @@ class HorizontalGrid extends BaseGrid implements HorizontalGridType {
     allowedCharts: string[];
     labels: AllLabels;
     mainLabel: 'left' | 'right';
+    secondaryLabel: 'top' | 'bottom';
     identifier: string;
-    constructor(canvas: HTMLCanvasElement, labels: InputAllLabels, {mainLabel}: {mainLabel: 'left' | 'right'} = {mainLabel: 'left'}) {
+    constructor(canvas: HTMLCanvasElement, labels: InputAllLabels, {mainLabel, secondaryLabel}: {mainLabel?: 'left' | 'right', secondaryLabel?: 'bottom' | 'top'} = {}) {
         super(canvas);
         this.identifier = 'HorizontalGrid';
         this.allowedCharts = [COLUMN_CHART, OPOSITE_COLUMN_CHART, LINE_CHART];
-        this.mainLabel = mainLabel;
+        this.mainLabel = mainLabel || 'left';
+        this.secondaryLabel = secondaryLabel || 'bottom';
         //validate labels
         if(!this.validateLabels(labels)) {
             throw new Error('No coresponding labels to values');

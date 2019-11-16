@@ -86,16 +86,16 @@ class CoordinateSystem2dGrid extends Grid implements Coordinate2dGridType {
     drawLabels() {
         
         this.setFont('center');
-        this.drawLabel(this.labels.x.values, this.step.x, this.y0position)
-        this.drawLabel(this.labels.y.values, this.step.y, this.x0position, true)
+        this.drawLabel(this.labels.x.values, this.step.x, this.y0position, 'height')
+        this.drawLabel(this.labels.y.values, this.step.y, this.x0position, 'width', true)
         this.ctx.fillText('0', this.x0position + this.labelPadding, this.y0position + 5 + this.labelPadding);
     }
 
-    drawLabel(values: number[], step: number, zeroPosition: number, reverse: boolean = false) {
+    drawLabel(values: number[], step: number, zeroPosition: number, direction: 'height' | 'width', reverse: boolean = false) {
         let offset = 0;
         for(let label of values) {
             if(label !== 0) {
-                let long = [[offset, 0], [offset, this.drawArea.height]];
+                let long = [[offset, 0], [offset, this.drawArea[direction]]];
                 let short = [[offset, zeroPosition - 3],[offset, zeroPosition + 3]]
                 if(reverse) {
                     long = long.map( l => l.reverse());

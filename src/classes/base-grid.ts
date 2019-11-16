@@ -175,7 +175,7 @@ abstract class BaseGrid extends Grid {
             for(let label of values) {
                 label = label.toString();
                 if(cType === 'left' || cType === 'right') {
-                    if(this.mainLabel === cType && label === '0') {
+                    if(this.mainLabel === cType && (label === '0' || label === '0%')) {
                         this.y0position = curentOffset;
                     }
                     ctx.textBaseline = 'middle'

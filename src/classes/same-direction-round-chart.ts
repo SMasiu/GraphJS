@@ -15,7 +15,8 @@ class SameDirectionRoundChart extends Chart implements SameDirectionRoundChartTy
     draw() {
         if(this.ctx && this.parent) {
             const { centerX, centerY } = this.parent.drawArea;
-            let radius = centerX;
+            let originRadius = centerX;
+            let radius = originRadius;
             let margin = this.parent.labelPadding + this.itemSize;
             
             for(let item of this.content) {
@@ -29,15 +30,15 @@ class SameDirectionRoundChart extends Chart implements SameDirectionRoundChartTy
                 }).draw();
                 radius -= margin;
             }
+            this.ctx.textBaseline = 'middle';
             if(this.centerValue) {
                 this.parent.setFont('center');
-                this.ctx.font = `${radius / 3}px ${this.parent.font.family}`;
-                this.ctx.textBaseline = 'middle';
+                this.ctx.font = `35px ${this.parent.font.family}`;
                 this.ctx.fillText(this.centerValue, centerX, centerY);
             }
 
             let labels = (<LabelType>this.parent.labels).values;
-            let posY = 0 - this.itemSize + 30;
+            let posY = centerY - originRadius;
             this.parent.setFont('right');
             for(let label of labels) {
                 let posX = centerX - this.parent.labelPadding * 2;

@@ -12,6 +12,7 @@ import SameDirectionRoundChart from "./classes/same-direction-round-chart";
 import RoundChart from "./classes/round-chart";
 import RangeChart from "./classes/range-chart";
 import LineChart from "./classes/line-chart";
+import PolygonChart from "./classes/polygon-chart";
 
 let canvas1: HTMLCanvasElement | null = document.querySelector('#c1');
 let canvas2: HTMLCanvasElement | null = document.querySelector('#c2');
@@ -33,9 +34,13 @@ if(canvas1) {
     grid.addCharts({
         line: new LineChart({
             fill: true,
+            dots: true,
             values: [{
                 color: 'red',
-                values: [[20, 50, 70], [100, 40], [70, 50, 30, 20], [45], [65, 95, 90]]
+                values: [50, 76, 60, 45, 90, 70]
+            }, {
+                color: 'orange',
+                values: [[30, 60, 40, 70], [10 , 0, 40], [5], [60, 65, 65, 100, 90], [70, 75, 85], 75]
             }]
         })
     })
@@ -52,12 +57,34 @@ if(canvas2) {
 }
 if(canvas3) {
     let grid = new PolygonGrid(canvas3, new StringLabel(['June', 'July', 'May', 'November', 'December']));
+    grid.addCharts({
+        polygon: new PolygonChart({
+            dots: true,
+            values: [{
+                color: 'red',
+                values: [100, 10, 100, 100, 10]
+            }]
+        })
+    });
     grid.draw();
 }
 if(canvas4) {
     let grid = new CoordinateSystem2dGrid(canvas4, {
-        x: new ValueLabel(-100, 100, 20),
+        x: new ValueLabel(-100, 100, 50),
         y: new ValueLabel(-100, 100, 20, {reverse: true})
+    });
+    grid.addCharts({
+        line: new LineChart({
+            fill: true,
+            dots: true,
+            values: [{
+                color: 'red',
+                values: [10, 50, 60, 40, 30]
+            }, {
+                color: 'orange',
+                values: [[-30, -60, -40, -70], [-10 , -10, -40], [-60, -65, -65, -100, -90], [-70, -75, -85], -70]
+            }]
+        })
     });
     grid.draw();
 }
