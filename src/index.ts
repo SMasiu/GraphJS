@@ -10,7 +10,8 @@ import CoordinateSystem1dGrid from "./classes/coordinate-system-1d-grid";
 import NoGrid from "./classes/no-grid";
 import SameDirectionRoundChart from "./classes/same-direction-round-chart";
 import RoundChart from "./classes/round-chart";
-import LineChart from "./classes/range-chart";
+import RangeChart from "./classes/range-chart";
+import LineChart from "./classes/line-chart";
 
 let canvas1: HTMLCanvasElement | null = document.querySelector('#c1');
 let canvas2: HTMLCanvasElement | null = document.querySelector('#c2');
@@ -24,11 +25,20 @@ new ValueLabel(0, 100, 20);
 
 if(canvas1) {
     let grid: Grid = new HorizontalGrid(canvas1, {
-        top: new ValueLabel(0, 100, 20),
-        right: new PercentLabel(25, {reverse: true}),
+        // top: new ValueLabel(0, 100, 20),
+        // right: new PercentLabel(25, {reverse: true}),
         bottom: new StringLabel(['June', 'July', 'May', 'November', 'December']),
         left: new ValueLabel(0, 100, 20, {reverse: true})
     });
+    grid.addCharts({
+        line: new LineChart({
+            fill: true,
+            values: [{
+                color: 'red',
+                values: [[20, 50, 70], [100, 40], [70, 50, 30, 20], [45], [65, 95, 90]]
+            }]
+        })
+    })
     grid.draw();
 }
 if(canvas2) {
@@ -54,7 +64,7 @@ if(canvas4) {
 if(canvas5) {
     let grid = new CoordinateSystem1dGrid(canvas5, new ValueLabel(-100, 100, 20));
     grid.addCharts({
-        line: new LineChart({
+        range: new RangeChart({
             values: [{
                 color: 'red',
                 values: [0]

@@ -11,9 +11,11 @@ class CoordinateSystem1dGrid extends Grid implements CoordinateSystem1dGrid {
     mainLabel: string;
     step: number;
     x0position: number;
+    identifier: string;
 
     constructor(canvas: HTMLCanvasElement, label: ValueLabel) {
         super(canvas);
+        this.identifier = 'CoordinateSystem1dGrid';
         this.allowedCharts = [];
         this.drawArea = clearDrawArea;
         this.labels = this.setLabels(label);

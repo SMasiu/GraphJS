@@ -9,8 +9,11 @@ class VerticalGrid extends BaseGrid implements VerticalGridType {
     allowedCharts: string[];
     labels: AllLabels;
     mainLabel: 'top' | 'bottom';
+    identifier: string;
+    
     constructor(canvas: HTMLCanvasElement, labels: InputAllLabels, {mainLabel}: {mainLabel: 'top' | 'bottom'} = {mainLabel: 'bottom'}) {
         super(canvas);
+        this.identifier = 'VerticalGrid';
         this.allowedCharts = [ROW_CHART, OPOSITE_ROW_CHART];
         this.mainLabel = mainLabel;
         //validate labels 

@@ -16,6 +16,7 @@ abstract class Grid implements GridType {
     labelPadding: number;
     RAD_0: number = 0 - Math.PI / 2;
     
+    abstract identifier: string;
     abstract mainLabel: string;
     abstract labels: LabelType | AllLabels | Label2dType;
     abstract drawArea: DrawArea;

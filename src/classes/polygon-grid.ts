@@ -14,9 +14,11 @@ class PolygonGrid extends Grid implements PolygonGridType {
     mainLabel: string;
     radius: number;
     gridSize: number;
+    identifier: string;
 
     constructor(canvas: HTMLCanvasElement, label: StringLabel) {
         super(canvas);
+        this.identifier = 'PolygonGrid';
         this.allowedCharts = [POLYGON_CHART];
         this.drawArea = clearDrawArea;
         this.mainLabel = '0';

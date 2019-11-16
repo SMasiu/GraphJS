@@ -19,6 +19,7 @@ class CoordinateSystem2dGrid extends Grid implements Coordinate2dGridType {
     x0position: number;
     y0position: number;
     meshType: string;
+    identifier: string;
     step: {
         x: number,
         y: number;
@@ -26,6 +27,7 @@ class CoordinateSystem2dGrid extends Grid implements Coordinate2dGridType {
 
     constructor(canvas: HTMLCanvasElement, labels: InputLabels, {meshType}: {meshType?: string} = {}) {
         super(canvas);
+        this.identifier = 'CoordinateSystem2dGrid';
         this.allowedCharts = [ROW_CHART, OPOSITE_ROW_CHART, COLUMN_CHART, OPOSITE_COLUMN_CHART, LINE_CHART];
         this.labels = this.setLabels(labels);
         this.drawArea = clearDrawArea;

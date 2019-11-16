@@ -19,9 +19,9 @@ interface GroupItemType {
     values: ValueColorType | ValueColorType[];
 }
 
-interface MultipleValuesItem {
+export interface MultipleValuesItem {
     color: string;
-    values: number[] | string[];
+    values: number[][]
 }
 
 export interface ColumnChartType extends ChartType {
@@ -40,7 +40,11 @@ export interface OpositeRowCharTypet extends ChartType {
     content: GroupItemType[];
 }
 
-export interface PolygonCharTypet extends ChartType {
+export interface PolygonCharType extends ChartType {
+    content: MultipleValuesItem[];
+}
+
+export interface LineCharType extends ChartType {
     content: MultipleValuesItem[];
 }
 
@@ -82,4 +86,9 @@ export interface RoundChartInputType {
 
 export interface RangeChartInputType {
     values?: RangeValueType[];
+}
+
+export interface LineChartInputType {
+    values?: MultipleValuesItem[];
+    fill?: boolean;
 }

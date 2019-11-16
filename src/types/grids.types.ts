@@ -16,6 +16,7 @@ export interface GridType {
     font: FontOptions;
     labelPadding: number;
     mainLabel: string;
+    identifier: string;
 }
 
 export interface FontOptions {

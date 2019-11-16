@@ -3,17 +3,21 @@ import { DrawArea, AllLabels, AnyLabelType } from "../types/grids.types";
 import clearDrawArea from "../types/draw-area";
 import Line from "./line";
 import { InputAllLabels } from "../types/input-labels.type";
+import Label from "./label";
 
 abstract class BaseGrid extends Grid {
 
     drawArea: DrawArea;
+    y0position: number;
     abstract labels: AllLabels;
     abstract allowedCharts: string[];
     abstract mainLabel: string;
+    abstract identifier: string;
 
     constructor(canvas: HTMLCanvasElement) {
         super(canvas);
         this.drawArea = clearDrawArea;
+        this.y0position = 0;
     }
 
     abstract drawGrid(): void;
@@ -23,10 +27,12 @@ abstract class BaseGrid extends Grid {
         let newLabels: {[key: string]: AnyLabelType} = {};
         for(let pos in labels) {
             if(pos === 'top' || pos === 'bottom' || pos === 'right' || pos === 'left') {
+    
                 newLabels[pos] = {
-                    type: labels[pos].identifier,
-                    values: labels[pos].values
+                    type: (<Label>labels[pos]).identifier,
+                    values: (<Label>labels[pos]).values
                 }
+        
             }
         }
 
@@ -164,11 +170,15 @@ abstract class BaseGrid extends Grid {
             let curentOffset = step / 2;
             if(type === 'percent' || type === 'value') {
                 step = size / (values.length - 1);
-                curentOffset = cType === 'top' || cType === 'bottom' ? 0 : -2;
+                curentOffset = cType === 'top' || cType === 'bottom' ? 0 : 0;
             }
             for(let label of values) {
-                label  = label.toString();
+                label = label.toString();
                 if(cType === 'left' || cType === 'right') {
+                    if(this.mainLabel === cType && label === '0') {
+                        this.y0position = curentOffset;
+                    }
+                    ctx.textBaseline = 'middle'
                     ctx.fillText(label, offset, curentOffset);
                 } else {
                     ctx.fillText(label, curentOffset, offset);

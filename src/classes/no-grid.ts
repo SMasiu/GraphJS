@@ -9,9 +9,11 @@ class NoGrid extends Grid implements NoGridType {
     allowedCharts: string[];
     drawArea: DrawArea;
     labels: StringLabelType;
+    identifier: string;
 
     constructor(canvas: HTMLCanvasElement, labels: StringLabel) {
         super(canvas);
+        this.identifier = 'NoGrid';
         this.mainLabel = '0';
         this.allowedCharts = [];
         this.drawArea = clearDrawArea;

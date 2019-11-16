@@ -9,8 +9,10 @@ class HorizontalGrid extends BaseGrid implements HorizontalGridType {
     allowedCharts: string[];
     labels: AllLabels;
     mainLabel: 'left' | 'right';
+    identifier: string;
     constructor(canvas: HTMLCanvasElement, labels: InputAllLabels, {mainLabel}: {mainLabel: 'left' | 'right'} = {mainLabel: 'left'}) {
         super(canvas);
+        this.identifier = 'HorizontalGrid';
         this.allowedCharts = [COLUMN_CHART, OPOSITE_COLUMN_CHART, LINE_CHART];
         this.mainLabel = mainLabel;
         //validate labels
