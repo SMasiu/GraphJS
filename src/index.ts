@@ -10,7 +10,7 @@ import CoordinateSystem1dGrid from "./classes/coordinate-system-1d-grid";
 import NoGrid from "./classes/no-grid";
 import SameDirectionRoundChart from "./classes/same-direction-round-chart";
 import RoundChart from "./classes/round-chart";
-import LineChart from "./classes/line-chart";
+import LineChart from "./classes/range-chart";
 
 let canvas1: HTMLCanvasElement | null = document.querySelector('#c1');
 let canvas2: HTMLCanvasElement | null = document.querySelector('#c2');

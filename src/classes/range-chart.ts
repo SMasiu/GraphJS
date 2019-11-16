@@ -1,19 +1,19 @@
 import Chart from "./chart";
-import { LineChartInputType, LineValueType, LineChartType, ValueColorType } from "../types/charts.types";
+import { RangeChartType, RangeValueType, RangeChartInputType } from "../types/charts.types";
 import CoordinateSystem1dGrid from "./coordinate-system-1d-grid";
 import Circle from "./circle";
 import Line from "./line";
 
-class LineChart extends Chart implements LineChartType {
+class RangeChart extends Chart implements RangeChartType {
 
-    content: LineValueType[]
+    content: RangeValueType[]
     min: number;
     max: number;
     width: number;
     x0position: number;
     radius: number;
 
-    constructor({values}: LineChartInputType = {}) {
+    constructor({values}: RangeChartInputType = {}) {
         super();
         this.content = values || [];
         this.max = 0;
@@ -136,4 +136,4 @@ class LineChart extends Chart implements LineChartType {
 
 }
 
-export default LineChart;
+export default RangeChart;
