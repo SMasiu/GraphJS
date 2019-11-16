@@ -78,8 +78,8 @@ class RoundChart extends Chart implements RoundChartType {
                 
                 if(this.centerValue) {
                     this.parent.setFont('center');
-                    this.ctx.font = `${centerX / 4}px ${this.parent.font.family}`;
-                    this.ctx.textBaseline = 'middle';
+                    ctx.font = `${centerX / 4}px ${this.parent.font.family}`;
+                    ctx.textBaseline = 'middle';
                     ctx.fillText(this.centerValue, centerX, centerY);
                 }
             }

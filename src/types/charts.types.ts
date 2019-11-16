@@ -52,8 +52,13 @@ export interface SameDirectionRoundChartType {
     content: ValueColorType[];
 }
 
-export interface LineChart extends ChartType {
-    content: MultipleValuesItem[];
+export interface LineValueType {
+    color: string;
+    values: number[] | number[][]
+}
+
+export interface LineChartType extends ChartType {
+    content: LineValueType[];
 }
 
 export interface ChartOptions {
@@ -73,4 +78,8 @@ export interface RoundChartInputType {
     changingSize?: boolean;
     blankCenter?: boolean;
     itemsMargin?: number;
+}
+
+export interface LineChartInputType {
+    values?: LineValueType[];
 }

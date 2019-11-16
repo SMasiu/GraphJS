@@ -10,6 +10,7 @@ import CoordinateSystem1dGrid from "./classes/coordinate-system-1d-grid";
 import NoGrid from "./classes/no-grid";
 import SameDirectionRoundChart from "./classes/same-direction-round-chart";
 import RoundChart from "./classes/round-chart";
+import LineChart from "./classes/line-chart";
 
 let canvas1: HTMLCanvasElement | null = document.querySelector('#c1');
 let canvas2: HTMLCanvasElement | null = document.querySelector('#c2');
@@ -52,12 +53,26 @@ if(canvas4) {
 }
 if(canvas5) {
     let grid = new CoordinateSystem1dGrid(canvas5, new ValueLabel(-100, 100, 20));
+    grid.addCharts({
+        line: new LineChart({
+            values: [{
+                color: 'red',
+                values: [0]
+            },{
+                color: 'gray',
+                values: [[Infinity, -10], [10, Infinity]]
+            },{
+                color: 'orange',
+                values: [[Infinity, Infinity]]
+            }]
+        })
+    })
     grid.draw();
 }
 if(canvas6) {
     let grid = new NoGrid(canvas6, new StringLabel(['June', 'July', 'May']));
     grid.addCharts({
-        animals: new SameDirectionRoundChart({
+        sameRoud: new SameDirectionRoundChart({
             centerValue: 130,
             values: [{
                 color: 'red',
@@ -76,7 +91,7 @@ if(canvas6) {
 if(canvas7) {
     let grid = new NoGrid(canvas7, new StringLabel(['June', 'July', 'May']));
     grid.addCharts({
-        animals: new RoundChart({
+        roud: new RoundChart({
             centerValue: 130,
             changingSize: true,
             blankCenter: true,
