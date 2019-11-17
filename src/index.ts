@@ -15,6 +15,7 @@ import LineChart from "./classes/line-chart";
 import PolygonChart from "./classes/polygon-chart";
 import ColumnChart from "./classes/column-chart";
 import RowChart from "./classes/row-chart";
+import BubleChart from "./classes/buble-chart";
 
 let canvas1: HTMLCanvasElement | null = document.querySelector('#c1');
 let canvas2: HTMLCanvasElement | null = document.querySelector('#c2');
@@ -27,6 +28,7 @@ let canvas8: HTMLCanvasElement | null = document.querySelector('#c8');
 let canvas9: HTMLCanvasElement | null = document.querySelector('#c9');
 let canvas10: HTMLCanvasElement | null = document.querySelector('#c10');
 let canvas11: HTMLCanvasElement | null = document.querySelector('#c11');
+let canvas12: HTMLCanvasElement | null = document.querySelector('#c12');
 
 if(canvas1) {
     let grid: Grid = new HorizontalGrid(canvas1, {
@@ -274,5 +276,29 @@ if(canvas11) {
             }]
         })
     });
+    grid.draw();
+}
+if(canvas12) {
+    let grid = new CoordinateSystem2dGrid(canvas12, {
+        x: new ValueLabel(-100, 100, 20),
+        y: new ValueLabel(-100, 100, 20, {reverse: true})
+    });
+    grid.addCharts({
+        buble: new BubleChart({
+            values: [{
+                color: 'red',
+                values: [10, 20],
+                radius: 20
+            },{
+                color: 'orange',
+                values: [10, 40],
+                radius: 10,
+            },{
+                color: 'gray',
+                values: [-50, -40],
+                radius: 25,
+            }]
+        })
+    })
     grid.draw();
 }

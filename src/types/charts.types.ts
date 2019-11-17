@@ -60,6 +60,20 @@ export interface RangeChartType extends ChartType {
     content: RangeValueType[];
 }
 
+export interface CoordinateValuesType {
+    color: string;
+    values: number[],
+    radius: number;
+}
+
+export interface BubleChartType {
+    content: CoordinateValuesType[];
+}
+
+export interface BubleChartInputType {
+    values?: CoordinateValuesType[];
+}
+
 export interface ChartOptions {
     lineWidth: number;
     opacity: number;
