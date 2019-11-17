@@ -35,14 +35,6 @@ export interface RowChartType extends ChartType {
     content: GroupItemType[];
 }
 
-export interface OpositeColumnChartType extends ChartType {
-    content: GroupItemType[];
-}
-
-export interface OpositeRowCharTypet extends ChartType {
-    content: GroupItemType[];
-}
-
 export interface PolygonCharType extends ChartType {
     content: MultipleValuesItem[];
 }

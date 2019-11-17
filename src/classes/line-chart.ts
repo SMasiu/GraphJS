@@ -4,7 +4,7 @@ import HorizontalGrid from "./horizontal-grid";
 import Line from "./line";
 import Circle from "./circle";
 import CoordinateSystem2dGrid from "./coordinate-system-2d-grid";
-import { AnyLabelType, AllLabels } from "../types/grids.types";
+import { AllLabels } from "../types/grids.types";
 
 class LineChart extends Chart implements LineCharType {
 

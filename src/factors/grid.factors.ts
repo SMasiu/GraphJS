@@ -2,7 +2,7 @@ import { OptionsType } from "../types/grids.types";
 
 export const USE_DEFAULT_GRID = (): OptionsType => ({
     colors: {
-        primary: 'rgb(100, 100, 100)',
+        primary: 'rgb(170, 170, 170)',
         secondary: 'rgb(240, 240, 240)'
     },
     margin: {

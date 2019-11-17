@@ -50,8 +50,10 @@ class HorizontalGrid extends BaseGrid implements HorizontalGridType {
         let step = this.drawArea.height / len;
         let curent = 0;
         for(let i = 0; i < len + 1; i++) {
-            new Line(this.ctx, [[0, curent],[this.drawArea.width, curent]], {color: this.colors.secondary}).draw();
-            curent += step;
+            let label = (<AnyLabelType>this.labels[this.mainLabel]).values[i / 2];
+            let color = this.colors[label === '0' || label === '0%' || label === 0 ? 'primary' : 'secondary'];
+            new Line(this.ctx, [[0, curent],[this.drawArea.width, curent]], {color}).draw();
+            curent += step + .001;
         }
 
     }

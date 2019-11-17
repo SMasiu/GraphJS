@@ -72,24 +72,25 @@ abstract class BaseGrid extends Grid {
     drawBorder() {
         const {ctx} = this;
         const {width, height} = this.drawArea;
+        const color = this.colors.primary;
         const {left, bottom, top, right} = this.labels;
         if(left) {
-            new Line(ctx, [[0, 0],[0, height]]).draw();
+            new Line(ctx, [[0, 0],[0, height]], {color}).draw();
             let len = left.type !== 'string' ? 1 : 0;
             this.drawMarkers(left.values, height / (left.values.length - len), -5, 0, left.type);
         }
         if(bottom) {
-            new Line(ctx, [[0, height],[width, height]]).draw();
+            new Line(ctx, [[0, height],[width, height]], {color}).draw();
             let len = bottom.type !== 'string' ? 1 : 0;
             this.drawMarkers(bottom.values, width / (bottom.values.length - len), height + 5, height, bottom.type, true);
         }
         if(top) {
-            new Line(ctx, [[0, 0], [width, 0]]).draw();
+            new Line(ctx, [[0, 0], [width, 0]], {color}).draw();
             let len = top.type !== 'string' ? 1 : 0;
             this.drawMarkers(top.values, width / (top.values.length - len), -5, 0, top.type, true);
         }
         if(right) {
-            new Line(ctx, [[width, 0], [width, height]]).draw();
+            new Line(ctx, [[width, 0], [width, height]], {color}).draw();
             let len = right.type !== 'string' ? 1 : 0;
             this.drawMarkers(right.values, height / (right.values.length - len), width, width + 5, right.type);
         }
@@ -97,20 +98,21 @@ abstract class BaseGrid extends Grid {
 
     private drawMarkers(values: any[], step: number, from: number, to: number, type: string, reverse: boolean = false) {
         let curent = 0;
+        const color = this.colors.primary;
         let len = type === 'string' ? 0 : 1;
         for(let i = 0; i < values.length - len; i++) {
             let arr = [[from, curent],[to, curent]];
             if(reverse) {
                 arr = arr.map( i => i.reverse());
             }
-            new Line(this.ctx, arr).draw();
+            new Line(this.ctx, arr, {color}).draw();
             curent += step;
         }
         let arr = [[from, curent],[to, curent]];
         if(reverse) {
             arr = arr.map( i => i.reverse());
         }
-        new Line(this.ctx, arr).draw();
+        new Line(this.ctx, arr, {color}).draw();
     }
 
     private drawLabels() {

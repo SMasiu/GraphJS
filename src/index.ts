@@ -23,19 +23,18 @@ let canvas5: HTMLCanvasElement | null = document.querySelector('#c5');
 let canvas6: HTMLCanvasElement | null = document.querySelector('#c6');
 let canvas7: HTMLCanvasElement | null = document.querySelector('#c7');
 let canvas8: HTMLCanvasElement | null = document.querySelector('#c8');
-
-new ValueLabel(0, 100, 20);
+let canvas9: HTMLCanvasElement | null = document.querySelector('#c9');
 
 if(canvas1) {
     let grid: Grid = new HorizontalGrid(canvas1, {
         // top: new ValueLabel(0, 100, 20),
         // right: new PercentLabel(25, {reverse: true}),
         bottom: new StringLabel(['June', 'July', 'May', 'November', 'December']),
-        left: new ValueLabel(-20, 100, 20, {reverse: true})
+        left: new ValueLabel(0, 100, 20, {reverse: true})
     });
     grid.addCharts({
         line: new LineChart({
-            fill: true,
+            fill: false,
             dots: true,
             values: [{
                 color: 'red',
@@ -154,7 +153,7 @@ if(canvas8) {
         // top: new ValueLabel(0, 100, 20),
         // right: new PercentLabel(25, {reverse: true}),
         bottom: new StringLabel(['June', 'July', 'May', 'November', 'December']),
-        left: new ValueLabel(0, 100, 20, {reverse: true})
+        left: new ValueLabel(-100, 100, 20, {reverse: true})
     });
     grid.addCharts({
         column: new ColumnChart({
@@ -180,8 +179,62 @@ if(canvas8) {
                 color: ['gray', 'orange', 'red'],
                 values: [20, 30, 50]
             }]
+        }),
+        opositeColumn: new ColumnChart({
+            values: [{
+                type: 'simple',
+                color: 'blue',
+                values: -50
+            },{
+                type: 'simple',
+                color: 'pink',
+                values: -60
+            },{
+                type: 'group',
+                color: ['black', 'yellow', 'silver'],
+                values: [-20, -50, -60]
+            },{
+                type: 'group',
+                color: ['black', 'pink', 'silver'],
+                values: [-50, -30, -70],
+                margin: 'collapse'
+            },{
+                type: 'stacked-group',
+                color: ['black', 'yellow', 'siler'],
+                values: [20, 30, 50],
+                direction: 'reverse'
+            }]
         })
     });
     
+    grid.draw();
+}
+if(canvas9) {
+    let grid = new CoordinateSystem2dGrid(canvas9, {
+        x: new ValueLabel(-100, 100, 50),
+        y: new ValueLabel(-100, 100, 20, {reverse: true})
+    });
+    grid.addCharts({
+        column: new ColumnChart({
+            values: [{
+                type: 'simple',
+                color: 'red',
+                values: 50
+            },{
+                type: 'group',
+                color: ['gray', 'orange', 'red'],
+                values: [20, 50, 60]
+            },{
+                type: 'group',
+                color: ['gray', 'orange', 'red'],
+                values: [50, 30, 70],
+                margin: 'collapse'
+            },{
+                type: 'stacked-group',
+                color: ['gray', 'orange', 'red'],
+                values: [20, 30, 50]
+            }]
+        })
+    })
     grid.draw();
 }
