@@ -1,7 +1,7 @@
 interface LinePieceOptions {
     color?: string;
     lineWidth?: number;
-    opcaity?: number;
+    opacity?: number;
     offset?: number;
     angle?: number;
     size?: number;
@@ -20,7 +20,7 @@ class LinePiece {
     constructor(private ctx: CanvasRenderingContext2D, private x: number , private y: number, private radius: number, options: LinePieceOptions = {}) {
         this.color = options.color || 'red';
         this.lineWidth = options.lineWidth || 20;
-        this.opacity = options.opcaity || .75;
+        this.opacity = options.opacity || .75;
         this.offset = options.offset || 0 - Math.PI / 2;
         this.angle = options.angle || Math.PI * 2;
         this.angle -= Math.PI * .5;

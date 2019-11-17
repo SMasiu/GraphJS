@@ -52,28 +52,31 @@ class ColumnChart extends Chart implements ColumnChartType {
 
             let offsetX = x0position;
             let step = width / this.stepLen;
+            const {ctx, opacity, lineWidth, itemSize, height, minY, maxY} = this;
             for(let item of this.content) {
                 if(item.type === 'simple') {
                     let value = <number>item.values;
                     let m = value > 0 ? 1 : -1;
                     let color = <string>item.color;
-                    this.ctx.globalAlpha = this.opacity;
-                    let h = this.calcHeight(value) + (this.lineWidth / 2) * m;
-                    new Rect(this.ctx, offsetX + step / 2 - this.itemSize / 2, h, this.itemSize, this.height - h - (this.height - y0position) - (this.lineWidth / 2) * m, {color, lineWidth: this.lineWidth}).draw();
+                    ctx.globalAlpha = opacity;
+                    let lW = (lineWidth / 2) * m;
+                    let h = this.calcHeight(value) + lW;
+                    new Rect(ctx, offsetX + step / 2 - itemSize / 2, h, itemSize, height - h - (height - y0position) - lW, {color, lineWidth}).draw();
                 } else if (item.type === 'group') {
                     let values: number[] = <number[]>item.values;
                     let collapse = item.margin === 'collapse';
                     let innerOffset = step / values.length;
-                    let curentOffset = collapse ? step / 2 - ((this.itemSize + this.lineWidth) * values.length) / 2 : innerOffset / 2;
+                    let curentOffset = collapse ? step / 2 - ((itemSize + lineWidth) * values.length) / 2 : innerOffset / 2;
                     let i = 0;
                     let colors: string[] = <string[]>item.color;
                     for(let value of values) {
                         let m = value > 0 ? 1 : -1;
-                        let h = this.calcHeight(value) + (this.lineWidth / 2) * m;
-                        this.ctx.globalAlpha = this.opacity;
-                        let minus = collapse ? 0 : this.itemSize / 2;
-                        new Rect(this.ctx, offsetX + curentOffset - minus, h, this.itemSize, this.height - h - (this.height - y0position) - (this.lineWidth / 2) * m, {color: colors[i] || '#000', lineWidth: this.lineWidth}).draw();
-                        curentOffset += collapse ?  this.itemSize + this.lineWidth : innerOffset;
+                        let lW = (lineWidth / 2) * m;
+                        let h = this.calcHeight(value) + lW;
+                        ctx.globalAlpha = opacity;
+                        let minus = collapse ? 0 : itemSize / 2;
+                        new Rect(ctx, offsetX + curentOffset - minus, h, itemSize, height - h - (height - y0position) - lW, {color: colors[i] || '#000', lineWidth}).draw();
+                        curentOffset += collapse ?  itemSize + lineWidth : innerOffset;
                         i++;
                     }
                 } else if(item.type === 'stacked-group') {
@@ -86,10 +89,11 @@ class ColumnChart extends Chart implements ColumnChartType {
                     for(let value of values) {
                         let multiplyer = item.direction === 'reverse' ? -1 : 1
                         cValue += value * multiplyer;
-                        let h = this.calcHeight(cValue) + (this.lineWidth / 2) * multiplyer;
-                        this.ctx.globalAlpha = this.opacity;
-                        new Rect(this.ctx, offsetX + step / 2 - this.itemSize / 2, h, this.itemSize, this.height - h - (this.height - y0position) - offsetY - (this.lineWidth / 2) * multiplyer, {color: colors[i], lineWidth: this.lineWidth}).draw();
-                        offsetY += this.height * (value / (Math.abs(this.maxY) + Math.abs(this.minY))) * multiplyer;
+                        let lW = (lineWidth / 2) * multiplyer;
+                        let h = this.calcHeight(cValue) + lW;
+                        ctx.globalAlpha = opacity;
+                        new Rect(ctx, offsetX + step / 2 - itemSize / 2, h, itemSize, height - h - (height - y0position) - offsetY - lW, {color: colors[i], lineWidth}).draw();
+                        offsetY += height * (value / (Math.abs(maxY) + Math.abs(minY))) * multiplyer;
                         i++;
                     }
 
@@ -98,7 +102,7 @@ class ColumnChart extends Chart implements ColumnChartType {
             }
         }
     }
-
+    
     calcHeight(value: number) {
         const {maxY, minY, height, y0position} = this;
         return height - height * (value / (Math.abs(maxY) + Math.abs(minY))) - (height - y0position);

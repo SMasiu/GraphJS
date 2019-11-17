@@ -31,37 +31,38 @@ class SameDirectionRoundChart extends Chart implements SameDirectionRoundChartTy
     }
     
     draw() {
-        if(this.ctx && this.parent) {
-            const { centerX, centerY } = this.parent.drawArea;
-            let originRadius = this.parent.drawArea.width / 2;
+        const {ctx, parent, itemSize, opacity, itemMargin, lineWidth, centerValue} = this;
+        if(ctx && parent) {
+            const { centerX, centerY } = parent.drawArea;
+            let originRadius = parent.drawArea.width / 2;
             let radius = originRadius;
-            let margin = this.itemMargin + this.itemSize;
+            let margin = itemMargin + itemSize;
             
             for(let item of this.content) {
                 let angle = 2 * Math.PI * (item.values / 100);
-                new LinePiece(this.ctx, centerX, centerY, radius, {
-                    opcaity: this.opacity,
+                new LinePiece(ctx, centerX, centerY, radius, {
+                    opacity,
                     angle,
                     color: item.color,
-                    lineWidth: this.lineWidth,
-                    size: this.itemSize
+                    lineWidth,
+                    size: itemSize
                 }).draw();
                 radius -= margin;
             }
-            this.ctx.textBaseline = 'middle';
-            if(this.centerValue) {
-                this.parent.setFont('center');
-                this.ctx.font = `35px ${this.parent.font.family}`;
-                this.ctx.fillText(this.centerValue, centerX, centerY);
+            ctx.textBaseline = 'middle';
+            if(centerValue) {
+                parent.setFont('center');
+                ctx.font = `35px ${parent.font.family}`;
+                ctx.fillText(centerValue, centerX, centerY);
             }
             if(this.labels) {
             let labels = this.labels.values;
             let posY = centerY - originRadius;
-            this.parent.setFont('right');
+            parent.setFont('right');
             for(let label of labels) {
-                let posX = centerX - this.parent.labelPadding * 2;
-                this.ctx.fillText(label.toString(), posX, posY);
-                posY += this.itemSize + this.itemMargin;
+                let posX = centerX - parent.labelPadding * 2;
+                ctx.fillText(label.toString(), posX, posY);
+                posY += itemSize + itemMargin;
             }
             }
 

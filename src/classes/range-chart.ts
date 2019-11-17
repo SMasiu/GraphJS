@@ -33,17 +33,19 @@ class RangeChart extends Chart implements RangeChartType {
             this.width = width;
             this.x0position = x0position;
             let posY = -15;
+            const {radius, ctx, lineWidth} = this;
             for(let item of this.content) {
 
                 let decrement = false;
 
+                
                 for(let value of item.values) {
                     if(typeof value === 'number') {
                         let posX = this.getPos(value);
-                        this.ctx.lineWidth = this.radius + 2;
-                        new Circle(this.ctx, posX, centerY, this.radius, {color: '#fff'}).draw();
-                        this.ctx.fillStyle = item.color;
-                        this.ctx.fill();
+                        ctx.lineWidth = radius + 2;
+                        new Circle(ctx, posX, centerY, radius, {color: '#fff'}).draw();
+                        ctx.fillStyle = item.color;
+                        ctx.fill();
                         decrement = false;
                     } else {
                         const [x1, x2] = value;
@@ -54,19 +56,19 @@ class RangeChart extends Chart implements RangeChartType {
                             let posX1 = this.getPos(x1);
                             let posX2 = this.getPos(x2);
 
-                            this.ctx.lineWidth = this.radius + 2;
-                            new Circle(this.ctx, posX1, centerY, this.radius, {color: '#fff'}).draw();
-                            this.ctx.fill();
+                            ctx.lineWidth = radius + 2;
+                            new Circle(ctx, posX1, centerY, radius, {color: '#fff'}).draw();
+                            ctx.fill();
 
-                            new Circle(this.ctx, posX2, centerY, this.radius, {color: '#fff'}).draw();
-                            this.ctx.fill();
+                            new Circle(ctx, posX2, centerY, radius, {color: '#fff'}).draw();
+                            ctx.fill();
 
-                            this.ctx.lineWidth = this.lineWidth;
-                            new Line(this.ctx, [
-                                [posX1, centerY - this.radius],
+                            ctx.lineWidth = lineWidth;
+                            new Line(ctx, [
+                                [posX1, centerY - radius],
                                 [posX1, centerY + posY],
                                 [posX2, centerY + posY],
-                                [posX2, centerY - this.radius]],
+                                [posX2, centerY - radius]],
                                 {color: item.color}).draw();
                             } else {
 
@@ -75,8 +77,8 @@ class RangeChart extends Chart implements RangeChartType {
 
                                 if(x1I && x2I) {
 
-                                    this.ctx.lineWidth = this.lineWidth;
-                                    new Line(this.ctx, [
+                                    ctx.lineWidth = lineWidth;
+                                    new Line(ctx, [
                                             start, 
                                             end
                                         ],
@@ -98,26 +100,27 @@ class RangeChart extends Chart implements RangeChartType {
                 }
 
             }
-            this.ctx.translate(-.5,-.5);
+            ctx.translate(-.5,-.5);
         }
     }
 
     drawInfinity(val: number, color: string, inf: number[], posY :number, centerY: number, rev: boolean = false) {
-        if(this.ctx) {
+        const {ctx, radius, lineWidth} = this;
+        if(ctx) {
             let posX = this.getPos(val);
             let points = [
                 inf, 
                 [posX, centerY + posY], 
-                [posX, centerY + this.radius]
+                [posX, centerY + radius]
             ];
             if(rev) {
                 points.reverse();
             }
-            this.ctx.lineWidth = this.lineWidth;
-            new Line(this.ctx, points, {color: color}).draw();
-            this.ctx.lineWidth = this.radius + 2;
-            new Circle(this.ctx, posX, centerY, this.radius, {color: '#fff'}).draw();
-            this.ctx.fill();
+            ctx.lineWidth = lineWidth;
+            new Line(ctx, points, {color: color}).draw();
+            ctx.lineWidth = radius + 2;
+            new Circle(ctx, posX, centerY, radius, {color: '#fff'}).draw();
+            ctx.fill();
         }
     }
 

@@ -61,19 +61,19 @@ class RowChart extends Chart implements RowChartType {
                 this.minX = parent.labels.x.values[0];
                 this.maxX = parent.labels.x.values[parent.labels.x.values.length - 1];
             }
+            const {y0position, height, stepLen ,itemSize, width, x0position, lineWidth, opacity, ctx, maxX, minX} = this;
 
-            let offsetY = this.y0position;
-            let step = this.height / this.stepLen;
-
-            this.ctx.globalAlpha = this.opacity;
+            let offsetY = y0position;
+            let step = height / stepLen;
+            ctx.globalAlpha = opacity;
             for(let item of this.content) {
                 if(item.type === 'simple') {
                     let value: number = <number>item.values;
                     let color: string = <string>item.color;
                     let m = value > 0 ? 1 : -1;
-                    let lW = (this.lineWidth / 2) * m
+                    let lW = (lineWidth / 2) * m
                     let w = this.calcWidth(value) + lW;
-                    new Rect(this.ctx, Math.ceil(this.x0position + lW) , Math.ceil(offsetY + step / 2 - this.itemSize / 2), Math.ceil(this.width - w - (this.width - this.x0position) - lW), this.itemSize, {color, lineWidth: this.lineWidth}).draw();
+                    new Rect(ctx, Math.ceil(x0position + lW) , Math.ceil(offsetY + step / 2 - itemSize / 2), Math.ceil(width - w - (width - x0position) - lW), itemSize, {color, lineWidth}).draw();
                 }
                 let values: number[] = <number[]>item.values;
                 let colors: string[] = <string[]>item.color;
@@ -81,24 +81,24 @@ class RowChart extends Chart implements RowChartType {
                 if(item.type === 'group') {
                     let collapse = item.margin === 'collapse';
                     let innerOffset = step / values.length;
-                    let curentOffset = collapse ? step / 2 - ((this.itemSize + this.lineWidth) * values.length) / 2 : innerOffset / 2;
+                    let curentOffset = collapse ? step / 2 - ((itemSize + lineWidth) * values.length) / 2 : innerOffset / 2;
                     for(let value of values) {
                         let m = value > 0 ? 1 : -1;
-                        let lW = (this.lineWidth / 2) * m
+                        let lW = (lineWidth / 2) * m
                         let w = this.calcWidth(value) + lW;
-                        let plus = collapse ? this.itemSize / 2 : 0;
-                        new Rect(this.ctx, Math.ceil(this.x0position + lW), Math.ceil(offsetY + curentOffset + plus - this.itemSize / 2), Math.ceil(this.width - w - (this.width - this.x0position) - lW), this.itemSize, {color: colors[i], lineWidth: this.lineWidth}).draw();
-                        curentOffset += collapse ? this.itemSize + this.lineWidth : innerOffset;
+                        let plus = collapse ? itemSize / 2 : 0;
+                        new Rect(ctx, Math.ceil(x0position + lW), Math.ceil(offsetY + curentOffset + plus - itemSize / 2), Math.ceil(width - w - (width - x0position) - lW), itemSize, {color: colors[i], lineWidth}).draw();
+                        curentOffset += collapse ? itemSize + lineWidth : innerOffset;
                         i++;
                     }
                 } else if(item.type === 'stacked-group') {
                     let offsetX: number = 0;    
                     let m = item.direction === 'reverse' ? -1 : 1;
                     for(let value of values) {
-                        let lW = (this.lineWidth / 2) * m;
+                        let lW = (lineWidth / 2) * m;
                         let w = this.calcWidth(value * m) + lW;
-                        new Rect(this.ctx, Math.ceil(this.x0position + offsetX + (lW * m) * m), Math.ceil(offsetY + step / 2 - this.itemSize / 2), Math.round(this.width - w - (this.width - this.x0position) - lW), this.itemSize, {color: colors[i], lineWidth: this.lineWidth}).draw();
-                        offsetX += this.width * (value / (Math.abs(this.maxX) + Math.abs(this.minX))) * m;
+                        new Rect(ctx, Math.ceil(x0position + offsetX + (lW * m) * m), Math.ceil(offsetY + step / 2 - itemSize / 2), Math.round(width - w - (width - x0position) - lW), itemSize, {color: colors[i], lineWidth}).draw();
+                        offsetX += width * (value / (Math.abs(maxX) + Math.abs(minX))) * m;
                         i++;
                     }
                 }

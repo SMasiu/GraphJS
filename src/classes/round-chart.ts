@@ -38,27 +38,27 @@ class RoundChart extends Chart implements RoundChartType {
     }
 
     draw() {
-        if(this.parent && this.ctx) {
-            this.parent.margin = {
+        const {parent, ctx, content, opacity ,itemsMargin, lineWidth, centerValue} = this;
+        if(parent && ctx) {
+            parent.margin = {
                 left: 200,
                 right: 200,
                 top: 50,
                 bottom: 50
             }
-            this.parent.setUpDrawArea();
-            const {centerX, centerY} = this.parent.drawArea;
-            const {ctx} = this;
+            parent.setUpDrawArea();
+            const {centerX, centerY} = parent.drawArea;
             let offset = 0 - Math.PI / 2;
             let radius = centerX;
-            let changingStep = radius / 2 / this.content.length;
-            ctx.globalAlpha = this.opacity;
+            let changingStep = radius / 2 / content.length;
+            ctx.globalAlpha = opacity;
             let i = 0;
-            for(let item of this.content) {
-                ctx.lineWidth = this.lineWidth;
+            for(let item of content) {
+                ctx.lineWidth = lineWidth;
                 let angle = 2 * Math.PI * (item.values / 100);
                 //offset
                 let offsetAngle = offset + angle / 2;
-                let cPoint = new CirclePoint(this.itemsMargin + this.lineWidth - 1, offsetAngle, 0);
+                let cPoint = new CirclePoint(itemsMargin + lineWidth - 1, offsetAngle, 0);
                 let [x, y] = cPoint.next();
                 ctx.translate(x, y);
                 //values
@@ -78,11 +78,11 @@ class RoundChart extends Chart implements RoundChartType {
                     let label = this.labels.values[i];
                     ctx.lineWidth = 1;
                     let [x2, y2] = new CirclePoint(radius, offsetAngle, 0, centerX, centerY).next();
-                    let [x3, y3] = new CirclePoint(radius + this.parent.labelPadding * 7.5, offsetAngle, 0, centerX, centerY).next();
+                    let [x3, y3] = new CirclePoint(radius + parent.labelPadding * 7.5, offsetAngle, 0, centerX, centerY).next();
                     let left = offsetAngle > Math.PI / 2;
                     let x4 = x3 - 100 * (left ? 1 : -1);
                     new Line(ctx, [[x2, y2], [x3, y3], [x4, y3]]).draw();
-                    this.parent.setFont(left ? 'left' : 'right');
+                    parent.setFont(left ? 'left' : 'right');
                     ctx.fillText(label, x4, y3 - 5);
                 }
                 offset += angle;
@@ -99,11 +99,11 @@ class RoundChart extends Chart implements RoundChartType {
                 ctx.fillStyle = '#fff';
                 ctx.fill();
                 
-                if(this.centerValue) {
-                    this.parent.setFont('center');
-                    ctx.font = `35px ${this.parent.font.family}`;
+                if(centerValue) {
+                    parent.setFont('center');
+                    ctx.font = `35px ${parent.font.family}`;
                     ctx.textBaseline = 'middle';
-                    ctx.fillText(this.centerValue, centerX, centerY);
+                    ctx.fillText(centerValue, centerX, centerY);
                 }
             }
         }
