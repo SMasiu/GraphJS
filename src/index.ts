@@ -14,6 +14,7 @@ import RangeChart from "./classes/range-chart";
 import LineChart from "./classes/line-chart";
 import PolygonChart from "./classes/polygon-chart";
 import ColumnChart from "./classes/column-chart";
+import RowChart from "./classes/row-chart";
 
 let canvas1: HTMLCanvasElement | null = document.querySelector('#c1');
 let canvas2: HTMLCanvasElement | null = document.querySelector('#c2');
@@ -24,6 +25,8 @@ let canvas6: HTMLCanvasElement | null = document.querySelector('#c6');
 let canvas7: HTMLCanvasElement | null = document.querySelector('#c7');
 let canvas8: HTMLCanvasElement | null = document.querySelector('#c8');
 let canvas9: HTMLCanvasElement | null = document.querySelector('#c9');
+let canvas10: HTMLCanvasElement | null = document.querySelector('#c10');
+let canvas11: HTMLCanvasElement | null = document.querySelector('#c11');
 
 if(canvas1) {
     let grid: Grid = new HorizontalGrid(canvas1, {
@@ -179,31 +182,6 @@ if(canvas8) {
                 color: ['gray', 'orange', 'red'],
                 values: [20, 30, 50]
             }]
-        }),
-        opositeColumn: new ColumnChart({
-            values: [{
-                type: 'simple',
-                color: 'blue',
-                values: -50
-            },{
-                type: 'simple',
-                color: 'pink',
-                values: -60
-            },{
-                type: 'group',
-                color: ['black', 'yellow', 'silver'],
-                values: [-20, -50, -60]
-            },{
-                type: 'group',
-                color: ['black', 'pink', 'silver'],
-                values: [-50, -30, -70],
-                margin: 'collapse'
-            },{
-                type: 'stacked-group',
-                color: ['black', 'yellow', 'siler'],
-                values: [20, 30, 50],
-                direction: 'reverse'
-            }]
         })
     });
     
@@ -236,5 +214,65 @@ if(canvas9) {
             }]
         })
     })
+    grid.draw();
+}
+if(canvas10) {
+    let grid = new VerticalGrid(canvas10, {
+        bottom: new ValueLabel(-100, 100, 20),
+        left: new StringLabel(['July', 'May', 'November', 'December']),
+    });
+    grid.addCharts({
+        row: new RowChart({
+            values: [{
+                type: 'simple',
+                color: 'red',
+                values: 50
+            },{
+                type: 'group',
+                color: ['gray', 'orange', 'red'],
+                values: [20, 10, 20]
+            },{
+                type: 'group',
+                color: ['gray', 'orange', 'red'],
+                values: [-50, -30, 70],
+                margin: 'collapse'
+            },{
+                type: 'stacked-group',
+                color: ['gray', 'orange', 'red'],
+                direction: 'reverse',
+                values: [20, 30, 50],
+            }]
+        })
+    });
+    grid.draw();
+}
+if(canvas11) {
+    let grid = new CoordinateSystem2dGrid(canvas11, {
+        x: new ValueLabel(-100, 100, 20),
+        y: new ValueLabel(-100, 100, 50, {reverse: true})
+    });
+    grid.addCharts({
+        row: new RowChart({
+            values: [{
+                type: 'simple',
+                color: 'red',
+                values: 50
+            },{
+                type: 'group',
+                color: ['gray', 'orange', 'red'],
+                values: [20, 10, 20]
+            },{
+                type: 'group',
+                color: ['gray', 'orange', 'red'],
+                values: [-50, -30, 70],
+                margin: 'collapse'
+            },{
+                type: 'stacked-group',
+                color: ['gray', 'orange', 'red'],
+                direction: 'reverse',
+                values: [20, 30, 50],
+            }]
+        })
+    });
     grid.draw();
 }

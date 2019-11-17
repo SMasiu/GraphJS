@@ -9,6 +9,7 @@ abstract class BaseGrid extends Grid {
 
     drawArea: DrawArea;
     y0position: number;
+    x0position: number;
     abstract labels: AllLabels;
     abstract allowedCharts: string[];
     abstract mainLabel: string;
@@ -18,6 +19,7 @@ abstract class BaseGrid extends Grid {
         super(canvas);
         this.drawArea = clearDrawArea;
         this.y0position = 0;
+        this.x0position = 0;
     }
 
     abstract drawGrid(): void;
@@ -183,6 +185,9 @@ abstract class BaseGrid extends Grid {
                     ctx.textBaseline = 'middle'
                     ctx.fillText(label, offset, curentOffset);
                 } else {
+                    if(this.mainLabel === cType && (label === '0' || label === '0%')) {
+                        this.x0position = curentOffset;
+                    }
                     ctx.fillText(label, curentOffset, offset);
                 }
                 curentOffset += step;

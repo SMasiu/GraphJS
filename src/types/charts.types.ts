@@ -98,3 +98,7 @@ export interface PolygonChartInputType {
 export interface ColumnChartInputType {
     values?: GroupItemType[];
 }
+
+export interface RowChartInputType {
+    values?: GroupItemType[];
+}

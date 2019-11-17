@@ -10,12 +10,14 @@ class VerticalGrid extends BaseGrid implements VerticalGridType {
     labels: AllLabels;
     mainLabel: 'top' | 'bottom';
     identifier: string;
-    
-    constructor(canvas: HTMLCanvasElement, labels: InputAllLabels, {mainLabel}: {mainLabel: 'top' | 'bottom'} = {mainLabel: 'bottom'}) {
+    secondaryLabel: 'left' | 'right';
+
+    constructor(canvas: HTMLCanvasElement, labels: InputAllLabels, {mainLabel, secondaryLabel}: {mainLabel?: 'top' | 'bottom', secondaryLabel?: 'left' | 'right'} = {}) {
         super(canvas);
         this.identifier = 'VerticalGrid';
         this.allowedCharts = [ROW_CHART, OPOSITE_ROW_CHART];
-        this.mainLabel = mainLabel;
+        this.mainLabel = mainLabel || 'bottom';
+        this.secondaryLabel = secondaryLabel || 'left';
         //validate labels 
         if(!this.validateLabels(labels)) {
             throw new Error('No coresponding labels to values');
@@ -49,7 +51,9 @@ class VerticalGrid extends BaseGrid implements VerticalGridType {
         let step = this.drawArea.width / len;
         let curent = 0;
         for(let i = 0; i < len + 1; i++) {
-            new Line(this.ctx, [[curent, 0],[curent, this.drawArea.height]], {color: this.colors.secondary}).draw();
+            let label = (<AnyLabelType>this.labels[this.mainLabel]).values[i / 2];
+            let color = this.colors[label === '0' || label === '0%' || label === 0 ? 'primary' : 'secondary'];
+            new Line(this.ctx, [[curent, 0],[curent, this.drawArea.height]], {color: color}).draw();
             curent += step;
         }
 
