@@ -1,5 +1,5 @@
 import Grid from "./grid";
-import { DrawArea, NumberLabelType } from "../types/grids.types";
+import { DrawArea, NumberLabelType, GridOptions } from "../types/grids.types";
 import clearDrawArea from "../types/draw-area";
 import ValueLabel from "./value-label";
 import Line from "./line";
@@ -13,8 +13,8 @@ class CoordinateSystem1dGrid extends Grid implements CoordinateSystem1dGrid {
     x0position: number;
     identifier: string;
 
-    constructor(canvas: HTMLCanvasElement, label: ValueLabel) {
-        super(canvas);
+    constructor(canvas: HTMLCanvasElement, label: ValueLabel, {factor}: GridOptions = {}) {
+        super(canvas, factor);
         this.identifier = 'CoordinateSystem1dGrid';
         this.allowedCharts = [];
         this.drawArea = clearDrawArea;
@@ -27,12 +27,12 @@ class CoordinateSystem1dGrid extends Grid implements CoordinateSystem1dGrid {
     drawGrid() {
         this.setUpDrawArea();
         const {centerY, width} = this.drawArea;
-        new Line(this.ctx, [[0, centerY], [width, centerY]]).draw();
+        new Line(this.ctx, [[0, centerY], [width, centerY]], {color: this.colors.primary}).draw();
         this.step = width / (this.labels.values.length - 1);
         let offset = 0;
         this.setFont('center');
         for(let label of this.labels.values) {
-            new Line(this.ctx, [[offset, centerY - 3], [offset, centerY + 3]]).draw();
+            new Line(this.ctx, [[offset, centerY - 3], [offset, centerY + 3]], {color: this.colors.primary}).draw();
             this.ctx.fillText(label.toString(), offset, centerY + this.labelPadding + 5);
             if(label === 0) {
                 this.x0position = offset;

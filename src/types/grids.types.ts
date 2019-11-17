@@ -1,4 +1,5 @@
 import Chart from "../classes/chart";
+import GridFactor from "../factors/grid-factor";
 
 export interface GridType {
     canvas: HTMLCanvasElement;
@@ -12,7 +13,7 @@ export interface GridType {
     drawArea: DrawArea;
     allowedCharts: string[];
     chartList: {[key: string]: Chart};
-    labels: LabelType | AllLabels | Label2dType;
+    labels: LabelType | AllLabels | Label2dType | null;
     font: FontOptions;
     labelPadding: number;
     mainLabel: string;
@@ -81,7 +82,7 @@ export interface Coordinate1dGridType {
 }
 
 export interface NoGridType {
-    labels: StringLabelType
+    labels: null
 }
 
 export interface Label2dType {
@@ -113,4 +114,8 @@ export interface NumberLabelType extends LabelType {
 export interface PercentLabelType extends LabelType {
     type: 'percent';
     values: string[];
+}
+
+export interface GridOptions {
+    factor?: GridFactor;
 }

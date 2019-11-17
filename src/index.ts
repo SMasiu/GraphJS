@@ -16,6 +16,8 @@ import PolygonChart from "./classes/polygon-chart";
 import ColumnChart from "./classes/column-chart";
 import RowChart from "./classes/row-chart";
 import BubleChart from "./classes/buble-chart";
+import GridFactor from "./factors/grid-factor";
+import ChartFactor from "./factors/chart-factor";
 
 let canvas1: HTMLCanvasElement | null = document.querySelector('#c1');
 let canvas2: HTMLCanvasElement | null = document.querySelector('#c2');
@@ -29,19 +31,44 @@ let canvas9: HTMLCanvasElement | null = document.querySelector('#c9');
 let canvas10: HTMLCanvasElement | null = document.querySelector('#c10');
 let canvas11: HTMLCanvasElement | null = document.querySelector('#c11');
 let canvas12: HTMLCanvasElement | null = document.querySelector('#c12');
+let canvas13: HTMLCanvasElement | null = document.querySelector('#c13');
+let f = new ChartFactor({lineWidth: 1.5})
+let gf = new GridFactor({colors: {primary: 'blue', secondary: 'red'}})
+
+if(canvas3) {
+    let polygon = new PolygonChart({
+        dots: true,
+        values: [{
+            color: 'red',
+            id: 1,
+            values: [50, 40, 70, 30, 20]
+        }]
+    });
+    let grid = new PolygonGrid(canvas3, new StringLabel(['June', 'July', 'May', 'November', 'December']));
+    grid.addCharts({
+        polygon
+    });
+    polygon.updateItemContent(1, {color: 'pink', values: [20, 20 ,20, 20, 20]})
+    polygon.addItemContent({id: 2, color: 'blue', values: [50, 39, 40 ,50]})
+    polygon.deleteItemContent(1);
+
+    grid.draw();
+}
 
 if(canvas1) {
     let grid: Grid = new HorizontalGrid(canvas1, {
         // top: new ValueLabel(0, 100, 20),
         // right: new PercentLabel(25, {reverse: true}),
         bottom: new StringLabel(['June', 'July', 'May', 'November', 'December']),
-        left: new ValueLabel(0, 100, 20, {reverse: true})
+        left: new ValueLabel(0, 100, 20, {reverse: true,})
     });
     grid.addCharts({
         line: new LineChart({
+            factor: f,
             fill: false,
             dots: true,
             values: [{
+                id: 1,
                 color: 'red',
                 values: [50, 76, 60, 45, 90, 70]
             }, {
@@ -54,23 +81,10 @@ if(canvas1) {
 }
 if(canvas2) {
     let grid = new VerticalGrid(canvas2, {
-        top: new PercentLabel(25, {reverse: true}),
+        top: new PercentLabel(25),
         right: new StringLabel(['June', 'July', 'May', 'November', 'December']),
         bottom: new ValueLabel(0, 100, 20),
         left: new ValueLabel(0, 100, 20, {reverse: true})
-    });
-    grid.draw();
-}
-if(canvas3) {
-    let grid = new PolygonGrid(canvas3, new StringLabel(['June', 'July', 'May', 'November', 'December']));
-    grid.addCharts({
-        polygon: new PolygonChart({
-            dots: true,
-            values: [{
-                color: 'red',
-                values: [100, 10, 100, 100, 10]
-            }]
-        })
     });
     grid.draw();
 }
@@ -113,13 +127,14 @@ if(canvas5) {
     grid.draw();
 }
 if(canvas6) {
-    let grid = new NoGrid(canvas6, new StringLabel(['June', 'July', 'May']));
+    let grid = new NoGrid(canvas6);
     grid.addCharts({
         sameRoud: new SameDirectionRoundChart({
+            labels: new StringLabel(['June', 'July', 'May', 'December']),
             centerValue: 130,
             values: [{
                 color: 'red',
-                values: 60
+                values: 60,
             },{
                 color: 'orange',
                 values: 50
@@ -129,12 +144,14 @@ if(canvas6) {
             }]
         })
     });
+    grid.chartList.sameRoud.addItemContent({values:70, color: 'black'})
     grid.draw();
 }
 if(canvas7) {
-    let grid = new NoGrid(canvas7, new StringLabel(['June', 'July', 'May']));
+    let grid = new NoGrid(canvas7);
     grid.addCharts({
         roud: new RoundChart({
+            labels: new StringLabel(['June', 'July', 'May']),
             centerValue: 130,
             changingSize: true,
             blankCenter: true,
@@ -295,10 +312,30 @@ if(canvas12) {
                 radius: 10,
             },{
                 color: 'gray',
+                id: 1,
                 values: [-50, -40],
                 radius: 25,
             }]
         })
     })
     grid.draw();
+}
+if(canvas13) {
+    let sameRoud = new SameDirectionRoundChart({
+        labels: new StringLabel(['June', 'July', 'May']),
+        centerValue: 130,
+        itemMargin: 10,
+        canvas: canvas13,
+        values: [{
+            color: 'red',
+            values: 60,
+        },{
+            color: 'orange',
+            values: 50
+        },{ 
+            color: 'gray',
+            values: 40
+        }]
+    })
+    sameRoud.draw();
 }

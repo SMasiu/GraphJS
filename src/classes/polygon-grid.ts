@@ -1,6 +1,6 @@
 import Grid from "./grid";
 import { POLYGON_CHART } from "../types/chart-names";
-import { DrawArea, PolygonGridType, StringLabelType } from "../types/grids.types";
+import { DrawArea, PolygonGridType, StringLabelType, GridOptions } from "../types/grids.types";
 import clearDrawArea from "../types/draw-area";
 import StringLabel from "./string-label";
 import CirclePoint from "./circle-point";
@@ -16,8 +16,14 @@ class PolygonGrid extends Grid implements PolygonGridType {
     gridSize: number;
     identifier: string;
 
-    constructor(canvas: HTMLCanvasElement, label: StringLabel) {
-        super(canvas);
+    constructor(canvas: HTMLCanvasElement, label: StringLabel, {factor}: GridOptions = {}) {
+        super(canvas, factor);
+        this.margin = {
+            top: 50,
+            left: 50,
+            bottom: 50,
+            right: 50
+        }
         this.identifier = 'PolygonGrid';
         this.allowedCharts = [POLYGON_CHART];
         this.drawArea = clearDrawArea;

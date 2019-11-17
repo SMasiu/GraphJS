@@ -22,7 +22,6 @@ class BubleChart extends Chart implements BubleChartType {
 
     draw() {
         if(this.parent && this.ctx) {
-
             let parent: CoordinateSystem2dGrid = <CoordinateSystem2dGrid>this.parent;
             this.width = parent.drawArea.width;
             this.height = parent.drawArea.height;

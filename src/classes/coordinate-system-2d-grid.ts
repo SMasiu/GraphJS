@@ -4,10 +4,16 @@ import { ROW_CHART, OPOSITE_ROW_CHART, COLUMN_CHART, OPOSITE_COLUMN_CHART, LINE_
 import ValueLabel from "./value-label";
 import clearDrawArea from "../types/draw-area";
 import Line from "./line";
+import GridFactor from "../factors/grid-factor";
 
 interface InputLabels {
     x: ValueLabel,
     y: ValueLabel
+}
+
+interface CoordinateSystem2dInput {
+    meshType?: string;
+    factor?: GridFactor
 }
 
 class CoordinateSystem2dGrid extends Grid implements Coordinate2dGridType {
@@ -25,8 +31,8 @@ class CoordinateSystem2dGrid extends Grid implements Coordinate2dGridType {
         y: number;
     }
 
-    constructor(canvas: HTMLCanvasElement, labels: InputLabels, {meshType}: {meshType?: string} = {}) {
-        super(canvas);
+    constructor(canvas: HTMLCanvasElement, labels: InputLabels, {meshType, factor}: CoordinateSystem2dInput = {}) {
+        super(canvas, factor);
         this.identifier = 'CoordinateSystem2dGrid';
         this.allowedCharts = [ROW_CHART, OPOSITE_ROW_CHART, COLUMN_CHART, OPOSITE_COLUMN_CHART, LINE_CHART];
         this.labels = this.setLabels(labels);
@@ -64,8 +70,8 @@ class CoordinateSystem2dGrid extends Grid implements Coordinate2dGridType {
     }
 
     drawBorder() {
-        new Line(this.ctx, [[0, this.y0position],[this.drawArea.width, this.y0position]]).draw();
-        new Line(this.ctx, [[this.x0position, 0],[this.x0position, this.drawArea.height]]).draw();
+        new Line(this.ctx, [[0, this.y0position],[this.drawArea.width, this.y0position]], {color: this.colors.primary}).draw();
+        new Line(this.ctx, [[this.x0position, 0],[this.x0position, this.drawArea.height]], {color: this.colors.primary}).draw();
     }
 
     setUpDrawArea() {
@@ -111,7 +117,7 @@ class CoordinateSystem2dGrid extends Grid implements Coordinate2dGridType {
                     this.ctx.textAlign = 'center';
                     this.ctx.fillText(label.toString(), offset, zeroPosition + this.labelPadding + 5);
                 }
-                new Line(this.ctx, short).draw();
+                new Line(this.ctx, short, {color: this.colors.primary}).draw();
             }
             offset += step;
         }

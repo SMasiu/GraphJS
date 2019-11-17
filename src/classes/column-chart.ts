@@ -1,5 +1,5 @@
 import Chart from "./chart";
-import { ColumnChartType, ColumnChartInputType, GroupItemType } from "../types/charts.types";
+import { ColumnChartType, ColumnChartInputType, GroupItemType, GroupItemUpdateType } from "../types/charts.types";
 import HorizontalGrid from "./horizontal-grid";
 import { AnyLabelType } from "../types/grids.types";
 import Rect from "./rect";

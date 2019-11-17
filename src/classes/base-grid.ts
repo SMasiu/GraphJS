@@ -1,5 +1,5 @@
 import Grid from "./grid";
-import { DrawArea, AllLabels, AnyLabelType } from "../types/grids.types";
+import { DrawArea, AllLabels, AnyLabelType, GridOptions } from "../types/grids.types";
 import clearDrawArea from "../types/draw-area";
 import Line from "./line";
 import { InputAllLabels } from "../types/input-labels.type";
@@ -15,8 +15,8 @@ abstract class BaseGrid extends Grid {
     abstract mainLabel: string;
     abstract identifier: string;
 
-    constructor(canvas: HTMLCanvasElement) {
-        super(canvas);
+    constructor(canvas: HTMLCanvasElement, {factor}: GridOptions = {}) {
+        super(canvas, factor);
         this.drawArea = clearDrawArea;
         this.y0position = 0;
         this.x0position = 0;

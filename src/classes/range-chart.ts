@@ -22,7 +22,7 @@ class RangeChart extends Chart implements RangeChartType {
         this.x0position = 0;
         this.radius = 3;
     }
-
+    
     draw() {
         if(this.parent && this.ctx) {
             this.ctx.translate(.5,.5);

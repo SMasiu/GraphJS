@@ -8,16 +8,16 @@ class NoGrid extends Grid implements NoGridType {
     mainLabel: string;
     allowedCharts: string[];
     drawArea: DrawArea;
-    labels: StringLabelType;
+    labels: null;
     identifier: string;
 
-    constructor(canvas: HTMLCanvasElement, labels: StringLabel) {
+    constructor(canvas: HTMLCanvasElement) {
         super(canvas);
         this.identifier = 'NoGrid';
         this.mainLabel = '0';
         this.allowedCharts = [];
         this.drawArea = clearDrawArea;
-        this.labels = this.setLabels(labels);
+        this.labels = null;
     }
 
     drawGrid() {
@@ -39,11 +39,8 @@ class NoGrid extends Grid implements NoGridType {
         this.ctx.translate(this.drawArea.startX, this.drawArea.startY);
     }
 
-    setLabels(labels: StringLabel): StringLabelType {
-        return {
-            type: labels.identifier,
-            values: labels.values
-        }
+    setLabels(labels: StringLabel){
+        return null;
     }
 
 }

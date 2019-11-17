@@ -3,6 +3,13 @@ import { AllLabels, AnyLabelType, VerticalGridType } from "../types/grids.types"
 import Line from "./line";
 import { ROW_CHART, OPOSITE_ROW_CHART } from "../types/chart-names";
 import { InputAllLabels } from "../types/input-labels.type";
+import GridFactor from "../factors/grid-factor";
+
+interface VerticalGridOptopns {
+    mainLabel?: 'top' | 'bottom';
+    secondaryLabel?: 'left' | 'right';
+    factor?: GridFactor
+}
 
 class VerticalGrid extends BaseGrid implements VerticalGridType {
 
@@ -12,8 +19,8 @@ class VerticalGrid extends BaseGrid implements VerticalGridType {
     identifier: string;
     secondaryLabel: 'left' | 'right';
 
-    constructor(canvas: HTMLCanvasElement, labels: InputAllLabels, {mainLabel, secondaryLabel}: {mainLabel?: 'top' | 'bottom', secondaryLabel?: 'left' | 'right'} = {}) {
-        super(canvas);
+    constructor(canvas: HTMLCanvasElement, labels: InputAllLabels, {mainLabel, secondaryLabel, factor}:VerticalGridOptopns = {}) {
+        super(canvas, {factor});
         this.identifier = 'VerticalGrid';
         this.allowedCharts = [ROW_CHART, OPOSITE_ROW_CHART];
         this.mainLabel = mainLabel || 'bottom';

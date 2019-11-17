@@ -1,5 +1,5 @@
 import Chart from "./chart";
-import { LineCharType, MultipleValuesItem, LineChartInputType } from "../types/charts.types";
+import { LineCharType, MultipleValuesItem, LineChartInputType, MultipleValuesItemUpdate } from "../types/charts.types";
 import HorizontalGrid from "./horizontal-grid";
 import Line from "./line";
 import Circle from "./circle";
@@ -13,8 +13,8 @@ class LineChart extends Chart implements LineCharType {
     dots: boolean;
     labelLen: number;
 
-    constructor({values, fill, dots}: LineChartInputType = {}) {
-        super();
+    constructor({values, fill, dots, factor}: LineChartInputType = {}) {
+        super(factor);
         this.content = values || [];
         this.fill = fill || false;
         this.dots = dots || false;
@@ -96,8 +96,10 @@ class LineChart extends Chart implements LineCharType {
                     }
                     for(let [x ,y] of points) {                        
                         ctx.globalAlpha = 1;
-                        ctx.lineWidth = 6;
-                        new Circle(ctx, x, y, 3, {color: '#fff'}).draw();
+                        if(this.dotBorder) {
+                            ctx.lineWidth = this.dotRadius * 2;
+                        }
+                        new Circle(ctx, x, y, this.dotRadius, {color: this.dotBorder ? '#fff' : item.color}).draw();
                         ctx.fillStyle = item.color;
                         ctx.fill();
                     }

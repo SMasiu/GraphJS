@@ -3,6 +3,13 @@ import { AllLabels, AnyLabelType, HorizontalGridType } from "../types/grids.type
 import { COLUMN_CHART, OPOSITE_COLUMN_CHART, LINE_CHART } from "../types/chart-names";
 import Line from "./line";
 import { InputAllLabels } from "../types/input-labels.type";
+import GridFactor from "../factors/grid-factor";
+
+interface HorizontalGridOptions {
+    mainLabel?: 'left' | 'right';
+    secondaryLabel?: 'bottom' | 'top';
+    factor?: GridFactor;
+}
 
 class HorizontalGrid extends BaseGrid implements HorizontalGridType {
 
@@ -11,8 +18,8 @@ class HorizontalGrid extends BaseGrid implements HorizontalGridType {
     mainLabel: 'left' | 'right';
     secondaryLabel: 'top' | 'bottom';
     identifier: string;
-    constructor(canvas: HTMLCanvasElement, labels: InputAllLabels, {mainLabel, secondaryLabel}: {mainLabel?: 'left' | 'right', secondaryLabel?: 'bottom' | 'top'} = {}) {
-        super(canvas);
+    constructor(canvas: HTMLCanvasElement, labels: InputAllLabels, {mainLabel, secondaryLabel, factor}: HorizontalGridOptions = {}) {
+        super(canvas, {factor});
         this.identifier = 'HorizontalGrid';
         this.allowedCharts = [COLUMN_CHART, OPOSITE_COLUMN_CHART, LINE_CHART];
         this.mainLabel = mainLabel || 'left';

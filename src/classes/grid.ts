@@ -1,6 +1,6 @@
-import { GridType, MarginAll, LabelType, DrawArea, GridColors, OptionsType, AllLabels, FontOptions, Label2dType } from "../types/grids.types";
-import { USE_DEFAULT_GRID } from "../factors/grid.factors";
+import { GridType, MarginAll, LabelType, DrawArea, GridColors, AllLabels, FontOptions, Label2dType } from "../types/grids.types";
 import Chart from "./chart";
+import GridFactor, { DEFAULT_GRID_FACTOR } from "../factors/grid-factor";
 
 abstract class Grid implements GridType {
     
@@ -18,16 +18,13 @@ abstract class Grid implements GridType {
     
     abstract identifier: string;
     abstract mainLabel: string;
-    abstract labels: LabelType | AllLabels | Label2dType;
+    abstract labels: LabelType | AllLabels | Label2dType | null;
     abstract drawArea: DrawArea;
     abstract allowedCharts: string[];
 
-    constructor(public canvas: HTMLCanvasElement, { margin, colors, font, labelPadding }: OptionsType = USE_DEFAULT_GRID()) {
+    constructor(public canvas: HTMLCanvasElement, factor: GridFactor = DEFAULT_GRID_FACTOR) {
         let ctx = this.canvas.getContext('2d');
         if (ctx) {
-            ctx.setTransform(1, 0, 0, 1, 0, 0);
-            ctx.restore();
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
             this.ctx = ctx;
         } else {
             throw new Error('Something went wrong while reading context');
@@ -36,10 +33,15 @@ abstract class Grid implements GridType {
         this.width = ctx.canvas.clientWidth;
         this.centerX = this.width / 2;
         this.centerY = this.height / 2;
-        this.margin = margin;
-        this.labelPadding = labelPadding;
-        this.colors = colors;
-        this.font = font;
+        this.margin = {
+            top: 25,
+            left: 25,
+            bottom: 25,
+            right: 25
+        };
+        this.labelPadding = factor.labelPadding;
+        this.colors = factor.colors;
+        this.font = factor.font;
         this.chartList = {};
     }
 
@@ -49,6 +51,9 @@ abstract class Grid implements GridType {
     abstract drawGrid(): void;
 
     draw() {
+        this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+        this.ctx.restore();
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(.5,.5);
         this.drawGrid();
         this.drawCharts();
@@ -93,7 +98,9 @@ abstract class Grid implements GridType {
     
     drawCharts() {
         for(let chart in this.chartList) {
-            this.chartList[chart].draw();
+            if(!this.chartList[chart].disable) {
+                this.chartList[chart].draw();
+            }
         }
     }
 

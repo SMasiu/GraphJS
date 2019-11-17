@@ -27,6 +27,14 @@ class RowChart extends Chart implements RowChartType {
         this.y0position = 0;
     
     }
+
+    updateItemContent(id: string | number) {
+        return {}
+    }
+    addItemContent() {
+        return {}
+    }
+
     draw() {
 
         if(this.parent && this.ctx) {

@@ -2,8 +2,9 @@ import Chart from "./chart";
 import { RoundChartType, ValueColorType, RoundChartInputType } from "../types/charts.types";
 import Circle from "./circle";
 import CirclePoint from "./circle-point";
-import { LabelType } from "../types/grids.types";
+import { StringLabelType } from "../types/grids.types";
 import Line from "./line";
+import NoGrid from "./no-grid";
 
 class RoundChart extends Chart implements RoundChartType {
     
@@ -12,9 +13,23 @@ class RoundChart extends Chart implements RoundChartType {
     changingSize: boolean;
     blankCenter: boolean;
     itemsMargin: number;
-    
-    constructor({centerValue, values, changingSize, blankCenter, itemsMargin}: RoundChartInputType) {
+    labels: StringLabelType | null;
+
+    constructor({centerValue, values, changingSize, blankCenter, itemsMargin, labels, canvas}: RoundChartInputType) {
         super();
+        if(canvas) {
+            this.parent = new NoGrid(canvas);
+            this.ctx = this.parent.ctx;
+            this.ctx.translate(.5, .5);
+        }
+        if(labels)  {
+            this.labels = {
+                values: labels.values,
+                type: labels.identifier
+            }
+        } else {
+            this.labels = null;
+        }
         this.content = values || [];
         this.centerValue = centerValue ? centerValue.toString() : null;
         this.changingSize = changingSize || false;
@@ -24,6 +39,13 @@ class RoundChart extends Chart implements RoundChartType {
 
     draw() {
         if(this.parent && this.ctx) {
+            this.parent.margin = {
+                left: 200,
+                right: 200,
+                top: 50,
+                bottom: 50
+            }
+            this.parent.setUpDrawArea();
             const {centerX, centerY} = this.parent.drawArea;
             const {ctx} = this;
             let offset = 0 - Math.PI / 2;
@@ -51,17 +73,18 @@ class RoundChart extends Chart implements RoundChartType {
                 ctx.closePath();
                 ctx.stroke();
                 ctx.fill();
-                //labels
-                let label = (<string[]>(<LabelType>this.parent.labels).values)[i];
-                ctx.lineWidth = 1;
-                let [x2, y2] = new CirclePoint(radius, offsetAngle, 0, centerX, centerY).next();
-                let [x3, y3] = new CirclePoint(radius + this.parent.labelPadding * 7.5, offsetAngle, 0, centerX, centerY).next();
-                let left = offsetAngle > Math.PI / 2;
-                let x4 = x3 - 100 * (left ? 1 : -1);
-                new Line(ctx, [[x2, y2], [x3, y3], [x4, y3]]).draw();
-                this.parent.setFont(left ? 'left' : 'right');
-                ctx.fillText(label, x4, y3 - 5);
-                
+                // labels
+                if(this.labels) {
+                    let label = this.labels.values[i];
+                    ctx.lineWidth = 1;
+                    let [x2, y2] = new CirclePoint(radius, offsetAngle, 0, centerX, centerY).next();
+                    let [x3, y3] = new CirclePoint(radius + this.parent.labelPadding * 7.5, offsetAngle, 0, centerX, centerY).next();
+                    let left = offsetAngle > Math.PI / 2;
+                    let x4 = x3 - 100 * (left ? 1 : -1);
+                    new Line(ctx, [[x2, y2], [x3, y3], [x4, y3]]).draw();
+                    this.parent.setFont(left ? 'left' : 'right');
+                    ctx.fillText(label, x4, y3 - 5);
+                }
                 offset += angle;
                 if(this.changingSize) {
                     radius -= changingStep;

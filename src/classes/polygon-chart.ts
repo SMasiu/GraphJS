@@ -1,5 +1,5 @@
 import Chart from "./chart";
-import { PolygonCharType, MultipleValuesItem, PolygonChartInputType } from "../types/charts.types";
+import { PolygonCharType, MultipleValuesItem, PolygonChartInputType, MultipleValuesItemUpdate } from "../types/charts.types";
 import CirclePoint from "./circle-point";
 import Circle from "./circle";
 import Line from "./line";
@@ -10,8 +10,8 @@ class PolygonChart extends Chart implements PolygonCharType {
     fill: boolean;
     dots: boolean;
 
-    constructor({values, fill, dots}: PolygonChartInputType = {}) {
-        super();
+    constructor({values, fill, dots, factor}: PolygonChartInputType = {}) {
+        super(factor);
         this.content = values || [];
         this.fill = fill === false ? false : true;
         this.dots = dots || false;
@@ -40,8 +40,11 @@ class PolygonChart extends Chart implements PolygonCharType {
                 }
                 if(this.dots) {
                     for(let [x, y] of points) {
-                        ctx.lineWidth = 6
-                        new Circle(ctx, x, y, 3, {color: '#fff'}).draw();
+
+                        if(this.dotBorder) {
+                            ctx.lineWidth = this.dotRadius * 2 ;
+                        }
+                        new Circle(ctx, x, y, this.dotRadius, {color: this.dotBorder ? '#fff' : item.color}).draw();
                         ctx.globalAlpha = 1;
                         ctx.fill();
                     }
