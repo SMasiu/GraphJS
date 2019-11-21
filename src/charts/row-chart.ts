@@ -2,8 +2,8 @@ import Chart from "./chart";
 import { RowChartType, RowChartInputType, GroupItemType } from "../types/charts.types";
 import VerticalGrid from "../grids/vertical-grid";
 import Rect from "../shapes/rect";
-import CoordinateSystem2dGrid from "../classes/coordinate-system-2d-grid";
 import Label from "../labels/label";
+import CoordinateSystem2dGrid from "../grids/coordinate-system-2d-grid";
 
 class RowChart extends Chart implements RowChartType {
 
