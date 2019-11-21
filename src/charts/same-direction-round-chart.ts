@@ -1,30 +1,29 @@
 import Chart from "./chart";
 import { SameDirectionRoundChartInputType, SameDirectionRoundChartType, ValueColorType, ValueColorUpdateType } from "../types/charts.types";
-import LinePiece from "./line-piece";
-import { StringLabelType } from "../types/grids.types";
-import NoGrid from "./no-grid";
+import LinePiece from "../shapes/line-piece";
+import NoGrid from "../grids/no-grid";
+import StringLabel from "../labels/string-label";
 
 class SameDirectionRoundChart extends Chart implements SameDirectionRoundChartType {
     content: ValueColorType[];
     centerValue: string | null;
-    labels: StringLabelType | null;
+    labels: StringLabel | null;
     itemMargin: number;
     constructor({labels, values, centerValue, canvas, itemMargin}: SameDirectionRoundChartInputType = {}) {
         super();
-        if(canvas) {
+        if (canvas) {
             this.parent = new NoGrid(canvas);
             this.ctx = this.parent.ctx;
             this.parent.setUpDrawArea();
-            this.ctx.translate(.5, .5);
+            if (this.ctx) {
+                this.ctx.translate(.5, .5);
+            }
         }
         this.itemMargin = itemMargin === 0 || itemMargin ? itemMargin : 10;
         this.content = values || [];
         this.centerValue = centerValue ? centerValue.toString() : null;
         if(labels) {
-            this.labels = {
-                type: labels.identifier,
-                values: labels.values
-            }
+            this.labels = labels;
         } else {
             this.labels = null
         }

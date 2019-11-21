@@ -1,6 +1,6 @@
 import Label from "./label";
 
-class StringLabel extends Label{
+class StringLabel extends Label {
 
     identifier: 'string';
     values: string[];

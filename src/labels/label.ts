@@ -4,9 +4,11 @@ abstract class Label {
     abstract toLabel(): any[];
     abstract values: any[];
     reverse: boolean;
+    width: number;
 
     constructor () {
         this.reverse = false;
+        this.width = 0;
     }
 
 }

@@ -1,9 +1,9 @@
 import Chart from "./chart";
-import { ColumnChartType, ColumnChartInputType, GroupItemType, GroupItemUpdateType } from "../types/charts.types";
-import HorizontalGrid from "./horizontal-grid";
-import { AnyLabelType } from "../types/grids.types";
-import Rect from "./rect";
-import CoordinateSystem2dGrid from "./coordinate-system-2d-grid";
+import { ColumnChartType, ColumnChartInputType, GroupItemType } from "../types/charts.types";
+import Rect from "../shapes/rect";
+import Label from "../labels/label";
+import HorizontalGrid from "../grids/horizontal-grid";
+import CoordinateSystem2dGrid from "../grids/coordinate-system-2d-grid";
 
 class ColumnChart extends Chart implements ColumnChartType {
 
@@ -33,7 +33,7 @@ class ColumnChart extends Chart implements ColumnChartType {
                 width = parent.drawArea.width;
                 y0position = parent.y0position;
                 this.y0position = y0position;
-                this.stepLen = (<AnyLabelType>parent.labels[parent.secondaryLabel]).values.length;
+                this.stepLen = (<Label>parent.labels[parent.secondaryLabel]).values.length;
                 let label = parent.labels[(<'left' | 'right'>parent.mainLabel)];
                 if(label) {
                     this.maxY = parseFloat(<any>label.values[0]);

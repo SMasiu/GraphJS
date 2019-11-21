@@ -1,10 +1,10 @@
 import { Coordinate2dGridType, Label2dType, DrawArea } from "../types/grids.types";
-import Grid from "./grid";
 import { ROW_CHART, OPOSITE_ROW_CHART, COLUMN_CHART, OPOSITE_COLUMN_CHART, LINE_CHART } from "../types/chart-names";
-import ValueLabel from "./value-label";
+import ValueLabel from "../labels/value-label";
 import clearDrawArea from "../types/draw-area";
-import Line from "./line";
 import GridFactor from "../factors/grid-factor";
+import Grid from "../grids/grid";
+import Line from "../shapes/line";
 
 interface InputLabels {
     x: ValueLabel,
@@ -124,16 +124,7 @@ class CoordinateSystem2dGrid extends Grid implements Coordinate2dGridType {
     }
 
     setLabels({x, y}: InputLabels): Label2dType {
-        return {
-            x: {
-                type: x.identifier,
-                values: x.values
-            },
-            y: {
-                type: y.identifier,
-                values: y.values
-            }
-        }
+        return { x, y };
     }
 
 }

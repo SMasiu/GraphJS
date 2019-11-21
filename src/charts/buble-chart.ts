@@ -1,7 +1,8 @@
 import Chart from "./chart";
 import { BubleChartType, BubleChartInputType, CoordinateValuesType } from "../types/charts.types";
-import CoordinateSystem2dGrid from "./coordinate-system-2d-grid";
-import Circle from "./circle";
+import Circle from "../shapes/circle";
+import ValueLabel from "../labels/value-label";
+import CoordinateSystem2dGrid from "../grids/coordinate-system-2d-grid";
 
 class BubleChart extends Chart implements BubleChartType {
 
@@ -14,6 +15,7 @@ class BubleChart extends Chart implements BubleChartType {
     x0position: number = 0;
     height: number = 0;
     y0position: number = 0;
+    stepValue: number = 0;
 
     constructor({values}: BubleChartInputType) {
         super();
@@ -27,6 +29,7 @@ class BubleChart extends Chart implements BubleChartType {
             this.height = parent.drawArea.height;
             this.x0position = parent.x0position;
             this.y0position = parent.y0position;
+            this.stepValue = this.width / (parent.labels.x.values.length - 1) / parent.labels.x.step;
             this.maxX = parent.labels.x.values[parent.labels.x.values.length - 1];
             this.minX = parent.labels.x.values[0];
             this.minY = parent.labels.y.values[parent.labels.y.values.length - 1];
@@ -36,7 +39,7 @@ class BubleChart extends Chart implements BubleChartType {
                 let [x, y] = values;
                 let w = this.calcWidth(x);
                 let h = this.calcHeight(y);
-                new Circle(this.ctx, w, h, radius, {color}).draw();
+                new Circle(this.ctx, w, h, radius * this.stepValue, {color}).draw();
                 this.ctx.fillStyle = color;
                 this.ctx.fill();
             }

@@ -1,9 +1,8 @@
-import Grid from "./grid";
-import { DrawArea, AllLabels, AnyLabelType, GridOptions } from "../types/grids.types";
+import { DrawArea, AllLabels, GridOptions, InputAllLabels } from "../types/grids.types";
 import clearDrawArea from "../types/draw-area";
-import Line from "./line";
-import { InputAllLabels } from "../types/input-labels.type";
-import Label from "./label";
+import Label from "../labels/label";
+import Grid from "./grid";
+import Line from "../shapes/line";
 
 abstract class BaseGrid extends Grid {
 
@@ -26,19 +25,7 @@ abstract class BaseGrid extends Grid {
     abstract validateLabels(labels: InputAllLabels): boolean;
 
     setLabels(labels: InputAllLabels): AllLabels {
-        let newLabels: {[key: string]: AnyLabelType} = {};
-        for(let pos in labels) {
-            if(pos === 'top' || pos === 'bottom' || pos === 'right' || pos === 'left') {
-    
-                newLabels[pos] = {
-                    type: (<Label>labels[pos]).identifier,
-                    values: (<Label>labels[pos]).values
-                }
-        
-            }
-        }
-
-        return newLabels;
+        return labels;
     }
 
     drawOuter() {
@@ -78,23 +65,23 @@ abstract class BaseGrid extends Grid {
         const {left, bottom, top, right} = this.labels;
         if(left) {
             new Line(ctx, [[0, 0],[0, height]], {color}).draw();
-            let len = left.type !== 'string' ? 1 : 0;
-            this.drawMarkers(left.values, height / (left.values.length - len), -5, 0, left.type);
+            let len = left.identifier !== 'string' ? 1 : 0;
+            this.drawMarkers(left.values, height / (left.values.length - len), -5, 0, left.identifier);
         }
         if(bottom) {
             new Line(ctx, [[0, height],[width, height]], {color}).draw();
-            let len = bottom.type !== 'string' ? 1 : 0;
-            this.drawMarkers(bottom.values, width / (bottom.values.length - len), height + 5, height, bottom.type, true);
+            let len = bottom.identifier !== 'string' ? 1 : 0;
+            this.drawMarkers(bottom.values, width / (bottom.values.length - len), height + 5, height, bottom.identifier, true);
         }
         if(top) {
             new Line(ctx, [[0, 0], [width, 0]], {color}).draw();
-            let len = top.type !== 'string' ? 1 : 0;
-            this.drawMarkers(top.values, width / (top.values.length - len), -5, 0, top.type, true);
+            let len = top.identifier !== 'string' ? 1 : 0;
+            this.drawMarkers(top.values, width / (top.values.length - len), -5, 0, top.identifier, true);
         }
         if(right) {
             new Line(ctx, [[width, 0], [width, height]], {color}).draw();
-            let len = right.type !== 'string' ? 1 : 0;
-            this.drawMarkers(right.values, height / (right.values.length - len), width, width + 5, right.type);
+            let len = right.identifier !== 'string' ? 1 : 0;
+            this.drawMarkers(right.values, height / (right.values.length - len), width, width + 5, right.identifier);
         }
     }
 
@@ -167,12 +154,12 @@ abstract class BaseGrid extends Grid {
 
     private drawLabelsValues(cType: 'left' | 'right' | 'top' | 'bottom', size: number, offset: number) {
         const {ctx} = this;
-        let curentLabel: AnyLabelType | undefined = this.labels[cType];
+        let curentLabel: Label | undefined = this.labels[cType];
         if(curentLabel) {
-            const {values, type} = curentLabel;
+            const {values, identifier} = curentLabel;
             let step = size / values.length;
             let curentOffset = step / 2;
-            if(type === 'percent' || type === 'value') {
+            if(identifier === 'percent' || identifier === 'value') {
                 step = size / (values.length - 1);
                 curentOffset = cType === 'top' || cType === 'bottom' ? 0 : 0;
             }

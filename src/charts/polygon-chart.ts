@@ -1,8 +1,8 @@
 import Chart from "./chart";
 import { PolygonCharType, MultipleValuesItem, PolygonChartInputType, MultipleValuesItemUpdate } from "../types/charts.types";
-import CirclePoint from "./circle-point";
-import Circle from "./circle";
-import Line from "./line";
+import CirclePoint from "../shapes/circle-point";
+import Circle from "../shapes/circle";
+import Line from "../shapes/line";
 
 class PolygonChart extends Chart implements PolygonCharType {
 

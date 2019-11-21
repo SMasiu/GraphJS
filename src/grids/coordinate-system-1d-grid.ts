@@ -1,13 +1,13 @@
-import Grid from "./grid";
-import { DrawArea, NumberLabelType, GridOptions } from "../types/grids.types";
+import { DrawArea, GridOptions } from "../types/grids.types";
 import clearDrawArea from "../types/draw-area";
-import ValueLabel from "./value-label";
-import Line from "./line";
+import ValueLabel from "../labels/value-label";
+import Grid from "./grid";
+import Line from "../shapes/line";
 
 class CoordinateSystem1dGrid extends Grid implements CoordinateSystem1dGrid {
     allowedCharts: string[];
     drawArea: DrawArea;
-    labels: NumberLabelType;
+    labels: ValueLabel;
     mainLabel: string;
     step: number;
     x0position: number;
@@ -56,11 +56,8 @@ class CoordinateSystem1dGrid extends Grid implements CoordinateSystem1dGrid {
         this.ctx.translate(this.drawArea.startX, this.drawArea.startY);
     }
 
-    setLabels(label: ValueLabel): NumberLabelType {
-        return {
-            type: label.identifier,
-            values: label.values
-        }
+    setLabels(label: ValueLabel): ValueLabel {
+        return label;
     }
 
 }

@@ -1,9 +1,9 @@
 import Chart from "./chart";
 import { RowChartType, RowChartInputType, GroupItemType } from "../types/charts.types";
-import VerticalGrid from "./vertical-grid";
-import { AnyLabelType } from "../types/grids.types";
-import Rect from "./rect";
-import CoordinateSystem2dGrid from "./coordinate-system-2d-grid";
+import VerticalGrid from "../grids/vertical-grid";
+import Rect from "../shapes/rect";
+import CoordinateSystem2dGrid from "../classes/coordinate-system-2d-grid";
+import Label from "../labels/label";
 
 class RowChart extends Chart implements RowChartType {
 
@@ -45,7 +45,7 @@ class RowChart extends Chart implements RowChartType {
                 this.width = parent.drawArea.width;
                 this.y0position = 0;
                 this.x0position = parent.x0position;
-                this.stepLen = (<AnyLabelType>parent.labels[parent.secondaryLabel]).values.length;
+                this.stepLen = (<Label>parent.labels[parent.secondaryLabel]).values.length;
                 let label = parent.labels[(<'top' | 'bottom'>parent.mainLabel)];
                 if(label) {
                     this.maxX = parseFloat(<any>label.values[0]);

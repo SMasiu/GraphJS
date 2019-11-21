@@ -1,6 +1,7 @@
-import { GridType, MarginAll, LabelType, DrawArea, GridColors, AllLabels, FontOptions, Label2dType } from "../types/grids.types";
-import Chart from "./chart";
+import { GridType, MarginAll, DrawArea, GridColors, AllLabels, FontOptions, Label2dType } from "../types/grids.types";
+import Chart from "../charts/chart";
 import GridFactor, { DEFAULT_GRID_FACTOR } from "../factors/grid-factor";
+import Label from "../labels/label";
 
 abstract class Grid implements GridType {
     
@@ -18,7 +19,7 @@ abstract class Grid implements GridType {
     
     abstract identifier: string;
     abstract mainLabel: string;
-    abstract labels: LabelType | AllLabels | Label2dType | null;
+    abstract labels: Label | AllLabels | Label2dType | null;
     abstract drawArea: DrawArea;
     abstract allowedCharts: string[];
 

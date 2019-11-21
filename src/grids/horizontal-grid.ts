@@ -1,9 +1,9 @@
-import BaseGrid from "./base-grid";
-import { AllLabels, AnyLabelType, HorizontalGridType } from "../types/grids.types";
+import { AllLabels, HorizontalGridType, InputAllLabels } from "../types/grids.types";
 import { COLUMN_CHART, OPOSITE_COLUMN_CHART, LINE_CHART } from "../types/chart-names";
-import Line from "./line";
-import { InputAllLabels } from "../types/input-labels.type";
 import GridFactor from "../factors/grid-factor";
+import BaseGrid from "./base-grid";
+import Label from "../labels/label";
+import Line from "../shapes/line";
 
 interface HorizontalGridOptions {
     mainLabel?: 'left' | 'right';
@@ -53,11 +53,11 @@ class HorizontalGrid extends BaseGrid implements HorizontalGridType {
     }
 
     drawInnerGrid() {
-        let len = ((<AnyLabelType>this.labels[this.mainLabel]).values.length - 1) * 2;
+        let len = ((<Label>this.labels[this.mainLabel]).values.length - 1) * 2;
         let step = this.drawArea.height / len;
         let curent = 0;
         for(let i = 0; i < len + 1; i++) {
-            let label = (<AnyLabelType>this.labels[this.mainLabel]).values[i / 2];
+            let label = (<Label>this.labels[this.mainLabel]).values[i / 2];
             let color = this.colors[label === '0' || label === '0%' || label === 0 ? 'primary' : 'secondary'];
             new Line(this.ctx, [[0, curent],[this.drawArea.width, curent]], {color}).draw();
             curent += step + .001;

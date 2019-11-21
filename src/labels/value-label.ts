@@ -5,7 +5,7 @@ class ValueLabel extends Label {
     values: number[];
     identifier: 'value';
 
-    constructor(private min: number, private max: number, private step: number, {reverse}: {reverse?: boolean} = {}) {
+    constructor(private min: number, private max: number, public step: number, {reverse}: {reverse?: boolean} = {}) {
         super();
         this.reverse = reverse || false;
         this.identifier = 'value';

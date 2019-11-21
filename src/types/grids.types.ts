@@ -1,5 +1,8 @@
-import Chart from "../classes/chart";
+import Chart from "../charts/chart";
 import GridFactor from "../factors/grid-factor";
+import Label from "../labels/label";
+import ValueLabel from "../labels/value-label";
+import StringLabel from "../labels/string-label";
 
 export interface GridType {
     canvas: HTMLCanvasElement;
@@ -13,7 +16,7 @@ export interface GridType {
     drawArea: DrawArea;
     allowedCharts: string[];
     chartList: {[key: string]: Chart};
-    labels: LabelType | AllLabels | Label2dType | null;
+    labels: Label | AllLabels | Label2dType | null;
     font: FontOptions;
     labelPadding: number;
     mainLabel: string;
@@ -55,10 +58,17 @@ export interface DrawArea {
 }
 
 export interface AllLabels {
-    top?: AnyLabelType;
-    right?: AnyLabelType;
-    bottom?: AnyLabelType;
-    left?: AnyLabelType;
+    top?: Label;
+    right?: Label;
+    bottom?: Label;
+    left?: Label;
+}
+
+export interface InputAllLabels {
+    top?: Label;
+    right?: Label;
+    bottom?: Label;
+    left?: Label;
 }
 
 export interface HorizontalGridType {
@@ -70,7 +80,7 @@ export interface VerticalGridType {
 }
 
 export interface PolygonGridType {
-    labels: StringLabelType;
+    labels: StringLabel;
 }
 
 export interface Coordinate2dGridType {
@@ -78,7 +88,7 @@ export interface Coordinate2dGridType {
 }
 
 export interface Coordinate1dGridType {
-    labels: NumberLabelType
+    labels: ValueLabel
 }
 
 export interface NoGridType {
@@ -86,34 +96,13 @@ export interface NoGridType {
 }
 
 export interface Label2dType {
-    y: NumberLabelType;
-    x: NumberLabelType;
+    y: ValueLabel;
+    x: ValueLabel;
 }
 
 export interface LabelType {
     type: string;
     values: string[] | boolean[] | number[];
-}
-
-export interface AnyLabelType extends LabelType {
-    type: 'percent' | 'value' | 'string';
-    width?: number;
-    values: string[] | number[];
-}
-
-export interface StringLabelType extends LabelType {
-    type: 'string';
-    values: string[];
-}
-
-export interface NumberLabelType extends LabelType {
-    type: 'value';
-    values: number[];
-}
-
-export interface PercentLabelType extends LabelType {
-    type: 'percent';
-    values: string[];
 }
 
 export interface GridOptions {

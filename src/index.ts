@@ -1,23 +1,23 @@
-import HorizontalGrid from "./classes/horizontal-grid";
-import VerticalGrid from "./classes/vertical-grid";
-import Grid from "./classes/grid";
-import ValueLabel from "./classes/value-label";
-import StringLabel from "./classes/string-label";
-import PercentLabel from "./classes/percent-label";
-import PolygonGrid from "./classes/polygon-grid";
-import CoordinateSystem2dGrid from "./classes/coordinate-system-2d-grid";
-import CoordinateSystem1dGrid from "./classes/coordinate-system-1d-grid";
-import NoGrid from "./classes/no-grid";
-import SameDirectionRoundChart from "./classes/same-direction-round-chart";
-import RoundChart from "./classes/round-chart";
-import RangeChart from "./classes/range-chart";
-import LineChart from "./classes/line-chart";
-import PolygonChart from "./classes/polygon-chart";
-import ColumnChart from "./classes/column-chart";
-import RowChart from "./classes/row-chart";
-import BubleChart from "./classes/buble-chart";
+import VerticalGrid from "./grids/vertical-grid";
+import ValueLabel from "./labels/value-label";
+import PercentLabel from "./labels/percent-label";
+import PolygonGrid from "./grids/polygon-grid";
+import CoordinateSystem1dGrid from "./grids/coordinate-system-1d-grid";
+import NoGrid from "./grids/no-grid";
+import SameDirectionRoundChart from "./charts/same-direction-round-chart";
+import RoundChart from "./charts/round-chart";
+import RangeChart from "./charts/range-chart";
+import LineChart from "./charts/line-chart";
+import PolygonChart from "./charts/polygon-chart";
+import ColumnChart from "./charts/column-chart";
+import RowChart from "./charts/row-chart";
+import BubleChart from "./charts/buble-chart";
 import GridFactor from "./factors/grid-factor";
 import ChartFactor from "./factors/chart-factor";
+import StringLabel from "./labels/string-label";
+import HorizontalGrid from "./grids/horizontal-grid";
+import Grid from "./grids/grid";
+import CoordinateSystem2dGrid from "./grids/coordinate-system-2d-grid";
 
 let canvas1: HTMLCanvasElement | null = document.querySelector('#c1');
 let canvas2: HTMLCanvasElement | null = document.querySelector('#c2');
@@ -304,7 +304,7 @@ if(canvas12) {
         buble: new BubleChart({
             values: [{
                 color: 'red',
-                values: [10, 20],
+                values: [0, 0],
                 radius: 20
             },{
                 color: 'orange',

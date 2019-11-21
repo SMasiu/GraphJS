@@ -1,10 +1,10 @@
 import Chart from "./chart";
-import { LineCharType, MultipleValuesItem, LineChartInputType, MultipleValuesItemUpdate } from "../types/charts.types";
-import HorizontalGrid from "./horizontal-grid";
-import Line from "./line";
-import Circle from "./circle";
-import CoordinateSystem2dGrid from "./coordinate-system-2d-grid";
+import { LineCharType, MultipleValuesItem, LineChartInputType } from "../types/charts.types";
+import Circle from "../shapes/circle";
 import { AllLabels } from "../types/grids.types";
+import Line from "../shapes/line";
+import HorizontalGrid from "../grids/horizontal-grid";
+import CoordinateSystem2dGrid from "../grids/coordinate-system-2d-grid";
 
 class LineChart extends Chart implements LineCharType {
 
@@ -41,7 +41,7 @@ class LineChart extends Chart implements LineCharType {
                     y0position = parent.y0position;
                     let lab = (<AllLabels>parent.labels)[parent.secondaryLabel]
                     if(lab) {
-                        let plus = lab.type === 'string' ? 1 : 0;
+                        let plus = lab.identifier === 'string' ? 1 : 0;
                         this.labelLen = lab.values.length + plus;
                     }
                 }

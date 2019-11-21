@@ -1,16 +1,16 @@
-import Grid from "./grid";
 import { POLYGON_CHART } from "../types/chart-names";
-import { DrawArea, PolygonGridType, StringLabelType, GridOptions } from "../types/grids.types";
-import clearDrawArea from "../types/draw-area";
-import StringLabel from "./string-label";
-import CirclePoint from "./circle-point";
-import Line from "./line";
+import { DrawArea, PolygonGridType, GridOptions } from "../types/grids.types";
+import clearDrawArea from "../types/draw-area"
+import CirclePoint from "../shapes/circle-point";
+import StringLabel from "../labels/string-label";
+import Grid from "./grid";
+import Line from "../shapes/line";
 
 class PolygonGrid extends Grid implements PolygonGridType {
 
     allowedCharts: string[];
     drawArea: DrawArea;
-    labels: StringLabelType;
+    labels: StringLabel;
     mainLabel: string;
     radius: number;
     gridSize: number;
@@ -33,15 +33,12 @@ class PolygonGrid extends Grid implements PolygonGridType {
         this.gridSize = 5;
     }
 
-    setLabels(label: StringLabel): StringLabelType {
-        return {
-            type: label.identifier,
-            values: label.values
-        }
+    setLabels(label: StringLabel): StringLabel {
+        return label;
     }
 
     drawGrid() {
-        const {ctx} = this;
+        const { ctx } = this;
         let singleAngle = Math.PI * 2 / this.labels.values.length;
         let radius = this.radius;
         let step = radius / this.gridSize;

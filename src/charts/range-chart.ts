@@ -1,8 +1,8 @@
 import Chart from "./chart";
 import { RangeChartType, RangeValueType, RangeChartInputType } from "../types/charts.types";
-import CoordinateSystem1dGrid from "./coordinate-system-1d-grid";
-import Circle from "./circle";
-import Line from "./line";
+import CoordinateSystem1dGrid from "../grids/coordinate-system-1d-grid";
+import Circle from "../shapes/circle";
+import Line from "../shapes/line";
 
 class RangeChart extends Chart implements RangeChartType {
 

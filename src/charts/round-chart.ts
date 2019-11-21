@@ -1,10 +1,10 @@
 import Chart from "./chart";
 import { RoundChartType, ValueColorType, RoundChartInputType } from "../types/charts.types";
-import Circle from "./circle";
-import CirclePoint from "./circle-point";
-import { StringLabelType } from "../types/grids.types";
-import Line from "./line";
-import NoGrid from "./no-grid";
+import Circle from "../shapes/circle";
+import CirclePoint from "../shapes/circle-point";
+import NoGrid from "../grids/no-grid";
+import StringLabel from "../labels/string-label";
+import Line from "../shapes/line";
 
 class RoundChart extends Chart implements RoundChartType {
     
@@ -13,20 +13,19 @@ class RoundChart extends Chart implements RoundChartType {
     changingSize: boolean;
     blankCenter: boolean;
     itemsMargin: number;
-    labels: StringLabelType | null;
+    labels: StringLabel | null;
 
     constructor({centerValue, values, changingSize, blankCenter, itemsMargin, labels, canvas}: RoundChartInputType) {
         super();
         if(canvas) {
             this.parent = new NoGrid(canvas);
             this.ctx = this.parent.ctx;
-            this.ctx.translate(.5, .5);
+            if (this.ctx) {
+                this.ctx.translate(.5, .5);
+            }
         }
         if(labels)  {
-            this.labels = {
-                values: labels.values,
-                type: labels.identifier
-            }
+            this.labels = labels;
         } else {
             this.labels = null;
         }

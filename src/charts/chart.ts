@@ -1,6 +1,6 @@
 import { ChartType } from "../types/charts.types";
-import Grid from "./grid";
 import ChartFactor, { DEFAULT_CHART_FACTOR } from "../factors/chart-factor";
+import Grid from "../grids/grid";
 
 abstract class Chart implements ChartType {
 

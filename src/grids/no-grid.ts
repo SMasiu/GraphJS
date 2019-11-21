@@ -1,7 +1,7 @@
-import Grid from "./grid";
-import StringLabel from "./string-label";
-import { DrawArea, StringLabelType, NoGridType } from "../types/grids.types";
+import { DrawArea, NoGridType } from "../types/grids.types";
 import clearDrawArea from "../types/draw-area";
+import StringLabel from "../labels/string-label";
+import Grid from "./grid";
 
 class NoGrid extends Grid implements NoGridType {
 
