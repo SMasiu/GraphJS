@@ -208,7 +208,7 @@ if(canvas7) {
 
 if(canvas8) {
     let grid: Grid = new HorizontalGrid(canvas8, {  
-left: new ValueLabel(100, 10, 10),
+left: new ValueLabel(-100, -10, 5),
 bottom: new StringLabel(['x','a','a','a']) 
     });
     grid.addCharts({
@@ -216,20 +216,21 @@ bottom: new StringLabel(['x','a','a','a'])
             values: [{
                 type: 'simple',
                 color: 'red',
-                values: 50
+                values: -50
             },{
                 type: 'group',
                 color: ['gray', 'orange', 'red'],
-                values: [20, 50, 60]
+                values: [-20, -50, -60]
             },{
                 type: 'group',
                 color: ['gray', 'orange', 'red'],
-                values: [50, 30, 70],
+                values: [-50, -30, -70],
                 margin: 'collapse'
             },{
                 type: 'stacked-group',
                 color: ['gray', 'orange', 'red'],
-                values: [20, 30, 50]
+                values: [20, 30, 50],
+                direction: 'reverse'
             }]
         })
     });

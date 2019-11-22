@@ -6,20 +6,15 @@ import HorizontalGrid from "../grids/horizontal-grid";
 class ColumnChart extends Chart implements ColumnChartType {
 
     content: GroupItemType[];
-    stepLen: number;
-    minY: number;
-    maxY: number;
-    height: number;
-    y0position: number;
+    stepLen: number = 0;
+    minY: number = 0;
+    maxY: number = 0;
+    height: number = 0;
+    y0position: number = 0;
 
     constructor({values}: ColumnChartInputType) {
         super();
         this.content = values || [];
-        this.stepLen = 0;
-        this.minY = 0;
-        this.maxY = 0;
-        this.height = 0;
-        this.y0position = 0;
     }
 
     draw() {
@@ -72,7 +67,7 @@ class ColumnChart extends Chart implements ColumnChartType {
                     let color = <string>item.color;
                     ctx.globalAlpha = opacity;
                     let lW = (lineWidth / 2) * m;
-                    let h = this.calcHeight(value) + lW;
+                    let h = this.calcHeight(value - this.getMinusValue()) + lW;
                     let itemH = height - h - (height - y0position) - lW;
                     let startH = h - minusStart;
 
@@ -87,7 +82,7 @@ class ColumnChart extends Chart implements ColumnChartType {
                     for(let value of values) {
                         let m = value > 0 ? 1 : -1;
                         let lW = (lineWidth / 2) * m;
-                        let h = this.calcHeight(value) + lW;
+                        let h = this.calcHeight(value - this.getMinusValue()) + lW;
                         ctx.globalAlpha = opacity;
                         let minus = collapse ? 0 : itemSize / 2;
                         let itemH = height - h - (height - y0position) - lW;
@@ -103,17 +98,23 @@ class ColumnChart extends Chart implements ColumnChartType {
                     let colors: string[] = <string[]>item.color;
                     let offsetY: number = 0;
                     let cValue: number = 0;
+                    let first = true;
                     for(let value of values) {
                         let multiplyer = item.direction === 'reverse' ? -1 : 1
                         cValue += value * multiplyer;
                         let lW = (lineWidth / 2) * multiplyer;
-                        let h = this.calcHeight(cValue) + lW;
+                        let h = this.calcHeight(cValue - this.getMinusValue()) + lW;
                         ctx.globalAlpha = opacity;
                         let itemH = height - h - (height - y0position) + offsetY - lW;
                         let startH = h - minusStart;
                         new Rect(ctx, offsetX + step / 2 - itemSize / 2, startH, itemSize, itemH, {color: colors[i], lineWidth}).draw();
-                        offsetY -= (height * (value / (Math.abs(maxY) + Math.abs(minY))) * multiplyer);
+                        if(this.minY > 0) {
+                            offsetY -= (height * ((value - (first ? this.getMinusValue() : 0))  / (maxY - minY)) * multiplyer);
+                        } else {
+                            offsetY -= (height * (value / (Math.abs(maxY) + Math.abs(minY))) * multiplyer);
+                        }
                         i++;
+                        first = false;
                     }
 
                 }
@@ -125,9 +126,19 @@ class ColumnChart extends Chart implements ColumnChartType {
             }
         }
     }
-    
+
+    getMinusValue() {
+        if(this.minY > 0) {
+            return this.minY;
+        }
+        return 0;
+    }
+
     calcHeight(value: number) {
         const {maxY, minY, height, y0position} = this;
+        if(minY > 0) {
+            return height - height * (value / (maxY - minY)) - (height - y0position);
+        }
         return height - height * (value / (Math.abs(maxY) + Math.abs(minY))) - (height - y0position);
     }
 
