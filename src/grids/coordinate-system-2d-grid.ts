@@ -53,7 +53,8 @@ class CoordinateSystem2dGrid extends Grid implements Coordinate2dGridType {
         let x = 0;
         let step = this.drawArea[what] / (this.labels[from].values.length - 1);
         this.step[from] = step;
-        for(let val of this.labels[from].values) {
+        let values = [...this.labels[from].values];
+        for(let val of values) {
             if(val === 0) {
                 break;
             }

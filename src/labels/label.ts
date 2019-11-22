@@ -5,6 +5,10 @@ abstract class Label {
     abstract values: any[];
     reverse: boolean;
     width: number;
+    reversedValues: boolean = false;
+    min = 0;
+    max = 0;
+    underZero = 0;
 
     constructor () {
         this.reverse = false;

@@ -3,23 +3,39 @@ import Label from "./label";
 class ValueLabel extends Label {
 
     values: number[];
-    identifier: 'value';
+    identifier: 'value' = 'value';
 
-    constructor(private min: number, private max: number, public step: number, {reverse}: {reverse?: boolean} = {}) {
+    constructor(private start: number, private end: number, public step: number, {reverse}: {reverse?: boolean} = {}) {
         super();
         this.reverse = reverse || false;
-        this.identifier = 'value';
         this.values = this.toLabel();
     }
 
     toLabel(): number[]{
-        const {min, max, step} = this;
+        const {start, end, step} = this;
         let v: number[] = [];
-        if((max - min) % step !== 0) {
+        if((end - start) % step !== 0) {
             throw new Error('Steps count is not type of Int');
         }
-        for(let i = min; i <= max; i += step) {
-            v.push(i);
+        if(start < end) {
+            this.min = start;
+            this.max = end;
+            for(let i = start; i <= end; i += step) {
+                if(i < 0) {
+                    this.underZero++;
+                }
+                v.push(i);
+            }
+        } else {
+            this.min = end;
+            this.max = start;
+            this.reversedValues = true;
+            for(let i = start; i >= end; i -= step) {
+                if(i < 0) {
+                    this.underZero++;
+                }
+                v.push(i);
+            }
         }
         if(this.reverse) {
             v = v.reverse();

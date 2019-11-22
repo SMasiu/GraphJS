@@ -60,7 +60,7 @@ if(canvas1) {
         // top: new ValueLabel(0, 100, 20),
         // right: new PercentLabel(25, {reverse: true}),
         bottom: new StringLabel(['June', 'July', 'May', 'November', 'December']),
-        left: new ValueLabel(0, 100, 20, {reverse: true,})
+        left: new ValueLabel(100, 0, 20)
     });
     grid.addCharts({
         line: new LineChart({
@@ -79,15 +79,42 @@ if(canvas1) {
     })
     grid.draw();
 }
+
+
+
+
+
+
+
+
 if(canvas2) {
     let grid = new VerticalGrid(canvas2, {
-        top: new PercentLabel(25),
-        right: new StringLabel(['June', 'July', 'May', 'November', 'December']),
+        left: new StringLabel(['June', 'July', 'May', 'November', 'December']),
         bottom: new ValueLabel(0, 100, 20),
-        left: new ValueLabel(0, 100, 20, {reverse: true})
     });
     grid.draw();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 if(canvas4) {
     let grid = new CoordinateSystem2dGrid(canvas4, {
         x: new ValueLabel(-100, 100, 50),
@@ -170,12 +197,19 @@ if(canvas7) {
     });
     grid.draw();
 }
+
+
+
+
+// left: new ValueLabel(100, 0, 50),
+// bottom: new StringLabel(['x','a','a','a'])
+// x: new ValueLabel(-50, 150, 50),
+// y: new ValueLabel(100, 0, 10)    
+
 if(canvas8) {
-    let grid: Grid = new HorizontalGrid(canvas8, {
-        // top: new ValueLabel(0, 100, 20),
-        // right: new PercentLabel(25, {reverse: true}),
-        bottom: new StringLabel(['June', 'July', 'May', 'November', 'December']),
-        left: new ValueLabel(-100, 100, 20, {reverse: true})
+    let grid: Grid = new HorizontalGrid(canvas8, {  
+left: new ValueLabel(100, 10, 10),
+bottom: new StringLabel(['x','a','a','a']) 
     });
     grid.addCharts({
         column: new ColumnChart({
@@ -183,10 +217,6 @@ if(canvas8) {
                 type: 'simple',
                 color: 'red',
                 values: 50
-            },{
-                type: 'simple',
-                color: 'orange',
-                values: 60
             },{
                 type: 'group',
                 color: ['gray', 'orange', 'red'],
@@ -206,6 +236,17 @@ if(canvas8) {
     
     grid.draw();
 }
+
+
+
+
+
+
+
+
+
+
+
 if(canvas9) {
     let grid = new CoordinateSystem2dGrid(canvas9, {
         x: new ValueLabel(-100, 100, 50),
