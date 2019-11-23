@@ -11,14 +11,13 @@ class LineChart extends Chart implements LineCharType {
     content: MultipleValuesItem[];
     fill: boolean;
     dots: boolean;
-    labelLen: number;
+    labelLen: number = 0;
 
     constructor({values, fill, dots, factor}: LineChartInputType = {}) {
         super(factor);
         this.content = values || [];
         this.fill = fill || false;
         this.dots = dots || false;
-        this.labelLen = 0;
     }
 
     draw() {
@@ -27,35 +26,44 @@ class LineChart extends Chart implements LineCharType {
 
             const {ctx} = this;
             const {width, height} = this.parent.drawArea;
-            let x0position: number = 0, y0position: number = 0;
+            let y0position: number = 0;
             let maxY: number = 0, minY: number = 0; 
             let id = this.parent.identifier;
-
+            let reversedValues = false;
+            let mainLabel = '';
+            let secondaryLabel = '';
+            let mainLen: number = 0;
+            let underZero: number = 0;
             if(id === 'HorizontalGrid') {
-                let parent: HorizontalGrid = <HorizontalGrid>this.parent;
-                let label = parent.labels[(<'left' | 'right'>parent.mainLabel)];
-                if(label) {
-                    maxY = parseFloat(<any>label.values[0]);
-                    minY = parseFloat(<any>label.values[label.values.length - 1]);
-                    x0position = 0;
-                    y0position = parent.y0position;
-                    let lab = (<AllLabels>parent.labels)[parent.secondaryLabel]
-                    if(lab) {
-                        let plus = lab.identifier === 'string' ? 1 : 0;
-                        this.labelLen = lab.values.length + plus;
-                    }
-                }
+                mainLabel = this.parent.mainLabel;
+                secondaryLabel = (<HorizontalGrid>this.parent).secondaryLabel;
             } else if(id === 'CoordinateSystem2dGrid') {
-                let parent: CoordinateSystem2dGrid = <CoordinateSystem2dGrid>this.parent;
-                let label = parent.labels.y;
-                maxY = label.values[0];
-                minY = label.values[label.values.length - 1];
-                x0position = parent.x0position;
-                y0position = parent.y0position;
-                this.labelLen = parent.labels.x.values.length;
+                mainLabel = 'y';
+                secondaryLabel = 'x';
             }
-            
-            let originPosX = 0
+            let parent: any = this.parent;
+            let label = parent.labels[mainLabel];
+            if(label) {
+                maxY = parseFloat(<any>label.values[0]);
+                minY = parseFloat(<any>label.values[label.values.length - 1]);
+                y0position = parent.y0position;
+                mainLen = label.values.length - 1;
+                reversedValues = label.reversedValues;
+                underZero = label.underZero;
+                let lab = parent.labels[secondaryLabel];
+                if(lab) {
+                    let plus = lab.identifier === 'string' ? 1 : 0;
+                    this.labelLen = lab.values.length + plus;
+                }
+            }
+
+            let hStep = height * (underZero / mainLen);
+            let originPosX = 0;
+            if(!reversedValues) {
+                ctx.translate(0, hStep + y0position);
+                ctx.scale(1, -1);
+            }
+
             for(let item of this.content) {
                 let posX = originPosX;
                 
@@ -106,6 +114,12 @@ class LineChart extends Chart implements LineCharType {
                 }
 
             }
+
+            if(!reversedValues) {
+                ctx.scale(1, -1);
+                ctx.translate(0, -(hStep + y0position));
+            }
+
         }
     }
 

@@ -234,9 +234,9 @@ let column2 = new LineChart({
 })
 
 if(canvas8) {
-    let grid: Grid = new HorizontalGrid(canvas8, {  
-        left: new ValueLabel(-100, 0, 50),
-        bottom: new StringLabel(['x','a','a','a'])
+    let grid: Grid = new CoordinateSystem2dGrid(canvas8, {  
+        x: new ValueLabel(-50, 150, 50),
+        y: new ValueLabel(-100, 0, 10)
     });
     grid.addCharts({
         column2
@@ -244,9 +244,9 @@ if(canvas8) {
     grid.draw();
 }
 if(canvas9) {
-    let grid: Grid = new HorizontalGrid(canvas9, {  
-        left: new ValueLabel(100, 0, 50),
-        bottom: new StringLabel(['x','a','a','a']) 
+    let grid: Grid = new CoordinateSystem2dGrid(canvas9, {  
+        x: new ValueLabel(-50, 150, 50),
+        y: new ValueLabel(100, 0, 10)
     });
     grid.addCharts({
         column
@@ -254,20 +254,20 @@ if(canvas9) {
     grid.draw();
 }
 if(canvas10) {
-    let grid: Grid = new HorizontalGrid(canvas10, {  
-        left: new ValueLabel(100, -100, 50),
-        bottom: new StringLabel(['x','a','a','a'])  
+    let grid: Grid = new CoordinateSystem2dGrid(canvas10, {  
+        x: new ValueLabel(-50, 150, 50),
+        y: new ValueLabel(100, -100, 10)
     });
     grid.addCharts({
+        column2,
         column,
-        column2
     });    
     grid.draw();
 }
 if(canvas11) {
-    let grid: Grid = new HorizontalGrid(canvas11, {  
-        left: new ValueLabel(-100, 100, 50),
-        bottom: new StringLabel(['x','a','a','a'])  
+    let grid: Grid = new CoordinateSystem2dGrid(canvas11, {  
+        x: new ValueLabel(-50, 150, 50),
+        y: new ValueLabel(-100, 100, 10)
     });
     grid.addCharts({
         column,
@@ -276,9 +276,9 @@ if(canvas11) {
     grid.draw();
 }
 if(canvas12) {
-    let grid: Grid = new HorizontalGrid(canvas12, {  
-        left: new ValueLabel(-100, 200, 50),
-        bottom: new StringLabel(['x','a','a','a'])  
+    let grid: Grid = new CoordinateSystem2dGrid(canvas12, {  
+        x: new ValueLabel(-50, 150, 50),
+        y: new ValueLabel(200, -100, 10) 
     });
     grid.addCharts({
         column2,
@@ -287,9 +287,9 @@ if(canvas12) {
     grid.draw();
 }
 if(canvas13) {
-    let grid: Grid = new HorizontalGrid(canvas13, {  
-        left: new ValueLabel(200, -100, 50),
-        bottom: new StringLabel(['x','a','a','a'])
+    let grid: Grid = new CoordinateSystem2dGrid(canvas13, {  
+        x: new ValueLabel(-50, 150, 50),
+        y: new ValueLabel(100, -200, 10)
     });
     grid.addCharts({
         column,
