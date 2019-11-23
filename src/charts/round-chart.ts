@@ -14,8 +14,10 @@ class RoundChart extends Chart implements RoundChartType {
     blankCenter: boolean;
     itemsMargin: number;
     labels: StringLabel | null;
+    centerRadius: number;
+    changingStepSize: number;
 
-    constructor({centerValue, values, changingSize, blankCenter, itemsMargin, labels, canvas}: RoundChartInputType) {
+    constructor({centerValue, values, changingSize, blankCenter, itemsMargin, labels, canvas, changingStepSize, centerRadius}: RoundChartInputType) {
         super();
         if(canvas) {
             this.parent = new NoGrid(canvas);
@@ -31,6 +33,8 @@ class RoundChart extends Chart implements RoundChartType {
         }
         this.content = values || [];
         this.centerValue = centerValue ? centerValue.toString() : null;
+        this.changingStepSize = changingStepSize || 3;
+        this.centerRadius = centerRadius || .75;
         this.changingSize = changingSize || false;
         this.blankCenter = blankCenter || false;
         this.itemsMargin = itemsMargin || 0;
@@ -46,10 +50,10 @@ class RoundChart extends Chart implements RoundChartType {
                 bottom: 50
             }
             parent.setUpDrawArea();
-            const {centerX, centerY} = parent.drawArea;
+            const {centerX, centerY, width, height} = parent.drawArea;
             let offset = 0 - Math.PI / 2;
-            let radius = centerX;
-            let changingStep = radius / 2 / content.length;
+            let radius = Math.min(width, height) / 2;
+            let changingStep = radius / this.changingStepSize / content.length;
             ctx.globalAlpha = opacity;
             let i = 0;
             for(let item of content) {
@@ -94,7 +98,7 @@ class RoundChart extends Chart implements RoundChartType {
 
             if(this.blankCenter) {
                 ctx.globalAlpha = 1;
-                new Circle(ctx, centerX, centerY, centerX / 2, {noEnd: true}).draw();
+                new Circle(ctx, centerX, centerY, radius * this.centerRadius, {noEnd: true}).draw();
                 ctx.fillStyle = '#fff';
                 ctx.fill();
                 

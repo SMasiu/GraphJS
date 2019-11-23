@@ -130,6 +130,8 @@ export interface RoundChartInputType {
     blankCenter?: boolean;
     itemsMargin?: number;
     canvas?: HTMLCanvasElement;
+    centerRadius?: number;
+    changingStepSize?: number;
 }
 
 export interface RangeChartInputType {
