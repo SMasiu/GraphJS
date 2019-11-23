@@ -52,16 +52,6 @@ if(canvas3) {
     grid.draw();
 }
 
-
-
-
-
-
-
-
-
-
-
 if(canvas1) {
     let grid: Grid = new HorizontalGrid(canvas1, {
         // top: new ValueLabel(0, 100, 20),
@@ -87,13 +77,6 @@ if(canvas1) {
     grid.draw();
 }
 
-
-
-
-
-
-
-
 if(canvas2) {
     let grid = new VerticalGrid(canvas2, {
         left: new StringLabel(['June', 'July', 'May', 'November', 'December']),
@@ -101,26 +84,6 @@ if(canvas2) {
     });
     grid.draw();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 if(canvas4) {
     let grid = new CoordinateSystem2dGrid(canvas4, {
@@ -142,11 +105,6 @@ if(canvas4) {
     });
     grid.draw();
 }
-
-
-
-
-
 
 if(canvas5) {
     let grid = new CoordinateSystem1dGrid(canvas5, new ValueLabel(-200, 100, 20));
@@ -174,13 +132,6 @@ if(canvas5) {
     })
     grid.draw();
 }
-
-
-
-
-
-
-
 
 if(canvas6) {
     let grid = new NoGrid(canvas6);
@@ -227,105 +178,118 @@ if(canvas7) {
     grid.draw();
 }
 
-
-
-
 // left: new ValueLabel(100, 0, 50),
 // bottom: new StringLabel(['x','a','a','a'])
 // x: new ValueLabel(-50, 150, 50),
 // y: new ValueLabel(100, 0, 10)    
-// let column = new LineChart({
-//     factor: f,
-//     fill: false,
-//     dots: true,
-//     values: [{
-//         id: 1,
-//         color: 'red',
-//         values: [50, 76, 60, 45, 90]
-//     }, {
-//         color: 'orange',
-//         values: [[30, 60, 40, 70], [10 , 0, 40], [5], [60, 65, 65, 100, 90], 75]
-//     }]
-// })
+let column = new RowChart({
+    values:[{
+        type: 'simple',
+        color: 'green',
+        values: -50
+    },{
+        type: 'group',
+        color: ['blue', 'pink', 'green'],
+        values: [-20, -50, -60] 
+    },{
+        type: 'group',
+        color: ['blue', 'pink', 'green'],
+        values: [-50, -30, -70],
+        margin: 'collapse'
+    },{
+        type: 'stacked-group',
+        color: ['blue', 'pink', 'green'],
+        values: [20, 30, 50],
+        direction: 'reverse'
+    }]
+})
 
-// let column2 = new LineChart({
-//     factor: f,
-//     fill: false,
-//     dots: true,
-//     values: [{
-//         id: 1,
-//         color: 'green',
-//         values: [-50, -76, -60, -45, -90]
-//     }, {
-//         color: 'blue',
-//         values: [[-30, -60, -40, -70], [-10 , -0, -40], [-5], [-60, -65, -65, -100, -90], -75]
-//     }]
-// })
+let column2 = new RowChart({
+    values:[{
+        type: 'simple',
+        color: 'red',
+        values: 50
+    },{
+        type: 'group',
+        color: ['gray', 'orange', 'red'],
+        values: [20, 50, 60]
+    },{
+        type: 'group',
+        color: ['gray', 'orange', 'red'],
+        values: [50, 30, 70],
+        margin: 'collapse'
+    },{
+        type: 'stacked-group',
+        color: ['gray', 'orange', 'red'],
+        values: [20, 30, 50]
+    }]
+})
 
-// if(canvas8) {
-//     let grid: Grid = new CoordinateSystem2dGrid(canvas8, {  
-//         x: new ValueLabel(-50, 150, 50),
-//         y: new ValueLabel(-100, 0, 10)
-//     });
-//     grid.addCharts({
-//         column2
-//     });    
-//     grid.draw();
-// }
-// if(canvas9) {
-//     let grid: Grid = new CoordinateSystem2dGrid(canvas9, {  
-//         x: new ValueLabel(-50, 150, 50),
-//         y: new ValueLabel(100, 0, 10)
-//     });
-//     grid.addCharts({
-//         column
-//     });    
-//     grid.draw();
-// }
-// if(canvas10) {
-//     let grid: Grid = new CoordinateSystem2dGrid(canvas10, {  
-//         x: new ValueLabel(-50, 150, 50),
-//         y: new ValueLabel(100, -100, 10)
-//     });
-//     grid.addCharts({
-//         column2,
-//         column,
-//     });    
-//     grid.draw();
-// }
-// if(canvas11) {
-//     let grid: Grid = new CoordinateSystem2dGrid(canvas11, {  
-//         x: new ValueLabel(-50, 150, 50),
-//         y: new ValueLabel(-100, 100, 10)
-//     });
-//     grid.addCharts({
-//         column,
-//         column2,
-//     });    
-//     grid.draw();
-// }
-// if(canvas12) {
-//     let grid: Grid = new CoordinateSystem2dGrid(canvas12, {  
-//         x: new ValueLabel(-50, 150, 50),
-//         y: new ValueLabel(200, -100, 10) 
-//     });
-//     grid.addCharts({
-//         column2,
-//         column
-//     });    
-//     grid.draw();
-// }
-// if(canvas13) {
-//     let grid: Grid = new CoordinateSystem2dGrid(canvas13, {  
-//         x: new ValueLabel(-50, 150, 50),
-//         y: new ValueLabel(100, -200, 10)
-//     });
-//     grid.addCharts({
-//         column,
-//         column2
-//     });    
-//     grid.draw();
-// }
+if(canvas8) {
+    let grid: Grid = new VerticalGrid(canvas8, {  
+        bottom: new ValueLabel(-100, 100, 50),
+        left: new StringLabel(['x','a','a','a'])
+    });
+    grid.addCharts({
+        column,
+        column2
+    });    
+    grid.draw();
+}
+if(canvas9) {
+    let grid: Grid = new VerticalGrid(canvas9, {  
+        bottom: new ValueLabel(100, 0, 50),
+        left: new StringLabel(['x','a','a','a'])
+    });
+    grid.addCharts({
+        column
+    });    
+    grid.draw();
+}
+if(canvas10) {
+    let grid: Grid = new VerticalGrid(canvas10, {  
+        bottom: new ValueLabel(100, -100, 50),
+        left: new StringLabel(['x','a','a','a'])
+    });
+    grid.addCharts({
+        column2,
+        column,
+    });    
+    grid.draw();
+}
+if(canvas11) {
+    let grid: Grid = new VerticalGrid(canvas11, {  
+        bottom: new ValueLabel(100, -100, 50),
+        left: new StringLabel(['x','a','a','a'])
+    });
+    grid.addCharts({
+        column,
+        column2,
+    });    
+    grid.draw();
+}
+if(canvas12) {
+    let grid: Grid = new VerticalGrid(canvas12, {  
+        bottom: new ValueLabel(100, -200, 50),
+        left: new StringLabel(['x','a','a','a'])
+    });
+    grid.addCharts({
+        column2,
+        column
+    });    
+    grid.draw();
+}
+if(canvas13) {
+    let grid: Grid = new VerticalGrid(canvas13, {  
+        bottom: new ValueLabel(-100, 100, 50),
+        left: new StringLabel(['x','a','a','a'])
+    });
+    grid.addCharts({
+        column,
+        column2
+    });    
+    grid.draw();
+}
 
 
 // if(canvas9) {
@@ -418,73 +382,50 @@ if(canvas7) {
 //     grid.draw();
 // }
 
+// if(canvas12) {
+//     let grid = new CoordinateSystem2dGrid(canvas12, {
+//         x: new ValueLabel(100, -100, 20),
+//         y: new ValueLabel(-100, 100, 20)
+//     });
+//     grid.addCharts({
+//         buble: new BubleChart({
+//             values: [{
+//                 color: 'red',
+//                 values: [0, 0],
+//                 radius: 20
+//             },{
+//                 color: 'orange',
+//                 values: [10, 40],
+//                 radius: 10,
+//             },{
+//                 color: 'gray',
+//                 id: 1,
+//                 values: [-50, -40],
+//                 radius: 30,
+//             }]
+//         })
+//     })
+//     grid.draw();
+// }
 
-
-
-
-
-
-
-
-
-
-
-
-if(canvas12) {
-    let grid = new CoordinateSystem2dGrid(canvas12, {
-        x: new ValueLabel(100, -100, 20),
-        y: new ValueLabel(-100, 100, 20)
-    });
-    grid.addCharts({
-        buble: new BubleChart({
-            values: [{
-                color: 'red',
-                values: [0, 0],
-                radius: 20
-            },{
-                color: 'orange',
-                values: [10, 40],
-                radius: 10,
-            },{
-                color: 'gray',
-                id: 1,
-                values: [-50, -40],
-                radius: 30,
-            }]
-        })
-    })
-    grid.draw();
-}
-
-
-
-
-
-
-
-
-
-
-
-
-if(canvas13) {
-    let sameRoud = new RoundChart({
-        labels: new StringLabel(['June', 'July', 'May']),
-        centerValue: 130,
-        canvas: canvas13,
-        blankCenter: true,
-        changingSize: true,
-        itemsMargin: 10,
-        values: [{
-            color: 'red',
-            values: 20,
-        },{
-            color: 'orange',
-            values: 40
-        },{ 
-            color: 'gray',
-            values: 40
-        }]
-    })
-    sameRoud.draw();
-}
+// if(canvas13) {
+//     let sameRoud = new RoundChart({
+//         labels: new StringLabel(['June', 'July', 'May']),
+//         centerValue: 130,
+//         canvas: canvas13,
+//         blankCenter: true,
+//         changingSize: true,
+//         itemsMargin: 10,
+//         values: [{
+//             color: 'red',
+//             values: 20,
+//         },{
+//             color: 'orange',
+//             values: 40
+//         },{ 
+//             color: 'gray',
+//             values: 40
+//         }]
+//     })
+//     sameRoud.draw();
+// }

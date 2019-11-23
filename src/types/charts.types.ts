@@ -32,6 +32,7 @@ export interface GroupItemType {
     values: number | number[];
     margin?: string;
     direction?: string;
+    id?: string | number;
 }
 
 export interface GroupItemUpdateType {
@@ -40,6 +41,7 @@ export interface GroupItemUpdateType {
     values?: number | number[];
     margin?: string;
     direction?: string;
+    id?: string | number;
 }
 
 export interface MultipleValuesItem {
