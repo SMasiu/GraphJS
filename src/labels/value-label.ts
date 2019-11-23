@@ -17,6 +17,9 @@ class ValueLabel extends Label {
         if((end - start) % step !== 0) {
             throw new Error('Steps count is not type of Int');
         }
+        if((start > 0 && end > 0) || (start < 0 && end < 0)) {
+            throw new Error('Invalid range');
+        }
         if(start < end) {
             this.min = start;
             this.max = end;

@@ -67,7 +67,7 @@ class ColumnChart extends Chart implements ColumnChartType {
                     let color = <string>item.color;
                     ctx.globalAlpha = opacity;
                     let lW = (lineWidth / 2) * m;
-                    let h = this.calcHeight(value - this.getMinusValue()) + lW;
+                    let h = this.calcHeight(value) + lW;
                     let itemH = height - h - (height - y0position) - lW;
                     let startH = h - minusStart;
 
@@ -82,7 +82,7 @@ class ColumnChart extends Chart implements ColumnChartType {
                     for(let value of values) {
                         let m = value > 0 ? 1 : -1;
                         let lW = (lineWidth / 2) * m;
-                        let h = this.calcHeight(value - this.getMinusValue()) + lW;
+                        let h = this.calcHeight(value) + lW;
                         ctx.globalAlpha = opacity;
                         let minus = collapse ? 0 : itemSize / 2;
                         let itemH = height - h - (height - y0position) - lW;
@@ -92,53 +92,36 @@ class ColumnChart extends Chart implements ColumnChartType {
                         i++;
                     }
                 } else if(item.type === 'stacked-group') {
-
                     let values: number[] = <number[]>item.values;
                     let i = 0;
                     let colors: string[] = <string[]>item.color;
                     let offsetY: number = 0;
                     let cValue: number = 0;
-                    let first = true;
                     for(let value of values) {
                         let multiplyer = item.direction === 'reverse' ? -1 : 1
                         cValue += value * multiplyer;
                         let lW = (lineWidth / 2) * multiplyer;
-                        let h = this.calcHeight(cValue - this.getMinusValue()) + lW;
+                        let h = this.calcHeight(cValue) + lW;
                         ctx.globalAlpha = opacity;
                         let itemH = height - h - (height - y0position) + offsetY - lW;
                         let startH = h - minusStart;
                         new Rect(ctx, offsetX + step / 2 - itemSize / 2, startH, itemSize, itemH, {color: colors[i], lineWidth}).draw();
-                        if(this.minY > 0) {
-                            offsetY -= (height * ((value - (first ? this.getMinusValue() : 0))  / (maxY - minY)) * multiplyer);
-                        } else {
-                            offsetY -= (height * (value / (Math.abs(maxY) + Math.abs(minY))) * multiplyer);
-                        }
+                        offsetY -= (height * (value / (Math.abs(maxY) + Math.abs(minY))) * multiplyer);
                         i++;
-                        first = false;
                     }
 
                 }
                 offsetX += step;
             }
             if(!reversedValues) {
-                ctx.translate(0, - (this.parent.height - (this.parent.height - height) / 2 - this.parent.centerY - this.y0position));
-                ctx.scale(-1, 1);
+                ctx.scale(1, -1);
+                ctx.translate(0, - (hStep + this.y0position));
             }
         }
     }
 
-    getMinusValue() {
-        if(this.minY > 0) {
-            return this.minY;
-        }
-        return 0;
-    }
-
     calcHeight(value: number) {
         const {maxY, minY, height, y0position} = this;
-        if(minY > 0) {
-            return height - height * (value / (maxY - minY)) - (height - y0position);
-        }
         return height - height * (value / (Math.abs(maxY) + Math.abs(minY))) - (height - y0position);
     }
 
