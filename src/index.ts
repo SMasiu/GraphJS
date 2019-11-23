@@ -18,6 +18,7 @@ import StringLabel from "./labels/string-label";
 import HorizontalGrid from "./grids/horizontal-grid";
 import Grid from "./grids/grid";
 import CoordinateSystem2dGrid from "./grids/coordinate-system-2d-grid";
+import { reverse } from "dns";
 
 let canvas1: HTMLCanvasElement | null = document.querySelector('#c1');
 let canvas2: HTMLCanvasElement | null = document.querySelector('#c2');
@@ -148,7 +149,7 @@ if(canvas4) {
 
 
 if(canvas5) {
-    let grid = new CoordinateSystem1dGrid(canvas5, new ValueLabel(100, -80, 20));
+    let grid = new CoordinateSystem1dGrid(canvas5, new ValueLabel(-200, 100, 20));
     grid.addCharts({
         range: new RangeChart({
             values: [{
@@ -167,7 +168,7 @@ if(canvas5) {
                 under: true
             },{
                 color: 'pink',
-                values: [40, -30]
+                values: [20, -30]
             }]
         })
     })
@@ -416,31 +417,56 @@ if(canvas7) {
 //     });
 //     grid.draw();
 // }
-// if(canvas12) {
-//     let grid = new CoordinateSystem2dGrid(canvas12, {
-//         x: new ValueLabel(-100, 100, 20),
-//         y: new ValueLabel(-100, 100, 20, {reverse: true})
-//     });
-//     grid.addCharts({
-//         buble: new BubleChart({
-//             values: [{
-//                 color: 'red',
-//                 values: [0, 0],
-//                 radius: 20
-//             },{
-//                 color: 'orange',
-//                 values: [10, 40],
-//                 radius: 10,
-//             },{
-//                 color: 'gray',
-//                 id: 1,
-//                 values: [-50, -40],
-//                 radius: 25,
-//             }]
-//         })
-//     })
-//     grid.draw();
-// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+if(canvas12) {
+    let grid = new CoordinateSystem2dGrid(canvas12, {
+        x: new ValueLabel(100, -100, 20),
+        y: new ValueLabel(-100, 100, 20)
+    });
+    grid.addCharts({
+        buble: new BubleChart({
+            values: [{
+                color: 'red',
+                values: [0, 0],
+                radius: 20
+            },{
+                color: 'orange',
+                values: [10, 40],
+                radius: 10,
+            },{
+                color: 'gray',
+                id: 1,
+                values: [-50, -40],
+                radius: 30,
+            }]
+        })
+    })
+    grid.draw();
+}
+
+
+
+
+
+
+
+
+
+
+
+
 if(canvas13) {
     let sameRoud = new RoundChart({
         labels: new StringLabel(['June', 'July', 'May']),

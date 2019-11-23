@@ -16,7 +16,8 @@ class BubleChart extends Chart implements BubleChartType {
     height: number = 0;
     y0position: number = 0;
     stepValue: number = 0;
-
+    reversedValuesX: boolean = false;
+    reversedValuesY: boolean = false;
     constructor({values}: BubleChartInputType) {
         super();
         this.content = values || [];
@@ -30,10 +31,12 @@ class BubleChart extends Chart implements BubleChartType {
             this.x0position = parent.x0position;
             this.y0position = parent.y0position;
             this.stepValue = this.width / (parent.labels.x.values.length - 1) / parent.labels.x.step;
-            this.maxX = parent.labels.x.values[parent.labels.x.values.length - 1];
-            this.minX = parent.labels.x.values[0];
-            this.minY = parent.labels.y.values[parent.labels.y.values.length - 1];
-            this.maxY = parent.labels.y.values[0];
+            this.maxX = parent.labels.x.max;
+            this.minX = parent.labels.x.min;
+            this.minY = parent.labels.y.min;
+            this.maxY = parent.labels.y.max;
+            this.reversedValuesX = parent.labels.x.reversedValues;
+            this.reversedValuesY = parent.labels.y.reversedValues;
             this.ctx.globalAlpha = this.opacity;
             for(let {values, color, radius} of this.content) {
                 let [x, y] = values;
@@ -46,14 +49,31 @@ class BubleChart extends Chart implements BubleChartType {
         }
     }
 
-    calcWidth(value: number) {
+    private calcWidth(value: number) {
         const {maxX, minX, width, x0position} = this;
-        return width * (value / (Math.abs(maxX) + Math.abs(minX))) + x0position;
+        return this.combineCalc(value, x0position, width, minX, maxX, this.reversedValuesX);
     }
 
-    calcHeight(value: number) {
+    private calcHeight(value: number) {
         const {maxY, minY, height, y0position} = this;
-        return height - height * (value / (Math.abs(maxY) + Math.abs(minY))) - (height - y0position);
+        return this.combineCalc(value, y0position, height, minY, maxY, this.reversedValuesY);
+    }
+
+    private combineCalc(value: number, _0pos: number, size: number, min: number, max: number, reverse: boolean) {
+        if(value === 0) {
+            return _0pos;
+        }
+        else if(value < 0 && !reverse) {
+            let lWidth = _0pos;
+            let w = lWidth * (Math.abs(value) / Math.abs(min));
+            return _0pos - w;
+        }
+
+        else {
+            let rWidth = reverse ? _0pos : size - _0pos;
+            let w = rWidth * (value / max) * (reverse ? -1 : 1);
+            return w + _0pos;
+        }
     }
 
 }

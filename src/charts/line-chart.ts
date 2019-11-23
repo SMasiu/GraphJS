@@ -44,8 +44,8 @@ class LineChart extends Chart implements LineCharType {
             let parent: any = this.parent;
             let label = parent.labels[mainLabel];
             if(label) {
-                maxY = parseFloat(<any>label.values[0]);
-                minY = parseFloat(<any>label.values[label.values.length - 1]);
+                maxY = parseFloat(<any>label.max);
+                minY = parseFloat(<any>label.min);
                 y0position = parent.y0position;
                 mainLen = label.values.length - 1;
                 reversedValues = label.reversedValues;
