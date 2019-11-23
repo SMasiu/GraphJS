@@ -12,7 +12,7 @@ class RangeChart extends Chart implements RangeChartType {
     width: number;
     x0position: number;
     radius: number;
-
+    reversedValues = false;
     constructor({values}: RangeChartInputType = {}) {
         super();
         this.content = values || [];
@@ -28,17 +28,17 @@ class RangeChart extends Chart implements RangeChartType {
             this.ctx.translate(.5,.5);
             const { centerY, width } = this.parent.drawArea;
             const { x0position, labels } = <CoordinateSystem1dGrid>this.parent;
+            this.reversedValues = labels.reversedValues;
             this.min = labels.values[0];
             this.max = labels.values[labels.values.length - 1];
             this.width = width;
             this.x0position = x0position;
-            let posY = -15;
+            let posY = -25;
+            let posYUnder = 25;
             const {radius, ctx, lineWidth} = this;
             for(let item of this.content) {
-
                 let decrement = false;
-
-                
+                let y  = item.under ? posYUnder : posY;
                 for(let value of item.values) {
                     if(typeof value === 'number') {
                         let posX = this.getPos(value);
@@ -48,7 +48,7 @@ class RangeChart extends Chart implements RangeChartType {
                         ctx.fill();
                         decrement = false;
                     } else {
-                        const [x1, x2] = value;
+                        const [x1, x2] = this.reversedValues ? value.reverse() : value;
                         let x1I = Math.abs(x1) === Infinity;
                         let x2I = Math.abs(x2) === Infinity;
                         this.ctx.fillStyle = item.color;
@@ -64,17 +64,17 @@ class RangeChart extends Chart implements RangeChartType {
                             ctx.fill();
 
                             ctx.lineWidth = lineWidth;
+
                             new Line(ctx, [
                                 [posX1, centerY - radius],
-                                [posX1, centerY + posY],
-                                [posX2, centerY + posY],
+                                [posX1, centerY + y],
+                                [posX2, centerY + y],
                                 [posX2, centerY - radius]],
                                 {color: item.color}).draw();
                             } else {
 
-                                let start = [0, centerY + posY]
-                                let end = [width, centerY + posY]
-
+                                let start = [0, centerY + y];
+                                let end = [width, centerY + y];
                                 if(x1I && x2I) {
 
                                     ctx.lineWidth = lineWidth;
@@ -86,9 +86,9 @@ class RangeChart extends Chart implements RangeChartType {
                                 }
                                 
                                 else if(x1I) {
-                                    this.drawInfinity(x2, item.color, start, posY, centerY);
+                                    this.drawInfinity(x2, item.color, start, y, centerY);
                                 } else {
-                                    this.drawInfinity(x1, item.color, end, posY, centerY, true);
+                                    this.drawInfinity(x1, item.color, end, y, centerY, true);
                                 }
 
                             }
@@ -96,7 +96,11 @@ class RangeChart extends Chart implements RangeChartType {
                     }
                 }
                 if(decrement) {
-                    posY -= 15;
+                    if(item.under) {
+                        posYUnder += 15;
+                    } else {
+                        posY -= 15;
+                    }
                 }
 
             }
@@ -130,7 +134,7 @@ class RangeChart extends Chart implements RangeChartType {
             return x0position;
         }
 
-        else if(value < 0) {
+        else if(value < 0 && !this.reversedValues) {
             let lWidth = x0position;
             let w = lWidth * (Math.abs(value) / Math.abs(min));
             return x0position - w;

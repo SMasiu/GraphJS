@@ -79,7 +79,8 @@ export interface SameDirectionRoundChartType {
 
 export interface RangeValueType {
     color: string;
-    values: number[] | number[][]
+    values: number[] | number[][],
+    under?: boolean
 }
 
 export interface RangeChartType extends ChartType {

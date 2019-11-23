@@ -40,20 +40,26 @@ if(canvas3) {
         dots: true,
         values: [{
             color: 'red',
-            id: 1,
-            values: [50, 40, 70, 30, 20]
+            values: [50, 40, 70, 30, 40, 100]
         }]
     });
-    let grid = new PolygonGrid(canvas3, new StringLabel(['June', 'July', 'May', 'November', 'December']));
+    let grid = new PolygonGrid(canvas3, new StringLabel(['June', 'July', 'May', 'November', 'December', 'Febuary']));
     grid.addCharts({
         polygon
     });
-    polygon.updateItemContent(1, {color: 'pink', values: [20, 20 ,20, 20, 20]})
-    polygon.addItemContent({id: 2, color: 'blue', values: [50, 39, 40 ,50]})
-    polygon.deleteItemContent(1);
 
     grid.draw();
 }
+
+
+
+
+
+
+
+
+
+
 
 if(canvas1) {
     let grid: Grid = new HorizontalGrid(canvas1, {
@@ -135,8 +141,14 @@ if(canvas4) {
     });
     grid.draw();
 }
+
+
+
+
+
+
 if(canvas5) {
-    let grid = new CoordinateSystem1dGrid(canvas5, new ValueLabel(-100, 100, 20));
+    let grid = new CoordinateSystem1dGrid(canvas5, new ValueLabel(100, -80, 20));
     grid.addCharts({
         range: new RangeChart({
             values: [{
@@ -147,12 +159,28 @@ if(canvas5) {
                 values: [[Infinity, -10], [10, Infinity]]
             },{
                 color: 'orange',
-                values: [[Infinity, Infinity]]
+                values: [[Infinity, Infinity]],
+                under: true
+            },{
+                color: 'green',
+                values: [[-50, 70]],
+                under: true
+            },{
+                color: 'pink',
+                values: [40, -30]
             }]
         })
     })
     grid.draw();
 }
+
+
+
+
+
+
+
+
 if(canvas6) {
     let grid = new NoGrid(canvas6);
     grid.addCharts({
