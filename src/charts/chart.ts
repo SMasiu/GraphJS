@@ -15,7 +15,7 @@ abstract class Chart implements ChartType {
     maxValue: number | number[] = 0;
     minValue: number | number[] = 0;
     abstract content: any[];
-
+    abstract identifier: string;
     abstract drawChart(): void;
 
     updateItemContent(id: string | number, content: any) {

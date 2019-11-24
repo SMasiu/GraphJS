@@ -21,6 +21,13 @@ export interface GridType {
     labelPadding: number;
     mainLabel: string;
     identifier: string;
+    background: Background;
+}
+
+export interface Background {
+    color: string;
+    image: string;
+    opacity: number;
 }
 
 export interface FontOptions {
@@ -46,6 +53,12 @@ export interface MarginAll {
     right: number;
     bottom: number;
     left: number;
+}
+
+export interface HorizontalGridOptions {
+    mainLabel?: 'left' | 'right';
+    secondaryLabel?: 'bottom' | 'top';
+    factor?: GridFactor;
 }
 
 export interface DrawArea {

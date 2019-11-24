@@ -2,6 +2,7 @@ import Chart from "./chart";
 import { BubleChartType, BubleChartInputType, CoordinateValuesType } from "../types/charts.types";
 import Circle from "../shapes/circle";
 import CoordinateSystem2dGrid from "../grids/coordinate-system-2d-grid";
+import { BUBLE_CHART } from "../types/chart-names";
 
 class BubleChart extends Chart implements BubleChartType {
 
@@ -17,6 +18,7 @@ class BubleChart extends Chart implements BubleChartType {
     stepValue: number = 0;
     reversedValuesX: boolean = false;
     reversedValuesY: boolean = false;
+    identifier = BUBLE_CHART;
     constructor({values}: BubleChartInputType) {
         super();
         this.content = values || [];

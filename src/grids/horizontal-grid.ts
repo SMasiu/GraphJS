@@ -1,31 +1,21 @@
-import { AllLabels, HorizontalGridType, InputAllLabels } from "../types/grids.types";
-import { COLUMN_CHART, OPOSITE_COLUMN_CHART, LINE_CHART } from "../types/chart-names";
-import GridFactor from "../factors/grid-factor";
+import { AllLabels, HorizontalGridType, InputAllLabels, HorizontalGridOptions } from "../types/grids.types";
+import { COLUMN_CHART, LINE_CHART } from "../types/chart-names";
 import BaseGrid from "./base-grid";
 import Label from "../labels/label";
 import Line from "../shapes/line";
-import FlexLabel from "../labels/flex-label";
-
-interface HorizontalGridOptions {
-    mainLabel?: 'left' | 'right';
-    secondaryLabel?: 'bottom' | 'top';
-    factor?: GridFactor;
-}
 
 class HorizontalGrid extends BaseGrid implements HorizontalGridType {
 
-    allowedCharts: string[];
+    allowedCharts = [COLUMN_CHART, LINE_CHART];
     labels: AllLabels;
     mainLabel: 'left' | 'right';
     secondaryLabel: 'top' | 'bottom';
-    identifier: string;
+    identifier = 'HorizontalGrid';
+
     constructor(canvas: HTMLCanvasElement, labels: InputAllLabels, {mainLabel, secondaryLabel, factor}: HorizontalGridOptions = {}) {
         super(canvas, {factor});
-        this.identifier = 'HorizontalGrid';
-        this.allowedCharts = [COLUMN_CHART, LINE_CHART];
         this.mainLabel = mainLabel || 'left';
         this.secondaryLabel = secondaryLabel || 'bottom';
-        //validate labels
         if(!this.validateLabels(labels)) {
             throw new Error('No coresponding labels to values');
         }   

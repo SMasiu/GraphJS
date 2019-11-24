@@ -5,6 +5,7 @@ import CirclePoint from "../shapes/circle-point";
 import NoGrid from "../grids/no-grid";
 import StringLabel from "../labels/string-label";
 import Line from "../shapes/line";
+import { ROUND_CHART } from "../types/chart-names";
 
 class RoundChart extends Chart implements RoundChartType {
     
@@ -16,6 +17,7 @@ class RoundChart extends Chart implements RoundChartType {
     labels: StringLabel | null;
     centerRadius: number;
     changingStepSize: number;
+    identifier = ROUND_CHART;
 
     constructor({centerValue, values, changingSize, blankCenter, itemsMargin, labels, canvas, changingStepSize, centerRadius}: RoundChartInputType) {
         super();

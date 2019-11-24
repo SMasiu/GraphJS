@@ -1,10 +1,9 @@
 import BaseGrid from "./base-grid";
 import { AllLabels, VerticalGridType, InputAllLabels } from "../types/grids.types";
-import { ROW_CHART, OPOSITE_ROW_CHART } from "../types/chart-names";
+import { ROW_CHART } from "../types/chart-names";
 import GridFactor from "../factors/grid-factor";
 import Label from "../labels/label";
 import Line from "../shapes/line";
-import FlexLabel from "../labels/flex-label";
 
 interface VerticalGridOptopns {
     mainLabel?: 'top' | 'bottom';
@@ -14,19 +13,16 @@ interface VerticalGridOptopns {
 
 class VerticalGrid extends BaseGrid implements VerticalGridType {
 
-    allowedCharts: string[];
+    allowedCharts = [ROW_CHART];
     labels: AllLabels;
     mainLabel: 'top' | 'bottom';
-    identifier: string;
+    identifier = 'VerticalGrid';
     secondaryLabel: 'left' | 'right';
 
     constructor(canvas: HTMLCanvasElement, labels: InputAllLabels, {mainLabel, secondaryLabel, factor}:VerticalGridOptopns = {}) {
         super(canvas, {factor});
-        this.identifier = 'VerticalGrid';
-        this.allowedCharts = [ROW_CHART, OPOSITE_ROW_CHART];
         this.mainLabel = mainLabel || 'bottom';
         this.secondaryLabel = secondaryLabel || 'left';
-        //validate labels 
         if(!this.validateLabels(labels)) {
             throw new Error('No coresponding labels to values');
         }   

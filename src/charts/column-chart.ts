@@ -3,6 +3,7 @@ import { ColumnChartType, ColumnChartInputType, GroupItemType } from "../types/c
 import Rect from "../shapes/rect";
 import HorizontalGrid from "../grids/horizontal-grid";
 import getColumnSize from "../functions/column-size";
+import { COLUMN_CHART } from "../types/chart-names";
 
 class ColumnChart extends Chart implements ColumnChartType {
 
@@ -12,6 +13,7 @@ class ColumnChart extends Chart implements ColumnChartType {
     maxY: number = 0;
     height: number = 0;
     y0position: number = 0;
+    identifier = COLUMN_CHART;
 
     constructor({values}: ColumnChartInputType) {
         super();

@@ -1,4 +1,4 @@
-import { GridType, MarginAll, DrawArea, GridColors, AllLabels, FontOptions, Label2dType } from "../types/grids.types";
+import { GridType, MarginAll, DrawArea, GridColors, AllLabels, FontOptions, Label2dType, Background } from "../types/grids.types";
 import Chart from "../charts/chart";
 import GridFactor, { DEFAULT_GRID_FACTOR } from "../factors/grid-factor";
 import Label from "../labels/label";
@@ -18,6 +18,7 @@ abstract class Grid implements GridType {
     RAD_0: number = 0 - Math.PI / 2;
     y0position: number = 0;
     x0position: number = 0;
+    background: Background;
     abstract identifier: string;
     abstract mainLabel: string;
     abstract labels: Label | AllLabels | Label2dType | null;
@@ -44,6 +45,7 @@ abstract class Grid implements GridType {
         this.labelPadding = factor.labelPadding;
         this.colors = factor.colors;
         this.font = factor.font;
+        this.background = factor.background;
         this.chartList = {};
     }
 
@@ -52,14 +54,41 @@ abstract class Grid implements GridType {
     abstract setLabels(labels: any): any;
     abstract drawGrid(): void;
 
-    draw() {
+    async draw() {
         this.resize();
         this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         this.ctx.restore();
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        await this.drawBackground();
         this.ctx.translate(.5,.5);
         this.drawGrid();
         this.drawCharts();
+    }
+
+    async drawBackground() {
+        return new Promise((resolve) => {
+            const {color, image, opacity} = this.background;
+            const {ctx, width, height} = this;
+            if(color !== 'transparent') {
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.rect(0, 0, width, height);
+                ctx.fill();
+            }
+            if(image) {
+                let img = new Image();
+                img.src = image;
+                img.onload = () => {
+                    ctx.globalAlpha = opacity;
+                    ctx.drawImage(img, 0, 0, width, height);
+                    ctx.globalAlpha = 1;
+                    resolve(true);
+                }
+            } 
+            else {
+                resolve(false);
+            }
+        });
     }
 
     resize() {}
@@ -93,6 +122,12 @@ abstract class Grid implements GridType {
             if(this.chartList[name]) {
                 throw new Error('This chart name is taken');
             } else {
+                
+                let index = this.allowedCharts.findIndex( a => a === charts[name].identifier );
+                if(index === -1) {
+                    throw new Error('This chart is not allowed on this type of grid');
+                }
+
                 charts[name].ctx = this.ctx;
                 charts[name].parent = this;
                 this.chartList[name] = charts[name];

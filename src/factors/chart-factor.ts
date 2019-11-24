@@ -18,7 +18,7 @@ class ChartFactor {
         this.opacity = opacity || .75;
         this.itemSize = itemSize || 30
         this.dotBorder = dotBorder === false ? false : true;
-        this.dotRadius = 3;
+        this.dotRadius = dotRadius || 3;
     }
 }
 

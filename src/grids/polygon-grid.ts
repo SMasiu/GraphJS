@@ -8,13 +8,13 @@ import Line from "../shapes/line";
 
 class PolygonGrid extends Grid implements PolygonGridType {
 
-    allowedCharts: string[];
+    allowedCharts = [POLYGON_CHART];
     drawArea: DrawArea;
     labels: StringLabel;
-    mainLabel: string;
+    mainLabel = '0';
     radius: number;
-    gridSize: number;
-    identifier: string;
+    gridSize = 5;
+    identifier = 'PolygonGrid';
 
     constructor(canvas: HTMLCanvasElement, label: StringLabel, {factor}: GridOptions = {}) {
         super(canvas, factor);
@@ -24,13 +24,9 @@ class PolygonGrid extends Grid implements PolygonGridType {
             bottom: 50,
             right: 50
         }
-        this.identifier = 'PolygonGrid';
-        this.allowedCharts = [POLYGON_CHART];
         this.drawArea = clearDrawArea;
-        this.mainLabel = '0';
         this.labels  = this.setLabels(label);
         this.radius = (this.height - this.margin.top - this.margin.bottom) / 2;
-        this.gridSize = 5;
     }
 
     setLabels(label: StringLabel): StringLabel {

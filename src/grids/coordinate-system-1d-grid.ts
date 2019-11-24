@@ -4,25 +4,21 @@ import ValueLabel from "../labels/value-label";
 import Grid from "./grid";
 import Line from "../shapes/line";
 import FlexLabel from "../labels/flex-label";
+import { RANGE_CHART } from "../types/chart-names";
 
 class CoordinateSystem1dGrid extends Grid implements CoordinateSystem1dGrid {
-    allowedCharts: string[];
+    allowedCharts = [RANGE_CHART];
     drawArea: DrawArea;
     labels: ValueLabel;
-    mainLabel: string;
-    step: number;
-    x0position: number;
-    identifier: string;
+    mainLabel = '0';
+    step = 0;
+    x0position = 0;
+    identifier = 'CoordinateSystem1dGrid';
 
     constructor(canvas: HTMLCanvasElement, label: ValueLabel, {factor}: GridOptions = {}) {
         super(canvas, factor);
-        this.identifier = 'CoordinateSystem1dGrid';
-        this.allowedCharts = [];
         this.drawArea = clearDrawArea;
         this.labels = this.setLabels(label);
-        this.mainLabel = '0';
-        this.step = 0;
-        this.x0position = 0;
     }
 
     drawGrid() {

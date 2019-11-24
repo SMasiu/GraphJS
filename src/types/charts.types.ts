@@ -12,6 +12,7 @@ export interface ChartType {
     disable: boolean;
     dotRadius: number;
     dotBorder: boolean;
+    identifier: string;
     maxValue: number | number[];
     minValue: number | number[];
 }

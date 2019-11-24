@@ -5,6 +5,7 @@ import Rect from "../shapes/rect";
 import Label from "../labels/label";
 import CoordinateSystem2dGrid from "../grids/coordinate-system-2d-grid";
 import getColumnSize from "../functions/column-size";
+import { ROW_CHART } from "../types/chart-names";
 
 class RowChart extends Chart implements RowChartType {
 
@@ -16,6 +17,8 @@ class RowChart extends Chart implements RowChartType {
     height: number = 0;
     x0position: number = 0;
     y0position: number = 0;
+    identifier = ROW_CHART;
+    
     constructor({values}: RowChartInputType) {
         super();
         this.content = values || [];

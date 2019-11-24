@@ -8,8 +8,8 @@ import FlexLabel from "../labels/flex-label";
 abstract class BaseGrid extends Grid {
 
     drawArea: DrawArea;
-    y0position: number;
-    x0position: number;
+    y0position = 0;
+    x0position = 0;
     abstract labels: AllLabels;
     abstract allowedCharts: string[];
     abstract mainLabel: string;
@@ -18,8 +18,6 @@ abstract class BaseGrid extends Grid {
     constructor(canvas: HTMLCanvasElement, {factor}: GridOptions = {}) {
         super(canvas, factor);
         this.drawArea = clearDrawArea;
-        this.y0position = 0;
-        this.x0position = 0;
     }
 
     abstract drawGrid(): void;

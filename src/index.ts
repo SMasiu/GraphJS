@@ -384,7 +384,12 @@ if(canvas13) {
 
 
 
-
+let ff = new GridFactor({
+    background: {
+        color: 'transparent',
+        image: 'test.jpg'
+    }
+})
 
 if(canvas11) {
     let grid = new CoordinateSystem2dGrid(canvas11, {

@@ -2,22 +2,19 @@ import { DrawArea, NoGridType } from "../types/grids.types";
 import clearDrawArea from "../types/draw-area";
 import StringLabel from "../labels/string-label";
 import Grid from "./grid";
+import { ROUND_CHART, SAME_DIRECTION_ROUND_CHART } from "../types/chart-names";
 
 class NoGrid extends Grid implements NoGridType {
 
-    mainLabel: string;
-    allowedCharts: string[];
+    mainLabel = '0';
+    allowedCharts = [ROUND_CHART, SAME_DIRECTION_ROUND_CHART];
     drawArea: DrawArea;
-    labels: null;
-    identifier: string;
+    labels = null;
+    identifier = 'NoGrid';
 
     constructor(canvas: HTMLCanvasElement) {
         super(canvas);
-        this.identifier = 'NoGrid';
-        this.mainLabel = '0';
-        this.allowedCharts = [];
         this.drawArea = clearDrawArea;
-        this.labels = null;
     }
 
     drawGrid() {

@@ -3,24 +3,22 @@ import { RangeChartType, RangeValueType, RangeChartInputType } from "../types/ch
 import CoordinateSystem1dGrid from "../grids/coordinate-system-1d-grid";
 import Circle from "../shapes/circle";
 import Line from "../shapes/line";
+import { RANGE_CHART } from "../types/chart-names";
 
 class RangeChart extends Chart implements RangeChartType {
 
     content: RangeValueType[]
-    min: number;
-    max: number;
-    width: number;
-    x0position: number;
-    radius: number;
+    min = 0;
+    max = 0;
+    width = 0;
+    x0position = 0;
+    radius = 3;
     reversedValues = false;
+    identifier = RANGE_CHART;
+
     constructor({values}: RangeChartInputType = {}) {
         super();
         this.content = values || [];
-        this.max = 0;
-        this.min = 0;
-        this.width = 0;
-        this.x0position = 0;
-        this.radius = 3;
     }
     
     drawChart() {

@@ -3,12 +3,14 @@ import { PolygonCharType, MultipleValuesItem, PolygonChartInputType, MultipleVal
 import CirclePoint from "../shapes/circle-point";
 import Circle from "../shapes/circle";
 import Line from "../shapes/line";
+import { POLYGON_CHART } from "../types/chart-names";
 
 class PolygonChart extends Chart implements PolygonCharType {
 
     content: MultipleValuesItem[];
     fill: boolean;
     dots: boolean;
+    identifier = POLYGON_CHART;
 
     constructor({values, fill, dots, factor}: PolygonChartInputType = {}) {
         super(factor);

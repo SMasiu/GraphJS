@@ -1,5 +1,5 @@
 import { Coordinate2dGridType, Label2dType, DrawArea } from "../types/grids.types";
-import { ROW_CHART, OPOSITE_ROW_CHART, COLUMN_CHART, OPOSITE_COLUMN_CHART, LINE_CHART } from "../types/chart-names";
+import { ROW_CHART, COLUMN_CHART, LINE_CHART, BUBLE_CHART } from "../types/chart-names";
 import ValueLabel from "../labels/value-label";
 import clearDrawArea from "../types/draw-area";
 import GridFactor from "../factors/grid-factor";
@@ -20,29 +20,23 @@ interface CoordinateSystem2dInput {
 
 class CoordinateSystem2dGrid extends Grid implements Coordinate2dGridType {
 
-    allowedCharts: string[];
+    allowedCharts = [ROW_CHART, COLUMN_CHART, LINE_CHART, BUBLE_CHART];
     labels: Label2dType;
-    mainLabel: string;
+    mainLabel = 'both';
     drawArea: DrawArea;
-    x0position: number;
-    y0position: number;
+    x0position: number = 0;
+    y0position: number = 0;
     meshType: string;
-    identifier: string;
-    step: {
-        x: number,
-        y: number;
+    identifier = 'CoordinateSystem2dGrid';
+    step = {
+        x: 0,
+        y: 0
     }
 
     constructor(canvas: HTMLCanvasElement, labels: InputLabels, {meshType, factor}: CoordinateSystem2dInput = {}) {
         super(canvas, factor);
-        this.identifier = 'CoordinateSystem2dGrid';
-        this.allowedCharts = [ROW_CHART, OPOSITE_ROW_CHART, COLUMN_CHART, OPOSITE_COLUMN_CHART, LINE_CHART];
         this.labels = this.setLabels(labels);
         this.drawArea = clearDrawArea;
-        this.mainLabel = 'both';
-        this.x0position = 0;
-        this.y0position = 0;
-        this.step = {x: 0, y: 0};
         this.meshType = meshType || 'default';
     }
 

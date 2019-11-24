@@ -3,12 +3,15 @@ import { SameDirectionRoundChartInputType, SameDirectionRoundChartType, ValueCol
 import LinePiece from "../shapes/line-piece";
 import NoGrid from "../grids/no-grid";
 import StringLabel from "../labels/string-label";
+import { SAME_DIRECTION_ROUND_CHART } from "../types/chart-names";
 
 class SameDirectionRoundChart extends Chart implements SameDirectionRoundChartType {
     content: ValueColorType[];
     centerValue: string | null;
     labels: StringLabel | null;
     itemMargin: number;
+    identifier = SAME_DIRECTION_ROUND_CHART;
+
     constructor({labels, values, centerValue, canvas, itemMargin}: SameDirectionRoundChartInputType = {}) {
         super();
         if (canvas) {

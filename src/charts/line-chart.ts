@@ -3,6 +3,7 @@ import { LineCharType, MultipleValuesItem, LineChartInputType } from "../types/c
 import Circle from "../shapes/circle";
 import Line from "../shapes/line";
 import HorizontalGrid from "../grids/horizontal-grid";
+import { LINE_CHART } from "../types/chart-names";
 
 class LineChart extends Chart implements LineCharType {
 
@@ -12,6 +13,7 @@ class LineChart extends Chart implements LineCharType {
     labelLen: number = 0;
     dashLine: number[];
     smooth: boolean;
+    identifier = LINE_CHART;
 
     constructor({values, fill, dots, dashLine, factor, smooth}: LineChartInputType = {}) {
         super(factor);
