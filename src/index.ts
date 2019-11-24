@@ -52,6 +52,11 @@ if(canvas3) {
     grid.draw();
 }
 
+
+
+
+
+
 if(canvas1) {
     let grid: Grid = new HorizontalGrid(canvas1, {
         // top: new ValueLabel(0, 100, 20),
@@ -76,6 +81,12 @@ if(canvas1) {
     })
     grid.draw();
 }
+
+
+
+
+
+
 
 if(canvas2) {
     let grid = new VerticalGrid(canvas2, {

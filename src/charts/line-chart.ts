@@ -1,10 +1,8 @@
 import Chart from "./chart";
 import { LineCharType, MultipleValuesItem, LineChartInputType } from "../types/charts.types";
 import Circle from "../shapes/circle";
-import { AllLabels } from "../types/grids.types";
 import Line from "../shapes/line";
 import HorizontalGrid from "../grids/horizontal-grid";
-import CoordinateSystem2dGrid from "../grids/coordinate-system-2d-grid";
 
 class LineChart extends Chart implements LineCharType {
 
@@ -12,12 +10,14 @@ class LineChart extends Chart implements LineCharType {
     fill: boolean;
     dots: boolean;
     labelLen: number = 0;
+    dashLine: number[];
 
-    constructor({values, fill, dots, factor}: LineChartInputType = {}) {
+    constructor({values, fill, dots, dashLine, factor}: LineChartInputType = {}) {
         super(factor);
         this.content = values || [];
         this.fill = fill || false;
         this.dots = dots || false;
+        this.dashLine = dashLine || [0];
     }
 
     draw() {
@@ -91,7 +91,7 @@ class LineChart extends Chart implements LineCharType {
                     points.push([posX - minus, y0position], [originPosX, y0position]);
                 }
                 ctx.lineWidth = this.lineWidth;
-                new Line(ctx, points, {color: item.color, close: this.fill}).draw();
+                new Line(ctx, points, {color: item.color, close: this.fill, dashLine: this.dashLine, smooth: true}).draw();
                 ctx.fillStyle = item.color;
                 if(this.fill) {
                     ctx.globalAlpha = this.opacity;

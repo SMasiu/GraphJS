@@ -149,6 +149,7 @@ export interface LineChartInputType extends ChartInput {
     values?: MultipleValuesItem[];
     fill?: boolean;
     dots?: boolean;
+    dashLine?: number[];
 }
 
 export interface PolygonChartInputType extends ChartInput {
