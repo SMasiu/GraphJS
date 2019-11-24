@@ -5,7 +5,7 @@ class ValueLabel extends Label {
     values: number[];
     identifier: 'value' = 'value';
 
-    constructor(private start: number, private end: number, public step: number, {reverse}: {reverse?: boolean} = {}) {
+    constructor(public start: number, public end: number, public step: number, {reverse}: {reverse?: boolean} = {}) {
         super();
         this.reverse = reverse || false;
         this.values = this.toLabel();
@@ -23,6 +23,7 @@ class ValueLabel extends Label {
         if(start < end) {
             this.min = start;
             this.max = end;
+            this.underZero = 0;
             for(let i = start; i <= end; i += step) {
                 if(i < 0) {
                     this.underZero++;

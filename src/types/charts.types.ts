@@ -12,6 +12,8 @@ export interface ChartType {
     disable: boolean;
     dotRadius: number;
     dotBorder: boolean;
+    maxValue: number | number[];
+    minValue: number | number[];
 }
 
 export interface ValueColorType {
@@ -150,6 +152,7 @@ export interface LineChartInputType extends ChartInput {
     fill?: boolean;
     dots?: boolean;
     dashLine?: number[];
+    smooth?: boolean;
 }
 
 export interface PolygonChartInputType extends ChartInput {

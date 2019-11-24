@@ -11,20 +11,22 @@ class LineChart extends Chart implements LineCharType {
     dots: boolean;
     labelLen: number = 0;
     dashLine: number[];
+    smooth: boolean;
 
-    constructor({values, fill, dots, dashLine, factor}: LineChartInputType = {}) {
+    constructor({values, fill, dots, dashLine, factor, smooth}: LineChartInputType = {}) {
         super(factor);
         this.content = values || [];
         this.fill = fill || false;
         this.dots = dots || false;
         this.dashLine = dashLine || [0];
+        this.smooth = smooth || false;
     }
 
-    draw() {
+    drawChart() {
 
         if(this.parent && this.ctx) {
 
-            const {ctx} = this;
+            const {ctx, smooth, fill, lineWidth, dashLine, dotRadius, dotBorder} = this;
             const {width, height} = this.parent.drawArea;
             let y0position: number = 0;
             let maxY: number = 0, minY: number = 0; 
@@ -86,28 +88,28 @@ class LineChart extends Chart implements LineCharType {
                         }
                     }
                 }
-                if(this.fill) {
+                if(fill) {
                     let minus = typeof item.values[item.values.length - 1] === 'number' ? step : innerStep;
                     points.push([posX - minus, y0position], [originPosX, y0position]);
                 }
-                ctx.lineWidth = this.lineWidth;
-                new Line(ctx, points, {color: item.color, close: this.fill, dashLine: this.dashLine, smooth: true}).draw();
+                ctx.lineWidth = lineWidth;
+                new Line(ctx, points, {color: item.color, close: fill, dashLine: dashLine, smooth}).draw();
                 ctx.fillStyle = item.color;
-                if(this.fill) {
+                if(fill) {
                     ctx.globalAlpha = this.opacity;
                     ctx.fill();
                 }
                 if(this.dots) {
-                    if(this.fill) {
+                    if(fill) {
                         points.pop();
                         points.pop();
                     }
                     for(let [x ,y] of points) {                        
                         ctx.globalAlpha = 1;
-                        if(this.dotBorder) {
-                            ctx.lineWidth = this.dotRadius * 2;
+                        if(dotBorder) {
+                            ctx.lineWidth = dotRadius * 2;
                         }
-                        new Circle(ctx, x, y, this.dotRadius, {color: this.dotBorder ? '#fff' : item.color}).draw();
+                        new Circle(ctx, x, y, dotRadius, {color: dotBorder ? '#fff' : item.color}).draw();
                         ctx.fillStyle = item.color;
                         ctx.fill();
                     }
@@ -121,6 +123,18 @@ class LineChart extends Chart implements LineCharType {
             }
 
         }
+    }
+
+    setSize() {
+        let arr: any = [...this.content];
+        arr = arr.map((a: any) => a.values).flat(3);
+        let max = 0, min = 0;
+        arr.forEach( (v:number) => {
+            if (v > max) { max = v }
+            else if (v < min) { min = v };
+        });
+        this.maxValue = max;
+        this.minValue = min;
     }
 
 }

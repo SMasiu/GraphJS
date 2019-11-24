@@ -3,6 +3,7 @@ import clearDrawArea from "../types/draw-area";
 import Label from "../labels/label";
 import Grid from "./grid";
 import Line from "../shapes/line";
+import FlexLabel from "../labels/flex-label";
 
 abstract class BaseGrid extends Grid {
 
@@ -149,6 +150,24 @@ abstract class BaseGrid extends Grid {
             ctx.translate(transX, 0);
             this.drawLabelsValues('bottom', width, this.height - this.margin.bottom);
             ctx.translate(-transX, 0);
+        }
+    }
+
+    resize() {
+        let label = (<any>this.labels)[this.mainLabel];
+        if(label && label.flex) {
+            let min = 0, max = 0;
+           for(let key in this.chartList) {
+               let chart = this.chartList[key];
+               chart.setSize();
+               if(min > chart.minValue) {
+                   min = <number>chart.minValue;
+               }
+               if(max < chart.maxValue) {
+                   max = <number>chart.maxValue;
+               }
+           }
+           (<FlexLabel>label).resize(min, max);
         }
     }
 

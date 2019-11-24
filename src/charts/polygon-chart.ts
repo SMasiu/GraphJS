@@ -17,7 +17,7 @@ class PolygonChart extends Chart implements PolygonCharType {
         this.dots = dots || false;
     }
 
-    draw() {
+    drawChart() {
         const {parent, ctx, lineWidth, opacity, dots, dotBorder, dotRadius, fill } = this;
         if(parent && ctx) {
             const {centerX, centerY} = parent.drawArea;

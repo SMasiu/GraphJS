@@ -23,7 +23,7 @@ class RangeChart extends Chart implements RangeChartType {
         this.radius = 3;
     }
     
-    draw() {
+    drawChart() {
         if(this.parent && this.ctx) {
             this.ctx.translate(.5,.5);
             const { centerY, width } = this.parent.drawArea;
@@ -146,6 +146,20 @@ class RangeChart extends Chart implements RangeChartType {
             return w + x0position;
         }
 
+    }
+
+    setSize() {
+        let arr:number[] = (<any>[...this.content].map( i => i.values )).flat(2);
+        let min = 0, max = 0;
+        arr.forEach( v => {
+            if(v > max && v !== Infinity) {
+                max = v;
+            } else if(v < min && v !== Infinity) {
+                min = v;
+            }
+        });
+        this.maxValue = max;
+        this.minValue = min;
     }
 
 }

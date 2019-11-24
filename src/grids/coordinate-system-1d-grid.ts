@@ -3,6 +3,7 @@ import clearDrawArea from "../types/draw-area";
 import ValueLabel from "../labels/value-label";
 import Grid from "./grid";
 import Line from "../shapes/line";
+import FlexLabel from "../labels/flex-label";
 
 class CoordinateSystem1dGrid extends Grid implements CoordinateSystem1dGrid {
     allowedCharts: string[];
@@ -54,6 +55,24 @@ class CoordinateSystem1dGrid extends Grid implements CoordinateSystem1dGrid {
             startY: top
         }
         this.ctx.translate(this.drawArea.startX, this.drawArea.startY);
+    }
+
+    resize() {
+        let label = this.labels;
+        if(label.flex) {
+            let min = 0, max = 0;
+           for(let key in this.chartList) {
+               let chart = this.chartList[key];
+               chart.setSize();
+               if(min > chart.minValue) {
+                   min = <number>chart.minValue;
+               }
+               if(max < chart.maxValue) {
+                   max = <number>chart.maxValue;
+               }
+           }
+           (<FlexLabel>label).resize(min, max);
+        }
     }
 
     setLabels(label: ValueLabel): ValueLabel {

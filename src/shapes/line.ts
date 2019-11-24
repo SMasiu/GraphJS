@@ -16,16 +16,25 @@ class Line {
         const {values, ctx} = this;
         ctx.strokeStyle = this.color;
         ctx.beginPath();
-        let x = Math.round(values[0][0]);   
-        let y = Math.round(values[0][1]);
+        let [x, y] = values[0];
         ctx.setLineDash(this.dashLine);
-        ctx.moveTo(x, y);
-        for(let i = 1; i < values.length; i++) {
-            let x = Math.round(values[i][0]);   
-            let y = Math.round(values[i][1]);
-            if (this.smooth) {
-                ctx.quadraticCurveTo(x - 15, y - 15, x, y)
-            } else {
+        ctx.moveTo(Math.round(x), Math.round(y));
+        if(this.smooth) {
+            for(let i = 0; i < values.length - 1; i ++) {
+                let [x1, y1] = values[i];
+                let [x2, y2] = values[i+1];
+                var x_mid = (x1 + x2) / 2;
+                var y_mid = (y1 + y2) / 2;
+                var cp_x1 = (x_mid + x1) / 2;
+                var cp_x2 = (x_mid + x2) / 2;
+                ctx.quadraticCurveTo(cp_x1,y1 ,x_mid, y_mid);
+                ctx.quadraticCurveTo(cp_x2,y2 ,x2,y2);
+            }
+        } else {
+            for(let i = 1; i < values.length; i++) {
+                let [x, y] = values[i];
+                x = Math.round(x);
+                y = Math.round(y);
                 ctx.lineTo(x, y);
             }
         }

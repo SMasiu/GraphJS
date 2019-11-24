@@ -40,7 +40,7 @@ class RoundChart extends Chart implements RoundChartType {
         this.itemsMargin = itemsMargin || 0;
     }
 
-    draw() {
+    drawChart() {
         const {parent, ctx, content, opacity ,itemsMargin, lineWidth, centerValue} = this;
         if(parent && ctx) {
             parent.margin = {

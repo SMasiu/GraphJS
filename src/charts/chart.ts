@@ -12,9 +12,11 @@ abstract class Chart implements ChartType {
     disable: boolean = false;
     dotBorder: boolean;
     dotRadius: number;
+    maxValue: number | number[] = 0;
+    minValue: number | number[] = 0;
     abstract content: any[];
 
-    abstract draw(): void;
+    abstract drawChart(): void;
 
     updateItemContent(id: string | number, content: any) {
         let item = this.getItemContent(id);
@@ -31,6 +33,11 @@ abstract class Chart implements ChartType {
         return content;
     }
 
+    setSize() {
+        this.maxValue = 100;
+        this.minValue = 0;
+    }
+
     constructor(factor: ChartFactor = DEFAULT_CHART_FACTOR) {
 
         this.opacity = factor.opacity;
@@ -40,7 +47,11 @@ abstract class Chart implements ChartType {
         this.dotRadius = factor.dotRadius;
         this.parent = null;
         this.ctx = null;
-        
+
+    }
+    
+    draw() {
+        this.drawChart();
     }
 
     getItemContent(id: string | number) {

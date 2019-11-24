@@ -1,6 +1,6 @@
 abstract class Label {
 
-    abstract identifier: 'percent' | 'value' | 'string';
+    abstract identifier: 'percent' | 'value' | 'string' | 'flex';
     abstract toLabel(): any[];
     abstract values: any[];
     reverse: boolean;
@@ -9,6 +9,7 @@ abstract class Label {
     min = 0;
     max = 0;
     underZero = 0;
+    flex: boolean = false;
 
     constructor () {
         this.reverse = false;

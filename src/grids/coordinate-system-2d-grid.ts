@@ -5,6 +5,8 @@ import clearDrawArea from "../types/draw-area";
 import GridFactor from "../factors/grid-factor";
 import Grid from "../grids/grid";
 import Line from "../shapes/line";
+import FlexLabel from "../labels/flex-label";
+import Label from "../labels/label";
 
 interface InputLabels {
     x: ValueLabel,
@@ -128,6 +130,39 @@ class CoordinateSystem2dGrid extends Grid implements Coordinate2dGridType {
         return { x, y };
     }
 
+    resize() {
+        this.checkLabel(this.labels.y, 1);
+        this.checkLabel(this.labels.x, 0);
+    }
+
+    private checkLabel(label: Label, i: number) {
+        if(label && label.flex) {
+            let min = 0, max = 0;
+            for(let key in this.chartList) {
+                let chart = this.chartList[key];
+                chart.setSize();
+                let mnVal = 0, mxVal = 0;
+                if(typeof chart.maxValue === 'number') {
+                    mxVal = chart.maxValue;
+                } else {
+                    mxVal = chart.maxValue[i];
+                }
+                if(typeof chart.minValue === 'number') {
+                    mnVal = chart.minValue;
+                } else {
+                    mnVal = chart.minValue[i];
+                }
+                if(min > mnVal) {
+                   min = mnVal;
+                }   
+                if(max < mxVal) {
+                   max = mxVal;
+                }
+            }
+            (<FlexLabel>label).resize(min, max);
+        }
+    }
 }
+
 
 export default CoordinateSystem2dGrid;

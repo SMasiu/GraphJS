@@ -4,6 +4,7 @@ import VerticalGrid from "../grids/vertical-grid";
 import Rect from "../shapes/rect";
 import Label from "../labels/label";
 import CoordinateSystem2dGrid from "../grids/coordinate-system-2d-grid";
+import getColumnSize from "../functions/column-size";
 
 class RowChart extends Chart implements RowChartType {
 
@@ -20,14 +21,16 @@ class RowChart extends Chart implements RowChartType {
         this.content = values || [];
     }
 
-    draw() {
+    drawChart() {
 
         if(this.parent && this.ctx) {
             let mainLabel = '';
             let secondaryLabel = '';
+            let minus = -1
             if(this.parent.identifier === 'VerticalGrid') {
                 mainLabel = this.parent.mainLabel;
                 secondaryLabel = (<VerticalGrid>this.parent).secondaryLabel;
+                minus = 0;
             } else if(this.parent.identifier === 'CoordinateSystem2dGrid') {
                 mainLabel = 'x';
                 secondaryLabel = 'y';
@@ -45,14 +48,14 @@ class RowChart extends Chart implements RowChartType {
             if(label) {
                 this.maxX = label.max;
                 this.minX = label.min;
-                mainLen = label.values.length - 1;
+                mainLen = label.values.length - minus;
                 underZero = label.underZero;
             }
 
             const {y0position, height, stepLen, itemSize, width, x0position, lineWidth, opacity, ctx, maxX, minX} = this;
 
             let offsetY = y0position;
-            let step = height / stepLen;
+            let step = height / (stepLen - 1);
             ctx.globalAlpha = opacity;
 
             let hStep = width * (underZero / mainLen);
@@ -100,7 +103,6 @@ class RowChart extends Chart implements RowChartType {
                 offsetY += step;
 
             }
-
             if(reversedValues) {
                 ctx.scale(-1, 1);
                 ctx.translate(-(hStep + x0position), 0);
@@ -113,6 +115,12 @@ class RowChart extends Chart implements RowChartType {
     calcWidth(value: number) {
         const {maxX, minX, width, x0position} = this;
         return width - width * (value / (Math.abs(maxX) + Math.abs(minX))) - (width - x0position);
+    }
+
+    setSize() {
+        const {max, min} = getColumnSize(this.content);
+        this.maxValue = max;
+        this.minValue = min;
     }
 
 }

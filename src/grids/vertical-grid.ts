@@ -4,6 +4,7 @@ import { ROW_CHART, OPOSITE_ROW_CHART } from "../types/chart-names";
 import GridFactor from "../factors/grid-factor";
 import Label from "../labels/label";
 import Line from "../shapes/line";
+import FlexLabel from "../labels/flex-label";
 
 interface VerticalGridOptopns {
     mainLabel?: 'top' | 'bottom';
@@ -65,7 +66,7 @@ class VerticalGrid extends BaseGrid implements VerticalGridType {
         }
 
     }
-
+    
 }
 
 export default VerticalGrid;

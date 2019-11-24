@@ -4,6 +4,7 @@ import GridFactor from "../factors/grid-factor";
 import BaseGrid from "./base-grid";
 import Label from "../labels/label";
 import Line from "../shapes/line";
+import FlexLabel from "../labels/flex-label";
 
 interface HorizontalGridOptions {
     mainLabel?: 'left' | 'right';
@@ -21,7 +22,7 @@ class HorizontalGrid extends BaseGrid implements HorizontalGridType {
     constructor(canvas: HTMLCanvasElement, labels: InputAllLabels, {mainLabel, secondaryLabel, factor}: HorizontalGridOptions = {}) {
         super(canvas, {factor});
         this.identifier = 'HorizontalGrid';
-        this.allowedCharts = [COLUMN_CHART, OPOSITE_COLUMN_CHART, LINE_CHART];
+        this.allowedCharts = [COLUMN_CHART, LINE_CHART];
         this.mainLabel = mainLabel || 'left';
         this.secondaryLabel = secondaryLabel || 'bottom';
         //validate labels

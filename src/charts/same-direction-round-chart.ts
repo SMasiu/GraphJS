@@ -29,7 +29,7 @@ class SameDirectionRoundChart extends Chart implements SameDirectionRoundChartTy
         }
     }
     
-    draw() {
+    drawChart() {
         const {ctx, parent, itemSize, opacity, itemMargin, lineWidth, centerValue} = this;
         if(ctx && parent) {
             const { centerX, centerY } = parent.drawArea;

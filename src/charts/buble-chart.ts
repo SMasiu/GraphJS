@@ -1,7 +1,6 @@
 import Chart from "./chart";
 import { BubleChartType, BubleChartInputType, CoordinateValuesType } from "../types/charts.types";
 import Circle from "../shapes/circle";
-import ValueLabel from "../labels/value-label";
 import CoordinateSystem2dGrid from "../grids/coordinate-system-2d-grid";
 
 class BubleChart extends Chart implements BubleChartType {
@@ -23,7 +22,7 @@ class BubleChart extends Chart implements BubleChartType {
         this.content = values || [];
     }
 
-    draw() {
+    drawChart() {
         if(this.parent && this.ctx) {
             let parent: CoordinateSystem2dGrid = <CoordinateSystem2dGrid>this.parent;
             this.width = parent.drawArea.width;
@@ -42,7 +41,7 @@ class BubleChart extends Chart implements BubleChartType {
                 let [x, y] = values;
                 let w = this.calcWidth(x);
                 let h = this.calcHeight(y);
-                new Circle(this.ctx, w, h, radius * this.stepValue, {color}).draw();
+                new Circle(this.ctx, w, h, radius, {color}).draw();
                 this.ctx.fillStyle = color;
                 this.ctx.fill();
             }
@@ -74,6 +73,25 @@ class BubleChart extends Chart implements BubleChartType {
             let w = rWidth * (value / max) * (reverse ? -1 : 1);
             return w + _0pos;
         }
+    }
+
+    setSize() {
+        let maxX = 0, maxY = 0, minY = 0, minX = 0;
+        for(let item of this.content) {
+            let [x, y] = item.values;
+            if(x > maxX) {
+                maxX = x + item.radius;
+            } else if(x < minX) {
+                minX = x - item.radius;
+            }
+            if(y > maxY) {
+                maxY = y + item.radius;
+            } else if(y < minY) {
+                minY = y - item.radius;
+            }
+        }
+        this.minValue = [minX, minY];
+        this.maxValue = [maxX, maxY];
     }
 
 }

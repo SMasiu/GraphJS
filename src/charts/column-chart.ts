@@ -2,6 +2,7 @@ import Chart from "./chart";
 import { ColumnChartType, ColumnChartInputType, GroupItemType } from "../types/charts.types";
 import Rect from "../shapes/rect";
 import HorizontalGrid from "../grids/horizontal-grid";
+import getColumnSize from "../functions/column-size";
 
 class ColumnChart extends Chart implements ColumnChartType {
 
@@ -17,7 +18,7 @@ class ColumnChart extends Chart implements ColumnChartType {
         this.content = values || [];
     }
 
-    draw() {
+    drawChart() {
         if(this.parent && this.ctx) {
             let mainLen = 1;
             let reversedValues = false;
@@ -125,6 +126,12 @@ class ColumnChart extends Chart implements ColumnChartType {
         return height - height * (value / (Math.abs(maxY) + Math.abs(minY))) - (height - y0position);
     }
 
+    setSize() {
+        const {max, min} = getColumnSize(this.content);;
+        this.maxValue = max;
+        this.minValue = min;
+    }
+    
 }
 
 export default ColumnChart;

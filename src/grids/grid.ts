@@ -53,6 +53,7 @@ abstract class Grid implements GridType {
     abstract drawGrid(): void;
 
     draw() {
+        this.resize();
         this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         this.ctx.restore();
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -60,6 +61,8 @@ abstract class Grid implements GridType {
         this.drawGrid();
         this.drawCharts();
     }
+
+    resize() {}
 
     validateLabels(labels: any): boolean {
         return true;
