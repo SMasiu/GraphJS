@@ -13,11 +13,13 @@ class ColumnChart extends Chart implements ColumnChartType {
     maxY: number = 0;
     height: number = 0;
     y0position: number = 0;
+    correspondTo: string;
     identifier = COLUMN_CHART;
 
-    constructor({values}: ColumnChartInputType) {
+    constructor({values, correspondTo}: ColumnChartInputType) {
         super();
         this.content = values || [];
+        this.correspondTo = correspondTo || '';
     }
 
     drawChart() {
@@ -29,7 +31,7 @@ class ColumnChart extends Chart implements ColumnChartType {
             let mainLabel = '';
             let secondaryLabel = '';
             if(this.parent.identifier === 'HorizontalGrid') {
-                mainLabel = (<HorizontalGrid>this.parent).mainLabel;
+                mainLabel = this.correspondTo || (<HorizontalGrid>this.parent).mainLabel;
                 secondaryLabel = (<HorizontalGrid>this.parent).secondaryLabel;
             } else if(this.parent.identifier === 'CoordinateSystem2dGrid') {
                 mainLabel = 'y';

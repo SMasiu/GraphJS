@@ -17,6 +17,7 @@ import Grid from "./grids/grid";
 import CoordinateSystem2dGrid from "./grids/coordinate-system-2d-grid";
 import FlexLabel from "./labels/flex-label";
 import BubleChart from "./charts/buble-chart";
+import ColumnChart from "./charts/column-chart";
 
 let canvas1: HTMLCanvasElement | null = document.querySelector('#c1');
 let canvas2: HTMLCanvasElement | null = document.querySelector('#c2');
@@ -393,11 +394,11 @@ let ff = new GridFactor({
 
 if(canvas11) {
     let grid = new CoordinateSystem2dGrid(canvas11, {
-        x: new FlexLabel(0, 100, 25),
-        y: new ValueLabel(200, 0, 50)
+        y: new ValueLabel(200, 0, 50),
+        x: new FlexLabel(0, 100, 100)
     });
     grid.addCharts({
-        row: new RowChart({
+        line: new RowChart({
             values: [{
                 type: 'simple',
                 color: 'red',
@@ -409,11 +410,12 @@ if(canvas11) {
             },{
                 type: 'group',
                 color: ['gray', 'orange', 'red'],
-                values: [-50, 160, 70],
+                values: [-50, -30, 70],
                 margin: 'collapse'
             },{
                 type: 'stacked-group',
                 color: ['gray', 'orange', 'red'],
+                direction: 'reverse',
                 values: [20, 30, 50],
             }]
         })

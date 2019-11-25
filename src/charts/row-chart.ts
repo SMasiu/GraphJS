@@ -18,10 +18,12 @@ class RowChart extends Chart implements RowChartType {
     x0position: number = 0;
     y0position: number = 0;
     identifier = ROW_CHART;
-    
-    constructor({values}: RowChartInputType) {
+    correspondTo: string;
+
+    constructor({values, correspondTo}: RowChartInputType) {
         super();
         this.content = values || [];
+        this.correspondTo = correspondTo || '';
     }
 
     drawChart() {
@@ -31,7 +33,7 @@ class RowChart extends Chart implements RowChartType {
             let secondaryLabel = '';
             let minus = -1
             if(this.parent.identifier === 'VerticalGrid') {
-                mainLabel = this.parent.mainLabel;
+                mainLabel = this.correspondTo || this.parent.mainLabel;
                 secondaryLabel = (<VerticalGrid>this.parent).secondaryLabel;
                 minus = 0;
             } else if(this.parent.identifier === 'CoordinateSystem2dGrid') {
@@ -51,18 +53,19 @@ class RowChart extends Chart implements RowChartType {
             if(label) {
                 this.maxX = label.max;
                 this.minX = label.min;
-                mainLen = label.values.length - minus;
+                mainLen = label.values.length + minus;
                 underZero = label.underZero;
             }
 
             const {y0position, height, stepLen, itemSize, width, x0position, lineWidth, opacity, ctx, maxX, minX} = this;
 
             let offsetY = y0position;
-            let step = height / (stepLen - 1);
+            let step = height / (stepLen + minus);
             ctx.globalAlpha = opacity;
-
+            let minusHstep = 0;
             let hStep = width * (underZero / mainLen);
             if(reversedValues) {
+                minusHstep = hStep - x0position;
                 ctx.translate(hStep + x0position, 0);
                 ctx.scale(-1, 1);
             }
@@ -74,7 +77,8 @@ class RowChart extends Chart implements RowChartType {
                     let m = value > 0 ? 1 : -1;
                     let lW = (lineWidth / 2) * m
                     let w = this.calcWidth(value) + lW;
-                    new Rect(ctx, Math.round(x0position + lW) , Math.ceil(offsetY + step / 2 - itemSize / 2), Math.ceil(width - w - (width - x0position) - lW), itemSize, {color, lineWidth}).draw();
+                    console.log(x0position)
+                    new Rect(ctx, Math.round(x0position + lW + minusHstep) , Math.ceil(offsetY + step / 2 - itemSize / 2), Math.ceil(width - w - (width - x0position) - lW), itemSize, {color, lineWidth}).draw();
                 }
                 let values: number[] = <number[]>item.values;
                 let colors: string[] = <string[]>item.color;
@@ -88,17 +92,17 @@ class RowChart extends Chart implements RowChartType {
                         let lW = (lineWidth / 2) * m
                         let w = this.calcWidth(value) + lW;
                         let plus = collapse ? itemSize / 2 : 0;
-                        new Rect(ctx, Math.round(x0position + lW), Math.ceil(offsetY + curentOffset + plus - itemSize / 2), Math.ceil(width - w - (width - x0position) - lW), itemSize, {color: colors[i], lineWidth}).draw();
+                        new Rect(ctx, Math.round(x0position + lW + minusHstep), Math.ceil(offsetY + curentOffset + plus - itemSize / 2), Math.ceil(width - w - (width - x0position) - lW), itemSize, {color: colors[i], lineWidth}).draw();
                         curentOffset += Math.floor(collapse ? itemSize + lineWidth : innerOffset);
                         i++;
                     }
                 } else if(item.type === 'stacked-group') {
-                    let offsetX: number = 0;    
+                    let offsetX: number = 0;
                     let m = item.direction === 'reverse' ? -1 : 1;
                     for(let value of values) {
                         let lW = (lineWidth / 2) * m;
                         let w = this.calcWidth(value * m) + lW;
-                        new Rect(ctx, Math.round(x0position + offsetX + (lW * m) * m), Math.ceil(offsetY + step / 2 - itemSize / 2), Math.round(width - w - (width - x0position) - lW), itemSize, {color: colors[i], lineWidth}).draw();
+                        new Rect(ctx, Math.round(x0position + offsetX + (lW * m) * m + minusHstep), Math.ceil(offsetY + step / 2 - itemSize / 2), Math.round(width - w - (width - x0position) - lW), itemSize, {color: colors[i], lineWidth}).draw();
                         offsetX += width * (value / (Math.abs(maxX) + Math.abs(minX))) * m;
                         i++;
                     }

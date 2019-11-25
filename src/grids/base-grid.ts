@@ -152,20 +152,30 @@ abstract class BaseGrid extends Grid {
     }
 
     resize() {
-        let label = (<any>this.labels)[this.mainLabel];
-        if(label && label.flex) {
-            let min = 0, max = 0;
-           for(let key in this.chartList) {
-               let chart = this.chartList[key];
-               chart.setSize();
-               if(min > chart.minValue) {
-                   min = <number>chart.minValue;
-               }
-               if(max < chart.maxValue) {
-                   max = <number>chart.maxValue;
-               }
-           }
-           (<FlexLabel>label).resize(min, max);
+        let label: {[key: string]: Label} = {}
+        let minMax: {[key: string]: any} = {}
+        label[this.mainLabel] = (<any>this.labels)[this.mainLabel];
+        minMax[this.mainLabel] = {min: 0,max: 0};
+        for(let key in this.chartList) {
+            let chart = this.chartList[key];
+            chart.setSize();
+            const {correspondTo, minValue, maxValue} = chart;
+            if(correspondTo && !label[correspondTo]) {
+                label[correspondTo] = (<any>this.labels)[correspondTo];
+                minMax[correspondTo] = {min: 0, max: 0};
+            }
+            if(minMax[correspondTo || this.mainLabel].min > minValue) {
+                minMax[correspondTo || this.mainLabel].min = minValue;
+            }
+            if(minMax[correspondTo || this.mainLabel].max < maxValue) {
+                minMax[correspondTo || this.mainLabel].max = maxValue;
+            }
+        }
+        for(let key in label) {
+            if(label[key].flex) {
+                const {min, max} = minMax[key];
+                (<FlexLabel>label[key]).resize(min, max);
+            }
         }
     }
 

@@ -9,7 +9,7 @@ const getColumnSize = (content: any[]) => {
                 it.values.forEach( (val: number) => {
                     v += val;
                 });
-                return v;
+                return v * (it.direction === 'reverse' ? -1 : 1);
             }
         }).flat();
         arr.forEach( (v:number) => {

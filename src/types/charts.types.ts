@@ -13,6 +13,7 @@ export interface ChartType {
     dotRadius: number;
     dotBorder: boolean;
     identifier: string;
+    correspondTo: string;
     maxValue: number | number[];
     minValue: number | number[];
 }
@@ -154,6 +155,7 @@ export interface LineChartInputType extends ChartInput {
     dots?: boolean;
     dashLine?: number[];
     smooth?: boolean;
+    correspondTo?: string;
 }
 
 export interface PolygonChartInputType extends ChartInput {
@@ -164,8 +166,10 @@ export interface PolygonChartInputType extends ChartInput {
 
 export interface ColumnChartInputType {
     values?: GroupItemType[];
+    correspondTo?: string;
 }
 
 export interface RowChartInputType {
     values?: GroupItemType[];
+    correspondTo?: string;
 }

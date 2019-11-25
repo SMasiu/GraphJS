@@ -13,15 +13,17 @@ class LineChart extends Chart implements LineCharType {
     labelLen: number = 0;
     dashLine: number[];
     smooth: boolean;
+    correspondTo: string;
     identifier = LINE_CHART;
 
-    constructor({values, fill, dots, dashLine, factor, smooth}: LineChartInputType = {}) {
+    constructor({values, fill, dots, dashLine, factor, smooth, correspondTo}: LineChartInputType = {}) {
         super(factor);
         this.content = values || [];
         this.fill = fill || false;
         this.dots = dots || false;
         this.dashLine = dashLine || [0];
         this.smooth = smooth || false;
+        this.correspondTo = correspondTo || '';
     }
 
     drawChart() {
@@ -39,7 +41,7 @@ class LineChart extends Chart implements LineCharType {
             let mainLen: number = 0;
             let underZero: number = 0;
             if(id === 'HorizontalGrid') {
-                mainLabel = this.parent.mainLabel;
+                mainLabel = this.correspondTo || this.parent.mainLabel;
                 secondaryLabel = (<HorizontalGrid>this.parent).secondaryLabel;
             } else if(id === 'CoordinateSystem2dGrid') {
                 mainLabel = 'y';

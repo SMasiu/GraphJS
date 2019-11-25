@@ -14,6 +14,7 @@ abstract class Chart implements ChartType {
     dotRadius: number;
     maxValue: number | number[] = 0;
     minValue: number | number[] = 0;
+    correspondTo: string = '';
     abstract content: any[];
     abstract identifier: string;
     abstract drawChart(): void;
