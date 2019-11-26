@@ -39,6 +39,16 @@ abstract class Chart implements ChartType {
         this.minValue = 0;
     }
 
+    getColor(color: string | string[], x: number, xE: number) {
+        if(typeof color === 'string') {
+            return color;
+        } else {
+            return this.createGradient(x, xE, color);
+        }
+    }
+
+    abstract createGradient(x: number, xE: number, colors: string[]): CanvasGradient;
+
     constructor(factor: ChartFactor = DEFAULT_CHART_FACTOR) {
 
         this.opacity = factor.opacity;

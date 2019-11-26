@@ -23,7 +23,17 @@ class BubleChart extends Chart implements BubleChartType {
         super();
         this.content = values || [];
     }
-
+    createGradient(x: number, xE: number, colors: string[]) {
+        const { ctx } = this;
+            let grd = (<CanvasRenderingContext2D>ctx).createLinearGradient(x, 0, x + xE, 0);
+            let step = 1 / (colors.length - 1);
+            let cStep = 0;
+            for(let c of colors) {
+                grd.addColorStop(cStep, c);
+                cStep += step;
+            }
+            return grd;
+    }
     drawChart() {
         if(this.parent && this.ctx) {
             let parent: CoordinateSystem2dGrid = <CoordinateSystem2dGrid>this.parent;
@@ -43,8 +53,9 @@ class BubleChart extends Chart implements BubleChartType {
                 let [x, y] = values;
                 let w = this.calcWidth(x);
                 let h = this.calcHeight(y);
-                new Circle(this.ctx, w, h, radius, {color}).draw();
-                this.ctx.fillStyle = color;
+                let col = this.getColor(color, w - radius , radius * 2);
+                new Circle(this.ctx, w, h, radius, {color: col}).draw();
+                this.ctx.fillStyle = col;
                 this.ctx.fill();
             }
         }

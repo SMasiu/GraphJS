@@ -32,7 +32,7 @@ export interface ValueColorUpdateType {
 
 export interface GroupItemType {
     type: string;
-    color: string | string[];
+    color: string | string[] | any;
     values: number | number[];
     margin?: string;
     direction?: string;
@@ -49,7 +49,7 @@ export interface GroupItemUpdateType {
 }
 
 export interface MultipleValuesItem {
-    color: string;
+    color: string | string[] | any;
     values: any[];
     id?: string | number;
 }
@@ -84,7 +84,7 @@ export interface SameDirectionRoundChartType {
 }
 
 export interface RangeValueType {
-    color: string;
+    color: string | string[] | any;
     values: number[] | number[][],
     under?: boolean
 }
@@ -94,7 +94,7 @@ export interface RangeChartType extends ChartType {
 }
 
 export interface CoordinateValuesType {
-    color: string;
+    color: string | string[] | any;
     values: number[],
     radius: number;
     id?: string | number;

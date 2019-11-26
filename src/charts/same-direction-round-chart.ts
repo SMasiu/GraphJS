@@ -31,7 +31,17 @@ class SameDirectionRoundChart extends Chart implements SameDirectionRoundChartTy
             this.labels = null
         }
     }
-    
+    createGradient(x: number, xE: number, colors: string[]) {
+        const { ctx } = this;
+            let grd = (<CanvasRenderingContext2D>ctx).createLinearGradient(x, 0, x + xE, 0);
+            let step = 1 / (colors.length - 1);
+            let cStep = 0;
+            for(let c of colors) {
+                grd.addColorStop(cStep, c);
+                cStep += step;
+            }
+            return grd;
+    }
     drawChart() {
         const {ctx, parent, itemSize, opacity, itemMargin, lineWidth, centerValue} = this;
         if(ctx && parent) {

@@ -393,33 +393,30 @@ let ff = new GridFactor({
 })
 
 if(canvas11) {
-    let grid = new CoordinateSystem2dGrid(canvas11, {
-        y: new ValueLabel(200, 0, 50),
-        x: new FlexLabel(0, 100, 100)
-    });
+
+    let grid = new CoordinateSystem1dGrid(canvas11, new FlexLabel(-100, 100, 20));
     grid.addCharts({
-        line: new RowChart({
+        range: new RangeChart({
             values: [{
-                type: 'simple',
-                color: 'red',
-                values: 50
+                color: ['red','black'],
+                values: [0]
             },{
-                type: 'group',
-                color: ['gray', 'orange', 'red'],
-                values: [20, 10, 20]
+                color: ['gray','black'],
+                values: [[Infinity, -10], [10, Infinity]]
             },{
-                type: 'group',
-                color: ['gray', 'orange', 'red'],
-                values: [-50, -30, 70],
-                margin: 'collapse'
+                color: ['orange', 'red'],
+                values: [[Infinity, Infinity]],
+                under: true
             },{
-                type: 'stacked-group',
-                color: ['gray', 'orange', 'red'],
-                direction: 'reverse',
-                values: [20, 30, 50],
+                color: ['green','blue'],
+                values: [[-170, 70]],
+                under: true
+            },{
+                color: 'pink',
+                values: [20, -30]
             }]
         })
-    });
+    })
     grid.draw();
 }
 
@@ -433,6 +430,7 @@ if(canvas12) {
         x: new FlexLabel(100, -100, 20),
         y: new FlexLabel(100, -100, 20)
     });
+
     grid.addCharts({
         buble: new BubleChart({
             values: [{

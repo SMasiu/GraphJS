@@ -2,8 +2,6 @@ import Chart from "./chart";
 import { RowChartType, RowChartInputType, GroupItemType } from "../types/charts.types";
 import VerticalGrid from "../grids/vertical-grid";
 import Rect from "../shapes/rect";
-import Label from "../labels/label";
-import CoordinateSystem2dGrid from "../grids/coordinate-system-2d-grid";
 import getColumnSize from "../functions/column-size";
 import { ROW_CHART } from "../types/chart-names";
 
@@ -26,6 +24,7 @@ class RowChart extends Chart implements RowChartType {
         this.correspondTo = correspondTo || '';
     }
 
+    
     drawChart() {
 
         if(this.parent && this.ctx) {
@@ -73,12 +72,14 @@ class RowChart extends Chart implements RowChartType {
             for(let item of this.content) {
                 if(item.type === 'simple') {
                     let value: number = <number>item.values;
-                    let color: string = <string>item.color;
                     let m = value > 0 ? 1 : -1;
                     let lW = (lineWidth / 2) * m
                     let w = this.calcWidth(value) + lW;
+                    let start = Math.round(x0position + lW + minusHstep);
+                    let end = Math.ceil(width - w - (width - x0position) - lW);
+                    let color: string | CanvasGradient = this.getColor(<string | string[]>item.color, start, end);
                     console.log(x0position)
-                    new Rect(ctx, Math.round(x0position + lW + minusHstep) , Math.ceil(offsetY + step / 2 - itemSize / 2), Math.ceil(width - w - (width - x0position) - lW), itemSize, {color, lineWidth}).draw();
+                    new Rect(ctx, start, Math.ceil(offsetY + step / 2 - itemSize / 2), end, itemSize, {color, lineWidth}).draw();
                 }
                 let values: number[] = <number[]>item.values;
                 let colors: string[] = <string[]>item.color;
@@ -92,7 +93,10 @@ class RowChart extends Chart implements RowChartType {
                         let lW = (lineWidth / 2) * m
                         let w = this.calcWidth(value) + lW;
                         let plus = collapse ? itemSize / 2 : 0;
-                        new Rect(ctx, Math.round(x0position + lW + minusHstep), Math.ceil(offsetY + curentOffset + plus - itemSize / 2), Math.ceil(width - w - (width - x0position) - lW), itemSize, {color: colors[i], lineWidth}).draw();
+                        let start = Math.round(x0position + lW + minusHstep);
+                        let end = Math.ceil(width - w - (width - x0position) - lW);
+                        let color: string | CanvasGradient = this.getColor(<string | string[]>item.color[i], start, end);
+                        new Rect(ctx, start, Math.ceil(offsetY + curentOffset + plus - itemSize / 2), end, itemSize, {color, lineWidth}).draw();
                         curentOffset += Math.floor(collapse ? itemSize + lineWidth : innerOffset);
                         i++;
                     }
@@ -102,7 +106,9 @@ class RowChart extends Chart implements RowChartType {
                     for(let value of values) {
                         let lW = (lineWidth / 2) * m;
                         let w = this.calcWidth(value * m) + lW;
-                        new Rect(ctx, Math.round(x0position + offsetX + (lW * m) * m + minusHstep), Math.ceil(offsetY + step / 2 - itemSize / 2), Math.round(width - w - (width - x0position) - lW), itemSize, {color: colors[i], lineWidth}).draw();
+                        let start = Math.round(x0position + offsetX + (lW * m) * m + minusHstep);
+                        let end = Math.round(width - w - (width - x0position) - lW);
+                        new Rect(ctx, start, Math.ceil(offsetY + step / 2 - itemSize / 2), end, itemSize, {color: this.getColor(colors[i], start, end), lineWidth}).draw();
                         offsetX += width * (value / (Math.abs(maxX) + Math.abs(minX))) * m;
                         i++;
                     }
@@ -130,6 +136,17 @@ class RowChart extends Chart implements RowChartType {
         this.minValue = min;
     }
 
+    createGradient(x: number, xE: number, colors: string[]) {
+        const { ctx } = this;
+            let grd = (<CanvasRenderingContext2D>ctx).createLinearGradient(x, 0, x + xE, 0);
+            let step = 1 / (colors.length - 1);
+            let cStep = 0;
+            for(let c of colors) {
+                grd.addColorStop(cStep, c);
+                cStep += step;
+            }
+            return grd;
+    }
 }
 
 export default RowChart;

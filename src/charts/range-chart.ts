@@ -20,7 +20,18 @@ class RangeChart extends Chart implements RangeChartType {
         super();
         this.content = values || [];
     }
-    
+    createGradient(x: number, xE: number, colors: string[]) {
+        const { ctx } = this;
+            let grd = (<CanvasRenderingContext2D>ctx).createLinearGradient(x, 0, x + xE, 0);
+            let step = 1 / (colors.length - 1);
+            let cStep = 0;
+            for(let c of colors) {
+                grd.addColorStop(cStep, c);
+                cStep += step;
+            }
+            return grd;
+    }
+
     drawChart() {
         if(this.parent && this.ctx) {
             this.ctx.translate(.5,.5);
@@ -42,18 +53,20 @@ class RangeChart extends Chart implements RangeChartType {
                         let posX = this.getPos(value);
                         ctx.lineWidth = radius + 2;
                         new Circle(ctx, posX, centerY, radius, {color: '#fff'}).draw();
-                        ctx.fillStyle = item.color;
+                        let color = this.getColor(item.color, posX - radius, radius * 2);
+                        ctx.fillStyle = color;
                         ctx.fill();
                         decrement = false;
                     } else {
                         const [x1, x2] = this.reversedValues ? value.reverse() : value;
                         let x1I = Math.abs(x1) === Infinity;
                         let x2I = Math.abs(x2) === Infinity;
-                        this.ctx.fillStyle = item.color;
                         if( !x1I && !x2I ) {
                             let posX1 = this.getPos(x1);
                             let posX2 = this.getPos(x2);
-
+                            let color = this.getColor(item.color, posX1, posX2);
+                            
+                            this.ctx.fillStyle = color;
                             ctx.lineWidth = radius + 2;
                             new Circle(ctx, posX1, centerY, radius, {color: '#fff'}).draw();
                             ctx.fill();
@@ -62,31 +75,32 @@ class RangeChart extends Chart implements RangeChartType {
                             ctx.fill();
 
                             ctx.lineWidth = lineWidth;
-
                             new Line(ctx, [
                                 [posX1, centerY - radius],
                                 [posX1, centerY + y],
                                 [posX2, centerY + y],
                                 [posX2, centerY - radius]],
-                                {color: item.color}).draw();
+                                {color}).draw();
                             } else {
 
                                 let start = [0, centerY + y];
                                 let end = [width, centerY + y];
                                 if(x1I && x2I) {
-
+                                    let color = this.getColor(item.color, start[0], end[0]);
                                     ctx.lineWidth = lineWidth;
                                     new Line(ctx, [
                                             start, 
                                             end
                                         ],
-                                        {color: item.color}).draw();
+                                        {color}).draw();
                                 }
                                 
                                 else if(x1I) {
-                                    this.drawInfinity(x2, item.color, start, y, centerY);
+                                    let color = this.getColor(item.color, x2, width - x2);
+                                    this.drawInfinity(x2, color, start, y, centerY);
                                 } else {
-                                    this.drawInfinity(x1, item.color, end, y, centerY, true);
+                                    let color = this.getColor(item.color, x1, width - x1);
+                                    this.drawInfinity(x1, color, end, y, centerY, true);
                                 }
 
                             }
@@ -106,7 +120,7 @@ class RangeChart extends Chart implements RangeChartType {
         }
     }
 
-    drawInfinity(val: number, color: string, inf: number[], posY :number, centerY: number, rev: boolean = false) {
+    drawInfinity(val: number, color: string | CanvasGradient, inf: number[], posY :number, centerY: number, rev: boolean = false) {
         const {ctx, radius, lineWidth} = this;
         if(ctx) {
             let posX = this.getPos(val);
@@ -119,8 +133,9 @@ class RangeChart extends Chart implements RangeChartType {
                 points.reverse();
             }
             ctx.lineWidth = lineWidth;
-            new Line(ctx, points, {color: color}).draw();
+            new Line(ctx, points, {color}).draw();
             ctx.lineWidth = radius + 2;
+            ctx.fillStyle = color;
             new Circle(ctx, posX, centerY, radius, {color: '#fff'}).draw();
             ctx.fill();
         }

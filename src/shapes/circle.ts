@@ -1,7 +1,7 @@
 interface CircleOptions {
     offset?: number;
     angle?: number;
-    color?: string;
+    color?: string | CanvasGradient;
     noEnd?: boolean;
 }
 
@@ -9,7 +9,7 @@ class Circle {
 
     offset: number;
     angle: number;
-    color: string;
+    color: string | CanvasGradient;
     noEnd: boolean;
 
     constructor(

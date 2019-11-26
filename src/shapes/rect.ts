@@ -1,12 +1,12 @@
 interface RectInput {
-    color?: string;
+    color?: string | CanvasGradient;
     fill?: boolean;
     lineWidth?: number;
 }
 
 class Rect {
 
-    color: string;
+    color: string | CanvasGradient;
     fill: boolean;
     lineWidth: number;
 

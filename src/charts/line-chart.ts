@@ -25,7 +25,17 @@ class LineChart extends Chart implements LineCharType {
         this.smooth = smooth || false;
         this.correspondTo = correspondTo || '';
     }
-
+    createGradient(x: number, xE: number, colors: string[]) {
+        const { ctx } = this;
+            let grd = (<CanvasRenderingContext2D>ctx).createLinearGradient(0, x, 0, x + xE);
+            let step = 1 / (colors.length - 1);
+            let cStep = 0;
+            for(let c of colors) {
+                grd.addColorStop(cStep, c);
+                cStep += step;
+            }
+            return grd;
+    }
     drawChart() {
 
         if(this.parent && this.ctx) {
@@ -97,8 +107,9 @@ class LineChart extends Chart implements LineCharType {
                     points.push([posX - minus, y0position], [originPosX, y0position]);
                 }
                 ctx.lineWidth = lineWidth;
-                new Line(ctx, points, {color: item.color, close: fill, dashLine: dashLine, smooth}).draw();
-                ctx.fillStyle = item.color;
+                let color = this.getColor(item.color, 0, height);
+                new Line(ctx, points, {color, close: fill, dashLine: dashLine, smooth}).draw();
+                ctx.fillStyle = color;
                 if(fill) {
                     ctx.globalAlpha = this.opacity;
                     ctx.fill();
@@ -113,8 +124,8 @@ class LineChart extends Chart implements LineCharType {
                         if(dotBorder) {
                             ctx.lineWidth = dotRadius * 2;
                         }
-                        new Circle(ctx, x, y, dotRadius, {color: dotBorder ? '#fff' : item.color}).draw();
-                        ctx.fillStyle = item.color;
+                        new Circle(ctx, x, y, dotRadius, {color: dotBorder ? '#fff' : color}).draw();
+                        ctx.fillStyle = color;
                         ctx.fill();
                     }
                 }

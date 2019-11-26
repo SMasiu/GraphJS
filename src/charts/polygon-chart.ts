@@ -1,5 +1,5 @@
 import Chart from "./chart";
-import { PolygonCharType, MultipleValuesItem, PolygonChartInputType, MultipleValuesItemUpdate } from "../types/charts.types";
+import { PolygonCharType, MultipleValuesItem, PolygonChartInputType } from "../types/charts.types";
 import CirclePoint from "../shapes/circle-point";
 import Circle from "../shapes/circle";
 import Line from "../shapes/line";
@@ -19,10 +19,22 @@ class PolygonChart extends Chart implements PolygonCharType {
         this.dots = dots || false;
     }
 
+    createGradient(x: number, xE: number, colors: string[]) {
+        const { ctx } = this;
+            let grd = (<CanvasRenderingContext2D>ctx).createLinearGradient(x, 0, x + xE, 0);
+            let step = 1 / (colors.length - 1);
+            let cStep = 0;
+            for(let c of colors) {
+                grd.addColorStop(cStep, c);
+                cStep += step;
+            }
+            return grd;
+    }
+
     drawChart() {
         const {parent, ctx, lineWidth, opacity, dots, dotBorder, dotRadius, fill } = this;
         if(parent && ctx) {
-            const {centerX, centerY} = parent.drawArea;
+            const {centerX, centerY, width} = parent.drawArea;
             for(let {values, color} of this.content) {
                 let angle = Math.PI * 2 / values.length;
                 let offset = 0 - Math.PI * .5;
@@ -34,9 +46,10 @@ class PolygonChart extends Chart implements PolygonCharType {
                     offset += angle;
                 }
                 ctx.lineWidth = lineWidth;
-                new Line(ctx, points, {color, close: true}).draw();
+                let col = this.getColor(color, 0, width)
+                new Line(ctx, points, {color: col, close: true}).draw();
                 ctx.globalAlpha = opacity;
-                ctx.fillStyle = color;
+                ctx.fillStyle = col;
                 if(fill) {
                     ctx.fill();
                 }
@@ -46,7 +59,7 @@ class PolygonChart extends Chart implements PolygonCharType {
                         if(dotBorder) {
                             ctx.lineWidth = dotRadius * 2 ;
                         }
-                        new Circle(ctx, x, y, dotRadius, {color: dotBorder ? '#fff' : color}).draw();
+                        new Circle(ctx, x, y, dotRadius, {color: dotBorder ? '#fff' : col}).draw();
                         ctx.globalAlpha = 1;
                         ctx.fill();
                     }

@@ -22,6 +22,18 @@ class ColumnChart extends Chart implements ColumnChartType {
         this.correspondTo = correspondTo || '';
     }
 
+    createGradient(y: number, yE: number, colors: string[]) {
+        const { ctx } = this;
+            let grd = (<CanvasRenderingContext2D>ctx).createLinearGradient(0, y, 0, y + yE);
+            let step = 1 / (colors.length - 1);
+            let cStep = 0;
+            for(let c of colors) {
+                grd.addColorStop(cStep, c);
+                cStep += step;
+            }
+            return grd;
+    }
+    
     drawChart() {
         if(this.parent && this.ctx) {
             let mainLen = 1;
@@ -69,12 +81,12 @@ class ColumnChart extends Chart implements ColumnChartType {
                 if(item.type === 'simple') {
                     let value = <number>item.values;
                     let m = value > 0 ? 1 : -1;
-                    let color = <string>item.color;
                     ctx.globalAlpha = opacity;
                     let lW = (lineWidth / 2) * m;
                     let h = this.calcHeight(value) + lW;
                     let itemH = height - h - (height - y0position) - lW;
                     let startH = h - minusStart;
+                    let color = this.getColor(<string | string[]>item.color, startH, itemH);
 
                     new Rect(ctx, offsetX + step / 2 - itemSize / 2, startH, itemSize, itemH, {color, lineWidth}).draw();
                 } else if (item.type === 'group') {
@@ -92,7 +104,8 @@ class ColumnChart extends Chart implements ColumnChartType {
                         let minus = collapse ? 0 : itemSize / 2;
                         let itemH = height - h - (height - y0position) - lW;
                         let startH = h - minusStart;
-                        new Rect(ctx, offsetX + curentOffset - minus, startH, itemSize, itemH, {color: colors[i] || '#000', lineWidth}).draw();
+                        let color = this.getColor(<string | string[]>item.color[i] || '#000', startH, itemH);
+                        new Rect(ctx, offsetX + curentOffset - minus, startH, itemSize, itemH, {color, lineWidth}).draw();
                         curentOffset += collapse ?  itemSize + lineWidth : innerOffset;
                         i++;
                     }
@@ -110,7 +123,8 @@ class ColumnChart extends Chart implements ColumnChartType {
                         ctx.globalAlpha = opacity;
                         let itemH = height - h - (height - y0position) + offsetY - lW;
                         let startH = h - minusStart;
-                        new Rect(ctx, offsetX + step / 2 - itemSize / 2, startH, itemSize, itemH, {color: colors[i], lineWidth}).draw();
+                        let color = this.getColor(<string | string[]>item.color[i] || '#000', startH, itemH);
+                        new Rect(ctx, offsetX + step / 2 - itemSize / 2, startH, itemSize, itemH, {color, lineWidth}).draw();
                         offsetY -= (height * (value / (Math.abs(maxY) + Math.abs(minY))) * multiplyer);
                         i++;
                     }

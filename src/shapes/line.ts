@@ -1,11 +1,11 @@
 class Line {
 
-    color: string;
+    color: string | CanvasGradient;
     close: boolean;
     dashLine: number[];
     smooth: boolean;
 
-    constructor(private ctx:CanvasRenderingContext2D, private values: number[][], {close, color, dashLine, smooth}: {close?: boolean, smooth?: boolean, color?: string, dashLine?: number[]} = {}) {
+    constructor(private ctx:CanvasRenderingContext2D, private values: number[][], {close, color, dashLine, smooth}: {close?: boolean, smooth?: boolean, color?: string | CanvasGradient, dashLine?: number[]} = {}) {
         this.close = close || false;
         this.color = color || 'rgb(167,167,167)';
         this.dashLine = dashLine || [0];
