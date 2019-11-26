@@ -4,6 +4,7 @@ import Rect from "../shapes/rect";
 import HorizontalGrid from "../grids/horizontal-grid";
 import getColumnSize from "../functions/column-size";
 import { COLUMN_CHART } from "../types/chart-names";
+import { createLineGradient } from "../functions/gradient";
 
 class ColumnChart extends Chart implements ColumnChartType {
 
@@ -22,16 +23,8 @@ class ColumnChart extends Chart implements ColumnChartType {
         this.correspondTo = correspondTo || '';
     }
 
-    createGradient(y: number, yE: number, colors: string[]) {
-        const { ctx } = this;
-            let grd = (<CanvasRenderingContext2D>ctx).createLinearGradient(0, y, 0, y + yE);
-            let step = 1 / (colors.length - 1);
-            let cStep = 0;
-            for(let c of colors) {
-                grd.addColorStop(cStep, c);
-                cStep += step;
-            }
-            return grd;
+    createGradient(x: number, xE: number, colors: string[]) {
+        return createLineGradient(<CanvasRenderingContext2D>this.ctx, x, xE, colors);
     }
     
     drawChart() {
@@ -95,7 +88,6 @@ class ColumnChart extends Chart implements ColumnChartType {
                     let innerOffset = step / values.length;
                     let curentOffset = collapse ? step / 2 - ((itemSize + lineWidth) * values.length) / 2 : innerOffset / 2;
                     let i = 0;
-                    let colors: string[] = <string[]>item.color;
                     for(let value of values) {
                         let m = value > 0 ? 1 : -1;
                         let lW = (lineWidth / 2) * m;
@@ -112,7 +104,6 @@ class ColumnChart extends Chart implements ColumnChartType {
                 } else if(item.type === 'stacked-group') {
                     let values: number[] = <number[]>item.values;
                     let i = 0;
-                    let colors: string[] = <string[]>item.color;
                     let offsetY: number = 0;
                     let cValue: number = 0;
                     for(let value of values) {

@@ -19,6 +19,43 @@ abstract class Chart implements ChartType {
     abstract identifier: string;
     abstract drawChart(): void;
 
+    createLabel(out: HTMLElement) {
+        let elem = document.createElement('aside');
+        for(let {name, color} of this.content) {
+            if(name) {
+                if(typeof name === 'string') {
+                    elem.appendChild(this.createItem(name, color));
+                } else {
+                    for(let i in name) {
+                        elem.appendChild(this.createItem(name[i], color[i]));
+                    }
+                }
+            }
+        }
+        out.appendChild(elem);
+    }
+    
+    private createItem (nam: string, col: string | string[]) {
+        let item = document.createElement('div');
+        let color = document.createElement('span');
+        color.style.display = 'inline-block';
+        color.style.width = '10px';
+        color.style.height = '10px';
+        let c: string;
+        if(typeof col === 'string') {
+            c = col;
+        } else {
+            c = `linear-gradient(${col.toString()})`;
+        }
+        color.style.background = c;
+        item.appendChild(color);
+    
+        let name = document.createElement('p');
+        name.appendChild(document.createTextNode(nam));
+        item.appendChild(name);
+        return item;
+    }
+
     updateItemContent(id: string | number, content: any) {
         let item = this.getItemContent(id);
         if(item) {

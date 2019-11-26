@@ -4,6 +4,7 @@ import CoordinateSystem1dGrid from "../grids/coordinate-system-1d-grid";
 import Circle from "../shapes/circle";
 import Line from "../shapes/line";
 import { RANGE_CHART } from "../types/chart-names";
+import { createLineGradient } from "../functions/gradient";
 
 class RangeChart extends Chart implements RangeChartType {
 
@@ -21,15 +22,7 @@ class RangeChart extends Chart implements RangeChartType {
         this.content = values || [];
     }
     createGradient(x: number, xE: number, colors: string[]) {
-        const { ctx } = this;
-            let grd = (<CanvasRenderingContext2D>ctx).createLinearGradient(x, 0, x + xE, 0);
-            let step = 1 / (colors.length - 1);
-            let cStep = 0;
-            for(let c of colors) {
-                grd.addColorStop(cStep, c);
-                cStep += step;
-            }
-            return grd;
+        return createLineGradient(<CanvasRenderingContext2D>this.ctx, x, xE, colors);
     }
 
     drawChart() {

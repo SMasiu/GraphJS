@@ -19,6 +19,7 @@ class RoundChart extends Chart implements RoundChartType {
     centerRadius: number;
     changingStepSize: number;
     identifier = ROUND_CHART;
+
     createGradient(x: number, xE: number, colors: string[]) {
         const { ctx, parent } = this;
         const { centerX, centerY } = (<Grid>parent).drawArea;

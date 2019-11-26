@@ -3,6 +3,7 @@ import { BubleChartType, BubleChartInputType, CoordinateValuesType } from "../ty
 import Circle from "../shapes/circle";
 import CoordinateSystem2dGrid from "../grids/coordinate-system-2d-grid";
 import { BUBLE_CHART } from "../types/chart-names";
+import { createLineGradient } from "../functions/gradient";
 
 class BubleChart extends Chart implements BubleChartType {
 
@@ -23,17 +24,11 @@ class BubleChart extends Chart implements BubleChartType {
         super();
         this.content = values || [];
     }
+
     createGradient(x: number, xE: number, colors: string[]) {
-        const { ctx } = this;
-            let grd = (<CanvasRenderingContext2D>ctx).createLinearGradient(x, 0, x + xE, 0);
-            let step = 1 / (colors.length - 1);
-            let cStep = 0;
-            for(let c of colors) {
-                grd.addColorStop(cStep, c);
-                cStep += step;
-            }
-            return grd;
+        return createLineGradient(<CanvasRenderingContext2D>this.ctx, x, xE, colors);
     }
+
     drawChart() {
         if(this.parent && this.ctx) {
             let parent: CoordinateSystem2dGrid = <CoordinateSystem2dGrid>this.parent;

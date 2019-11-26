@@ -396,24 +396,35 @@ if(canvas11) {
 
     let grid = new CoordinateSystem2dGrid(canvas11, {
         x: new ValueLabel(-100, 100, 50),
-        y: new FlexLabel(100, -100, 20)
+        y: new ValueLabel(100, 0, 20)
     });
     grid.addCharts({
-        line: new LineChart({
-            fill: true,
-            dots: true,
-            smooth: true,
+        column: new ColumnChart({
             values: [{
-                // color: 'red',
-                color: ['red','purple'],
-                values: [80, 60, 100, 1000, 70]
-            }, {
-                // color: 'purple',
-                color: ['purple','red'],
-                values: [[-100, -60, -40, -70], [-10 , -10, -40], [-60, -65, -65, -100, -90], [-70, -75, -85], -70]
+                name: '1',
+                type: 'simple',
+                color: 'red',
+                values: 50
+            },{
+                name: ['2','10','11'],
+                type: 'group',
+                color: ['gray', 'orange', 'red'],
+                values: [20, 50, 60]
+            },{
+                name: ['3','6','6'],
+                type: 'group',
+                color: ['gray', 'orange', 'red'],
+                values: [50, 30, 70],
+                margin: 'collapse'
+            },{
+                name: ['4','5','6'],
+                type: 'stacked-group',
+                color: ['gray', 'orange', 'red'],
+                values: [20, 30, 50]
             }]
         })
-    });
+    })
+    grid.chartList.column.createLabel(document.body);
     grid.draw();
 }
 

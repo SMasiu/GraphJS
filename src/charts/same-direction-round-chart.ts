@@ -1,5 +1,5 @@
 import Chart from "./chart";
-import { SameDirectionRoundChartInputType, SameDirectionRoundChartType, ValueColorType, ValueColorUpdateType } from "../types/charts.types";
+import { SameDirectionRoundChartInputType, SameDirectionRoundChartType, ValueColorType } from "../types/charts.types";
 import LinePiece from "../shapes/line-piece";
 import NoGrid from "../grids/no-grid";
 import StringLabel from "../labels/string-label";
@@ -32,6 +32,7 @@ class SameDirectionRoundChart extends Chart implements SameDirectionRoundChartTy
             this.labels = null
         }
     }
+
     createGradient(r: number, xE: number, colors: string[]) {
         const { ctx, itemSize } = this;
         const {centerX, centerY} = (<Grid>this.parent).drawArea;
@@ -44,6 +45,7 @@ class SameDirectionRoundChart extends Chart implements SameDirectionRoundChartTy
         }
         return grd;
     }
+
     drawChart() {
         const {ctx, parent, itemSize, opacity, itemMargin, lineWidth, centerValue} = this;
         if(ctx && parent) {

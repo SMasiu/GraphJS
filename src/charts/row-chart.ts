@@ -4,6 +4,7 @@ import VerticalGrid from "../grids/vertical-grid";
 import Rect from "../shapes/rect";
 import getColumnSize from "../functions/column-size";
 import { ROW_CHART } from "../types/chart-names";
+import { createLineGradient } from "../functions/gradient";
 
 class RowChart extends Chart implements RowChartType {
 
@@ -23,7 +24,6 @@ class RowChart extends Chart implements RowChartType {
         this.content = values || [];
         this.correspondTo = correspondTo || '';
     }
-
     
     drawChart() {
 
@@ -137,15 +137,7 @@ class RowChart extends Chart implements RowChartType {
     }
 
     createGradient(x: number, xE: number, colors: string[]) {
-        const { ctx } = this;
-            let grd = (<CanvasRenderingContext2D>ctx).createLinearGradient(x, 0, x + xE, 0);
-            let step = 1 / (colors.length - 1);
-            let cStep = 0;
-            for(let c of colors) {
-                grd.addColorStop(cStep, c);
-                cStep += step;
-            }
-            return grd;
+        return createLineGradient(<CanvasRenderingContext2D>this.ctx, x, xE, colors);
     }
 }
 

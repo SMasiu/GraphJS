@@ -22,12 +22,14 @@ export interface ValueColorType {
     color: string | string[] | any;
     values: number;
     id?: string | number;
+    name?: string;
 }
 
 export interface ValueColorUpdateType {
     color?: string;
     id?: string | number;
     values?: number;
+    name?: string;
 }
 
 export interface GroupItemType {
@@ -37,6 +39,7 @@ export interface GroupItemType {
     margin?: string;
     direction?: string;
     id?: string | number;
+    name?: string | string[];
 }
 
 export interface GroupItemUpdateType {
@@ -46,17 +49,21 @@ export interface GroupItemUpdateType {
     margin?: string;
     direction?: string;
     id?: string | number;
+    name?: string | string[];
 }
 
 export interface MultipleValuesItem {
     color: string | string[] | any;
     values: any[];
     id?: string | number;
+    name?: string;
 }
 
 export interface MultipleValuesItemUpdate {
     color?: string;
     values?: any[];
+    name?: string;
+    id?: string | number;
 }
 
 export interface ColumnChartType extends ChartType {
@@ -87,6 +94,7 @@ export interface RangeValueType {
     color: string | string[] | any;
     values: number[] | number[][],
     under?: boolean
+    name?: string;
 }
 
 export interface RangeChartType extends ChartType {
@@ -98,6 +106,7 @@ export interface CoordinateValuesType {
     values: number[],
     radius: number;
     id?: string | number;
+    name?: string;
 }
 
 export interface CoordinateValuesUpdateType {
@@ -105,6 +114,7 @@ export interface CoordinateValuesUpdateType {
     values?: number[],
     radius?: number;
     id?: string | number;
+    name?: string;
 }
 
 export interface BubleChartType {

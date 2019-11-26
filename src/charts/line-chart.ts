@@ -25,6 +25,7 @@ class LineChart extends Chart implements LineCharType {
         this.smooth = smooth || false;
         this.correspondTo = correspondTo || '';
     }
+
     createGradient(x: number, xE: number, colors: string[]) {
         const { ctx } = this;
             let grd = (<CanvasRenderingContext2D>ctx).createLinearGradient(0, x, 0, x + xE);
