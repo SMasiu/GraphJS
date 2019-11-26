@@ -4,6 +4,7 @@ import LinePiece from "../shapes/line-piece";
 import NoGrid from "../grids/no-grid";
 import StringLabel from "../labels/string-label";
 import { SAME_DIRECTION_ROUND_CHART } from "../types/chart-names";
+import Grid from "../grids/grid";
 
 class SameDirectionRoundChart extends Chart implements SameDirectionRoundChartType {
     content: ValueColorType[];
@@ -31,16 +32,17 @@ class SameDirectionRoundChart extends Chart implements SameDirectionRoundChartTy
             this.labels = null
         }
     }
-    createGradient(x: number, xE: number, colors: string[]) {
-        const { ctx } = this;
-            let grd = (<CanvasRenderingContext2D>ctx).createLinearGradient(x, 0, x + xE, 0);
-            let step = 1 / (colors.length - 1);
-            let cStep = 0;
-            for(let c of colors) {
-                grd.addColorStop(cStep, c);
-                cStep += step;
-            }
-            return grd;
+    createGradient(r: number, xE: number, colors: string[]) {
+        const { ctx, itemSize } = this;
+        const {centerX, centerY} = (<Grid>this.parent).drawArea;
+        let grd = (<CanvasRenderingContext2D>ctx).createRadialGradient(centerX, centerY, r - itemSize / 2, centerX, centerY, r + itemSize / 2);
+        let step = 1 / (colors.length - 1);
+        let cStep = 0;
+        for(let c of colors) {
+            grd.addColorStop(cStep, c);
+            cStep += step;
+        }
+        return grd;
     }
     drawChart() {
         const {ctx, parent, itemSize, opacity, itemMargin, lineWidth, centerValue} = this;
@@ -49,13 +51,13 @@ class SameDirectionRoundChart extends Chart implements SameDirectionRoundChartTy
             let originRadius = Math.min(parent.drawArea.width, parent.drawArea.height) / 2;
             let radius = originRadius;
             let margin = itemMargin + itemSize;
-            
             for(let item of this.content) {
+                let color = this.getColor(item.color, radius, 0);
                 let angle = 2 * Math.PI * (item.values / 100);
                 new LinePiece(ctx, centerX, centerY, radius, {
                     opacity,
                     angle,
-                    color: item.color,
+                    color,
                     lineWidth,
                     size: itemSize
                 }).draw();

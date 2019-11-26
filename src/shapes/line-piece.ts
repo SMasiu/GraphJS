@@ -1,5 +1,5 @@
 interface LinePieceOptions {
-    color?: string;
+    color?: string | CanvasGradient;
     lineWidth?: number;
     opacity?: number;
     offset?: number;
@@ -10,7 +10,7 @@ interface LinePieceOptions {
 
 class LinePiece {
 
-    color: string;
+    color: string | CanvasGradient;
     lineWidth: number;
     opacity: number;
     offset: number;

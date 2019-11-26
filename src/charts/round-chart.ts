@@ -6,6 +6,7 @@ import NoGrid from "../grids/no-grid";
 import StringLabel from "../labels/string-label";
 import Line from "../shapes/line";
 import { ROUND_CHART } from "../types/chart-names";
+import Grid from "../grids/grid";
 
 class RoundChart extends Chart implements RoundChartType {
     
@@ -19,15 +20,16 @@ class RoundChart extends Chart implements RoundChartType {
     changingStepSize: number;
     identifier = ROUND_CHART;
     createGradient(x: number, xE: number, colors: string[]) {
-        const { ctx } = this;
-            let grd = (<CanvasRenderingContext2D>ctx).createLinearGradient(x, 0, x + xE, 0);
-            let step = 1 / (colors.length - 1);
-            let cStep = 0;
-            for(let c of colors) {
-                grd.addColorStop(cStep, c);
-                cStep += step;
-            }
-            return grd;
+        const { ctx, parent } = this;
+        const { centerX, centerY } = (<Grid>parent).drawArea;
+        let grd = (<CanvasRenderingContext2D>ctx).createLinearGradient(x, xE, centerX, centerY);
+        let step = 1 / (colors.length - 1);
+        let cStep = 0;
+        for(let c of colors) {
+            grd.addColorStop(cStep, c);
+            cStep += step;
+        }
+        return grd;
     }
     constructor({centerValue, values, changingSize, blankCenter, itemsMargin, labels, canvas, changingStepSize, centerRadius}: RoundChartInputType) {
         super();
@@ -77,13 +79,15 @@ class RoundChart extends Chart implements RoundChartType {
                 let [x, y] = cPoint.next();
                 ctx.translate(x, y);
                 //values
+                let [gX, gY] =  new CirclePoint(radius, offsetAngle, 0, centerX, centerY).next();
+                let color = this.getColor(item.color, gX, gY);
                 new Circle(ctx, centerX, centerY, radius, {
                     offset,
                     angle: angle + offset,
-                    color: item.color,
+                    color,
                     noEnd: true
                 }).draw();
-                ctx.fillStyle = item.color;
+                ctx.fillStyle = color;
                 ctx.lineTo(centerX, centerY);
                 ctx.closePath();
                 ctx.stroke();

@@ -7,8 +7,35 @@ class FlexLabel extends ValueLabel {
         this.flex = true;
     }
 
+    nwd(a: number, b: number) {
+        while(a != b)
+            if(a>b)
+                a-=b;
+            else
+                b-=a;
+        return a;
+    }
+
     resize(newMin: number, newMax: number) {
+        
+        
         let {max, min, step} = this;
+        let x = Math.abs(newMax) + Math.abs(newMin);
+        let count = x / step;
+        let i = 0;
+        let last = step;
+        while (count > 10 && i < 100) {
+            step += 10;
+            count = x / step;
+            if(Math.abs(newMax) % step === 0 && Math.abs(newMin) % step === 0) {
+                last = step;
+            }
+            i++;
+        }
+        console.log(last)
+        this.step = last;
+        step = last;
+
         if(newMax > max) {
             while(newMax > max) {
                 max += step;
@@ -32,6 +59,7 @@ class FlexLabel extends ValueLabel {
             this.setNew('end', min);
         }
         this.values = this.toLabel();
+        console.log(this)
     }
 
     setNew(to: string, value: number) {

@@ -19,7 +19,7 @@ export interface ChartType {
 }
 
 export interface ValueColorType {
-    color: string;
+    color: string | string[] | any;
     values: number;
     id?: string | number;
 }

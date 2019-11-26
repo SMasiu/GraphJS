@@ -394,29 +394,26 @@ let ff = new GridFactor({
 
 if(canvas11) {
 
-    let grid = new CoordinateSystem1dGrid(canvas11, new FlexLabel(-100, 100, 20));
+    let grid = new CoordinateSystem2dGrid(canvas11, {
+        x: new ValueLabel(-100, 100, 50),
+        y: new FlexLabel(100, -100, 20)
+    });
     grid.addCharts({
-        range: new RangeChart({
+        line: new LineChart({
+            fill: true,
+            dots: true,
+            smooth: true,
             values: [{
-                color: ['red','black'],
-                values: [0]
-            },{
-                color: ['gray','black'],
-                values: [[Infinity, -10], [10, Infinity]]
-            },{
-                color: ['orange', 'red'],
-                values: [[Infinity, Infinity]],
-                under: true
-            },{
-                color: ['green','blue'],
-                values: [[-170, 70]],
-                under: true
-            },{
-                color: 'pink',
-                values: [20, -30]
+                // color: 'red',
+                color: ['red','purple'],
+                values: [80, 60, 100, 1000, 70]
+            }, {
+                // color: 'purple',
+                color: ['purple','red'],
+                values: [[-100, -60, -40, -70], [-10 , -10, -40], [-60, -65, -65, -100, -90], [-70, -75, -85], -70]
             }]
         })
-    })
+    });
     grid.draw();
 }
 
