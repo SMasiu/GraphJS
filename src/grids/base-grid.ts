@@ -205,7 +205,7 @@ abstract class BaseGrid extends Grid {
                     ctx.fillText(label, curentOffset, offset);
                 }
                 curentOffset += step;
-            }                
+            }
         }
     }
 

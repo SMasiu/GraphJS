@@ -18,11 +18,13 @@ class RowChart extends Chart implements RowChartType {
     y0position: number = 0;
     identifier = ROW_CHART;
     correspondTo: string;
+    correspondToSecondary: string;
 
-    constructor({values, correspondTo}: RowChartInputType) {
+    constructor({values, correspondTo, correspondToSecondary}: RowChartInputType) {
         super();
         this.content = values || [];
         this.correspondTo = correspondTo || '';
+        this.correspondToSecondary = correspondToSecondary || '';
     }
     
     drawChart() {
@@ -33,7 +35,7 @@ class RowChart extends Chart implements RowChartType {
             let minus = -1
             if(this.parent.identifier === 'VerticalGrid') {
                 mainLabel = this.correspondTo || this.parent.mainLabel;
-                secondaryLabel = (<VerticalGrid>this.parent).secondaryLabel;
+                secondaryLabel = this.correspondToSecondary || (<VerticalGrid>this.parent).secondaryLabel;
                 minus = 0;
             } else if(this.parent.identifier === 'CoordinateSystem2dGrid') {
                 mainLabel = 'x';

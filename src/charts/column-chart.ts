@@ -15,12 +15,14 @@ class ColumnChart extends Chart implements ColumnChartType {
     height: number = 0;
     y0position: number = 0;
     correspondTo: string;
+    correspondToSecondary: string;
     identifier = COLUMN_CHART;
 
-    constructor({values, correspondTo}: ColumnChartInputType) {
+    constructor({values, correspondTo, correspondToSecondary}: ColumnChartInputType) {
         super();
         this.content = values || [];
         this.correspondTo = correspondTo || '';
+        this.correspondToSecondary = correspondToSecondary || '';
     }
 
     createGradient(x: number, xE: number, colors: string[]) {
@@ -37,7 +39,7 @@ class ColumnChart extends Chart implements ColumnChartType {
             let secondaryLabel = '';
             if(this.parent.identifier === 'HorizontalGrid') {
                 mainLabel = this.correspondTo || (<HorizontalGrid>this.parent).mainLabel;
-                secondaryLabel = (<HorizontalGrid>this.parent).secondaryLabel;
+                secondaryLabel = this.correspondToSecondary || (<HorizontalGrid>this.parent).secondaryLabel;
             } else if(this.parent.identifier === 'CoordinateSystem2dGrid') {
                 mainLabel = 'y';
                 secondaryLabel = 'x';

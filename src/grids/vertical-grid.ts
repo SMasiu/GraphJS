@@ -11,7 +11,7 @@ class VerticalGrid extends BaseGrid implements VerticalGridType {
     mainLabel: 'top' | 'bottom';
     identifier = 'VerticalGrid';
     secondaryLabel: 'left' | 'right';
-
+    
     constructor(canvas: HTMLCanvasElement, labels: InputAllLabels, {mainLabel, secondaryLabel, factor}:VerticalGridOptopns = {}) {
         super(canvas, {factor});
         this.mainLabel = mainLabel || 'bottom';

@@ -20,10 +20,10 @@ class ValueLabel extends Label {
         if((start > 0 && end > 0) || (start < 0 && end < 0)) {
             throw new Error('Invalid range');
         }
+        this.underZero = 0;
         if(start < end) {
             this.min = start;
             this.max = end;
-            this.underZero = 0;
             for(let i = start; i <= end; i += step) {
                 if(i < 0) {
                     this.underZero++;
@@ -41,6 +41,12 @@ class ValueLabel extends Label {
                 v.push(i);
             }
         }
+
+        let index = v.findIndex( x => x === 0 );
+        if(index === -1) {
+            throw new Error('Grid should contain 0');
+        }
+
         if(this.reverse) {
             v = v.reverse();
         }

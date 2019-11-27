@@ -48,7 +48,6 @@ abstract class Grid implements GridType {
         this.background = factor.background;
         this.chartList = {};
     }
-
     
     abstract setUpDrawArea(): void;
     abstract setLabels(labels: any): any;

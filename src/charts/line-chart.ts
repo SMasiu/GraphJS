@@ -28,14 +28,14 @@ class LineChart extends Chart implements LineCharType {
 
     createGradient(x: number, xE: number, colors: string[]) {
         const { ctx } = this;
-            let grd = (<CanvasRenderingContext2D>ctx).createLinearGradient(0, x, 0, x + xE);
-            let step = 1 / (colors.length - 1);
-            let cStep = 0;
-            for(let c of colors) {
-                grd.addColorStop(cStep, c);
-                cStep += step;
-            }
-            return grd;
+        let grd = (<CanvasRenderingContext2D>ctx).createLinearGradient(0, x, 0, x + xE);
+        let step = 1 / (colors.length - 1);
+        let cStep = 0;
+        for(let c of colors) {
+            grd.addColorStop(cStep, c);
+            cStep += step;
+        }
+        return grd;
     }
     drawChart() {
 
@@ -83,23 +83,26 @@ class LineChart extends Chart implements LineCharType {
 
             for(let item of this.content) {
                 let posX = originPosX;
-                
                 let points: number[][] = [];
                 let step = width / (this.labelLen - 1);
                 let innerStep = 0;
+                let maxH = 0, minH = 0;
+
                 for(let values of item.values) {
                     if(typeof values === 'number') {
                         let h = height - height * (values / (Math.abs(maxY) + Math.abs(minY))) - (height - y0position);
                         points.push([posX, Math.round(h)]);
                         posX += step;
+                        let absH = h - y0position;
+                        if (absH > maxH) { maxH = absH} else if (absH < minH) { minH = absH }
                     } else {
                         innerStep = step / values.length;
                         for(let value of values) {
                             let h = height - height * (value / (Math.abs(maxY) + Math.abs(minY))) - (height - y0position);
                             points.push([Math.round(posX), Math.round(h)]);
-
                             posX += innerStep;
-
+                            let absH = h - y0position;
+                            if (absH > maxH) { maxH = absH } else if (absH < minH) { minH = absH }
                         }
                     }
                 }
@@ -108,7 +111,8 @@ class LineChart extends Chart implements LineCharType {
                     points.push([posX - minus, y0position], [originPosX, y0position]);
                 }
                 ctx.lineWidth = lineWidth;
-                let color = this.getColor(item.color, 0, height);
+                let plus = maxH > 0 ? 0 : y0position;
+                let color = this.getColor(item.color, minH + y0position, maxH + plus);
                 new Line(ctx, points, {color, close: fill, dashLine: dashLine, smooth}).draw();
                 ctx.fillStyle = color;
                 if(fill) {

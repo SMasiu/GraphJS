@@ -177,9 +177,11 @@ export interface PolygonChartInputType extends ChartInput {
 export interface ColumnChartInputType {
     values?: GroupItemType[];
     correspondTo?: string;
+    correspondToSecondary?: string;
 }
 
 export interface RowChartInputType {
     values?: GroupItemType[];
     correspondTo?: string;
+    correspondToSecondary?: string;
 }

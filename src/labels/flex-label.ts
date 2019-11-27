@@ -27,12 +27,12 @@ class FlexLabel extends ValueLabel {
         while (count > 10 && i < 100) {
             step += 10;
             count = x / step;
-            if(Math.abs(newMax) % step === 0 && Math.abs(newMin) % step === 0) {
+            if(Math.abs(newMax) % step === 0 && Math.abs(newMin) % step === 0 && this.toLabel().findIndex( v => v === 0 ) !== -1) {
                 last = step;
             }
             i++;
         }
-        console.log(last)
+
         this.step = last;
         step = last;
 
@@ -59,7 +59,6 @@ class FlexLabel extends ValueLabel {
             this.setNew('end', min);
         }
         this.values = this.toLabel();
-        console.log(this)
     }
 
     setNew(to: string, value: number) {
