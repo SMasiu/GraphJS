@@ -1,15 +1,8 @@
 import BaseGrid from "./base-grid";
-import { AllLabels, VerticalGridType, InputAllLabels } from "../types/grids.types";
+import { AllLabels, VerticalGridType, InputAllLabels, VerticalGridOptopns } from "../types/grids.types";
 import { ROW_CHART } from "../types/chart-names";
-import GridFactor from "../factors/grid-factor";
 import Label from "../labels/label";
 import Line from "../shapes/line";
-
-interface VerticalGridOptopns {
-    mainLabel?: 'top' | 'bottom';
-    secondaryLabel?: 'left' | 'right';
-    factor?: GridFactor
-}
 
 class VerticalGrid extends BaseGrid implements VerticalGridType {
 

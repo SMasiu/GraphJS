@@ -1,11 +1,4 @@
-interface ChartFactorOptions {
-    lineWidth?: number;
-    opacity?: number;
-    itemSize?: number;
-    dotBorder?: boolean;
-    dotRadius?: number;
-}
-
+import { ChartFactorOptions } from "../types/factor.type";
 
 class ChartFactor {
     lineWidth: number;

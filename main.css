@@ -1,9 +1,9 @@
 .graphis-labels {
     display: inline-block;
     font-family: sans-serif;
+    padding: 10px;
     font-size: 14px;
     border: 1px solid rgb(240, 240, 240);
-    padding: 10px;
     border-radius: 5px;
 }
 .graphjs-item {

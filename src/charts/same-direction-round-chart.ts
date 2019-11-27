@@ -5,6 +5,7 @@ import NoGrid from "../grids/no-grid";
 import StringLabel from "../labels/string-label";
 import { SAME_DIRECTION_ROUND_CHART } from "../types/chart-names";
 import Grid from "../grids/grid";
+import Line from "../shapes/line";
 
 class SameDirectionRoundChart extends Chart implements SameDirectionRoundChartType {
     content: ValueColorType[];
@@ -72,14 +73,21 @@ class SameDirectionRoundChart extends Chart implements SameDirectionRoundChartTy
                 ctx.fillText(centerValue, centerX, centerY);
             }
             if(this.labels) {
-            let labels = this.labels.values;
-            let posY = centerY - originRadius;
-            parent.setFont('right');
-            for(let label of labels) {
-                let posX = centerX - parent.labelPadding * 2;
-                ctx.fillText(label.toString(), posX, posY);
-                posY += itemSize + itemMargin;
-            }
+                let labels = this.labels.values;
+                let posY = centerY - originRadius - (this.itemSize / 2) + 2;
+                parent.setFont('left');
+                for(let label of labels) {
+                    if(this.parent) {
+                        let posX = centerX;
+                        ctx.lineWidth = this.parent.font.size + 5;
+                        label = label.toString();
+                        let textW = ctx.measureText(label).width;
+                        let start = posX - textW / 2;
+                        new Line(ctx, [[start, posY], [start + textW, posY]], {color: '#fff'}).draw();
+                        ctx.fillText(label, start, posY);
+                        posY += itemSize + itemMargin;
+                    }
+                }
             }
 
         }

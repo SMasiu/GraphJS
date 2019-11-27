@@ -1,12 +1,4 @@
-interface LinePieceOptions {
-    color?: string | CanvasGradient;
-    lineWidth?: number;
-    opacity?: number;
-    offset?: number;
-    angle?: number;
-    size?: number;
-    angleRadius?: number;
-}
+import { LinePieceOptions } from "../types/shape.type";
 
 class LinePiece {
 

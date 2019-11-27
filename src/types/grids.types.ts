@@ -121,3 +121,19 @@ export interface LabelType {
 export interface GridOptions {
     factor?: GridFactor;
 }
+
+export interface InputLabels {
+    x: ValueLabel,
+    y: ValueLabel
+}
+
+export interface CoordinateSystem2dInput {
+    meshType?: string;
+    factor?: GridFactor
+}
+
+export interface VerticalGridOptopns {
+    mainLabel?: 'top' | 'bottom';
+    secondaryLabel?: 'left' | 'right';
+    factor?: GridFactor
+}

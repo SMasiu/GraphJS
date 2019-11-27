@@ -1,48 +1,10 @@
-interface GridFactorOptions {
-    colors?: ColorsInput;
-    font?: FontsInput;
-    background?: BackgroundInput;
-    labelPadding?: number;
-}
-
-interface ColorsInput {
-    primary?: string;
-    secondary?: string;
-}
-
-interface FontsInput {
-    color?: string;
-    size?: number;
-    family?: string;
-}
-
-interface Colors {
-    primary: string;
-    secondary: string;
-}
-
-interface BackgroundInput {
-    image?: string;
-    color?: string;
-    opacity?: number;
-}
-
-interface Background {
-    image: string;
-    color: string;
-    opacity: number;
-}
-
-interface Fonts {
-    color: string;
-    size: number;
-    family: string;
-}
+import { GridFactorOptions } from "../types/factor.type";
+import { Background, GridColors, FontOptions } from "../types/grids.types";
 
 class GridFactor {
 
-    colors: Colors;
-    font: Fonts;
+    colors: GridColors;
+    font: FontOptions;
     labelPadding: number;
     background: Background;
 

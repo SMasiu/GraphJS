@@ -1,22 +1,10 @@
-import { Coordinate2dGridType, Label2dType, DrawArea } from "../types/grids.types";
+import { Coordinate2dGridType, Label2dType, DrawArea, CoordinateSystem2dInput, InputLabels } from "../types/grids.types";
 import { ROW_CHART, COLUMN_CHART, LINE_CHART, BUBLE_CHART } from "../types/chart-names";
-import ValueLabel from "../labels/value-label";
 import clearDrawArea from "../types/draw-area";
-import GridFactor from "../factors/grid-factor";
 import Grid from "../grids/grid";
 import Line from "../shapes/line";
 import FlexLabel from "../labels/flex-label";
 import Label from "../labels/label";
-
-interface InputLabels {
-    x: ValueLabel,
-    y: ValueLabel
-}
-
-interface CoordinateSystem2dInput {
-    meshType?: string;
-    factor?: GridFactor
-}
 
 class CoordinateSystem2dGrid extends Grid implements Coordinate2dGridType {
 

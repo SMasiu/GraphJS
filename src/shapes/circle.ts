@@ -1,9 +1,4 @@
-interface CircleOptions {
-    offset?: number;
-    angle?: number;
-    color?: string | CanvasGradient;
-    noEnd?: boolean;
-}
+import { CircleOptions } from "../types/shape.type";
 
 class Circle {
 

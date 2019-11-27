@@ -394,37 +394,27 @@ let ff = new GridFactor({
 
 if(canvas11) {
 
-    let grid = new CoordinateSystem2dGrid(canvas11, {
-        x: new ValueLabel(-100, 100, 50),
-        y: new ValueLabel(100, 0, 20)
-    });
+    let grid = new NoGrid(canvas11);
     grid.addCharts({
-        column: new ColumnChart({
+        sameRoud: new SameDirectionRoundChart({
+            labels: new StringLabel(['June', 'July', 'May']),
+            centerValue: 130,
             values: [{
-                name: '3',
-                type: 'simple',
+                name: '1',
                 color: 'red',
-                values: 50
+                values: 100,
             },{
-                name: ['1','2','3'],
-                type: 'group',
-                color: ['gray', 'orange', 'red'],
-                values: [20, 50, 60]
-            },{
-                name: ['1','2','3'],
-                type: 'group',
-                color: ['gray', 'orange', 'red'],
-                values: [50, 30, 70],
-                margin: 'collapse'
-            },{
-                name: ['1','2','3'],
-                type: 'stacked-group',
-                color: ['gray', 'orange', 'red'],
-                values: [20, 30, 50]
+                name: '2',
+                color: 'orange',
+                values: 100
+            },{ 
+                name: '3',
+                color: 'gray',
+                values: 100
             }]
         })
-    })
-    grid.chartList.column.createLabel(document.body);
+    });
+    grid.chartList.sameRoud.createLabel(document.body);
     grid.draw();
 }
 

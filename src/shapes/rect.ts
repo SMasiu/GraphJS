@@ -1,8 +1,4 @@
-interface RectInput {
-    color?: string | CanvasGradient;
-    fill?: boolean;
-    lineWidth?: number;
-}
+import { RectInput } from "../types/shape.type";
 
 class Rect {
 
