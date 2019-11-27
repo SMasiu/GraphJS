@@ -1,6 +1,6 @@
 {
   "name": "web-graphs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "graph and charts for websites",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
