@@ -21,13 +21,21 @@ abstract class Chart implements ChartType {
 
     createLabel(out: HTMLElement) {
         let elem = document.createElement('aside');
+        elem.classList.add('graphis-labels');
+        let names: string[] = [];
         for(let {name, color} of this.content) {
             if(name) {
                 if(typeof name === 'string') {
-                    elem.appendChild(this.createItem(name, color));
+                    if(this.isIn(names, name) === -1) {
+                        elem.appendChild(this.createItem(name, color));
+                        names.push(name);
+                    }
                 } else {
                     for(let i in name) {
-                        elem.appendChild(this.createItem(name[i], color[i]));
+                        if(this.isIn(names, name[i]) === -1) {
+                            elem.appendChild(this.createItem(name[i], color[i]));
+                            names.push(name[i]);
+                        }
                     }
                 }
             }
@@ -35,8 +43,15 @@ abstract class Chart implements ChartType {
         out.appendChild(elem);
     }
     
+    private isIn(names: string[], name: string) {
+
+        return names.findIndex( n => n === name);
+
+    }
+
     private createItem (nam: string, col: string | string[]) {
         let item = document.createElement('div');
+        item.classList.add('graphjs-item')
         let color = document.createElement('span');
         color.style.display = 'inline-block';
         color.style.width = '10px';

@@ -401,23 +401,23 @@ if(canvas11) {
     grid.addCharts({
         column: new ColumnChart({
             values: [{
-                name: '1',
+                name: '3',
                 type: 'simple',
                 color: 'red',
                 values: 50
             },{
-                name: ['2','10','11'],
+                name: ['1','2','3'],
                 type: 'group',
                 color: ['gray', 'orange', 'red'],
                 values: [20, 50, 60]
             },{
-                name: ['3','6','6'],
+                name: ['1','2','3'],
                 type: 'group',
                 color: ['gray', 'orange', 'red'],
                 values: [50, 30, 70],
                 margin: 'collapse'
             },{
-                name: ['4','5','6'],
+                name: ['1','2','3'],
                 type: 'stacked-group',
                 color: ['gray', 'orange', 'red'],
                 values: [20, 30, 50]

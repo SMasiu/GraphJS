@@ -1,0 +1,19 @@
+.graphis-labels {
+    display: inline-block;
+    font-family: sans-serif;
+    font-size: 14px;
+    border: 1px solid rgb(240, 240, 240);
+    padding: 10px;
+    border-radius: 5px;
+}
+.graphjs-item {
+    display: flex;
+    align-items: center;
+}
+.graphjs-item p {
+    margin: 0 0 0 10px;
+}
+.graphjs-item span {
+    border: solid 1px rgb(240, 240, 240);
+    border-radius: 3px;
+}
