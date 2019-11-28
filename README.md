@@ -7,17 +7,17 @@
 * [Documentation](#documentation)
 * [Links](#)
 
-# About {#about}
+<h1 id="about">About</h1>
 
 GraphJS is javascript library to create flexible graphs. It uses pure javascript to draw charts on canvas.
 
-# Installation {#installation}
+<h1 id="installation">Installation</h1>
 
 ```bash
     npm install web-graphs
 ```
 
-# Example {#example}
+<h1 id="example">Example</h1>
 
 **Code**
 
@@ -55,7 +55,7 @@ GraphJS is javascript library to create flexible graphs. It uses pure javascript
 
 ![Example](./img/example.png)
 
-# Documentation {#documentation}
+<h1 id="documentation">Documentation</h1>
 
 
 * [Labels](#)
