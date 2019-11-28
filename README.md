@@ -1,28 +1,44 @@
-<link rel="stylesheet" type="text/css" media="all" href="./readme-style.css" />
+<link href="readme-style.css" rel="stylesheet"></link>
 
-# GraphJS
+<h1 style="
+        text-align: center;
+        border-bottom: 1px solid #ccc;
+    ">GraphJS</h1>
 
 <nav>
-    <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#installation">Installation</a></li>
-        <li><a href="#example">Example</a></li>
-        <li><a href="#documentation">Documentation</a></li>
-        <li><a href="#">Links</a></li>
+    <ul style="
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+        ">
+        <li><a href="#about" style="padding: 10px 20px;">About</a></li>
+        <li><a href="#installation" style="padding: 10px 20px;">Installation</a></li>
+        <li><a href="#example" style="padding: 10px 20px;">Example</a></li>
+        <li><a href="#documentation" style="padding: 10px 20px;">Documentation</a></li>
+        <li><a href="#" style="padding: 10px 20px;">Links</a></li>
     </ul>
 </nav>
 
-<h1 id="about">About</h1>
+<h1 id="about" style="
+        text-align: center;
+        border-bottom: 1px solid #ccc;
+    ">About</h1>
 
 GraphJS is javascript library to create flexible graphs. It uses pure javascript to draw charts on canvas.
 
-<h1 id="installation">Installation</h1>
+<h1 id="installation" style="
+        text-align: center;
+        border-bottom: 1px solid #ccc;
+    ">Installation</h1>
 
 ```bash
     npm install web-graphs
 ```
 
-<h3 id="example">Example</h3>
+<h1 id="example" style="
+        text-align: center;
+        border-bottom: 1px solid #ccc;
+    ">Example</h1>
 
 **Code**
 
@@ -58,20 +74,34 @@ GraphJS is javascript library to create flexible graphs. It uses pure javascript
 
 **Output**
 
-![Example](./img/example.png)
+<img src="img/example.png" style="
+    margin: auto;
+    display: block;
+    max-width: 1000px;
+">
 
-<h1 id="documentation">Documentation</h1>
+<h1 id="documentation" style="
+        text-align: center;
+        border-bottom: 1px solid #ccc;
+    ">Documentation</h1>
 
 <nav>
-    <ul>
-        <li><a>Labels</a></li>
-        <li><a>Grids</a></li>
-        <li><a>Charts</a></li>
-        <li><a>Factors</a></li>
+    <ul style="
+        display: flex;
+        justify-content: center;
+        list-style-type: none;
+    ">
+        <li><a style="padding: 10px 20px;">Labels</a></li>
+        <li><a style="padding: 10px 20px;">Grids</a></li>
+        <li><a style="padding: 10px 20px;">Charts</a></li>
+        <li><a style="padding: 10px 20px;">Factors</a></li>
     </ul>
 </nav>
 
-## Labels
+<h2 style="
+        text-align: center;
+        border-bottom: 1px solid #ccc;
+    ">Labels</h2>
 
 ### **String label**
 It will create named ranges.
@@ -89,7 +119,11 @@ It will create named ranges.
 
 **Output**
 
-![StringLabel](./img/string-label.png)
+<img src="img/string-label.png" style="
+    margin: auto;
+    display: block;
+    max-width: 1000px;
+">
 
 ### **Value label**
 It is using to determinate points how the charts should be draw.
@@ -110,7 +144,11 @@ It is using to determinate points how the charts should be draw.
 
 **Output**
 
-![ValueLabel](./img/value-label.png)
+<img src="img/value-label.png" style="
+    margin: auto;
+    display: block;
+    max-width: 1000px;
+">
 
 ### **Flex label**
 It is same thing as ValueLabel but it will automativly change its start, end and step according to charts values.
@@ -130,7 +168,11 @@ It is same thing as ValueLabel but it will automativly change its start, end and
 
 **Output**
 
-![FlexLabel](./img/value-label.png)
+<img src="img/value-label.png" style="
+    margin: auto;
+    display: block;
+    max-width: 1000px;
+">
 
 ### **Percent label**
 It is using to determinate points how the charts should be draw. It takes values from 0 to 100.
@@ -148,7 +190,11 @@ It is using to determinate points how the charts should be draw. It takes values
 
 **Output**
 
-![PercentLabel](./img/percent-label.png)
+<img src="img/percent-label.png" style="
+    margin: auto;
+    display: block;
+    max-width: 1000px;
+">
 
 ## Grids
 
@@ -191,8 +237,16 @@ Creates 2d plane with values/string labels.
 **Output**
 
 <!-- <section class="img-box"> -->
-![HorizontalGrid](./img/horizontal-grid1.png)
-![HorizontalGrid](./img/horizontal-grid2.png)
+<img src="img/horizontal-grid1.png" style="
+    margin: auto;
+    display: block;
+    max-width: 1000px;
+">
+<img src="img/horizontal-grid2.png" style="
+    margin: auto;
+    display: block;
+    max-width: 1000px;
+">
 <!-- </section> -->
 ### VerticalGrid
 ### CoordinateSystem2dGrid
