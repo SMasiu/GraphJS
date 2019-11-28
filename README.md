@@ -1,32 +1,6 @@
-<style>
-    h1, h2 {
-        text-align: center;
-        border-bottom: 1px solid #ccc;
-    }
-    h3 {
-        padding-top: 15px;
-    }
-    h4 {
-        text-align: center;
-    }
-    img {
-        margin: auto;
-        display: block;
-        max-width: 1000px;
-    }
-    nav ul {
-        display: flex;
-        justify-content: center;
-        list-style-type: none;
-    }
-    nav a {
-        padding: 10px 20px;
-    }
-</style>
+<link rel="stylesheet" type="text/css" media="all" href="./readme-style.css" />
 
 # GraphJS
-
-## The documentation is not fully ready
 
 <nav>
     <ul>
