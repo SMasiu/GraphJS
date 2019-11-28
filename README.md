@@ -53,7 +53,7 @@ GraphJS is javascript library to create flexible graphs. It uses pure javascript
 
 **Output**
 
-![Example](./img/example.png)
+![Example](https://github.com/SMasiu/GraphJS/blob/master/img/example.png?raw=true)
 
 <h1 id="documentation">Documentation</h1>
 
@@ -81,7 +81,7 @@ It will create named ranges.
 
 **Output**
 
-![StringLabel](./img/string-label.png)
+![StringLabel](https://github.com/SMasiu/GraphJS/blob/master/img/string-label.png?raw=true)
 
 ### **Value label**
 It is using to determinate points how the charts should be draw.
@@ -102,7 +102,7 @@ It is using to determinate points how the charts should be draw.
 
 **Output**
 
-![ValueLabel](./img/value-label.png)
+![ValueLabel](https://github.com/SMasiu/GraphJS/blob/master/img/value-label.png?raw=true)
 
 ### **Flex label**
 It is same thing as ValueLabel but it will automativly change its start, end and step according to charts values.
@@ -122,7 +122,7 @@ It is same thing as ValueLabel but it will automativly change its start, end and
 
 **Output**
 
-![FlexLabel](./img/value-label.png)
+![FlexLabel](https://github.com/SMasiu/GraphJS/blob/master/img/value-label.png?raw=true)
 
 ### **Percent label**
 It is using to determinate points how the charts should be draw. It takes values from 0 to 100.
@@ -140,8 +140,7 @@ It is using to determinate points how the charts should be draw. It takes values
 
 **Output**
 
-![PercentLabel](./img/percent-label.png)
-
+![PercentLabel](https://github.com/SMasiu/GraphJS/blob/master/img/percent-label.png?raw=true)
 ## Grids
 
 ### HorizontalGrid
@@ -183,8 +182,8 @@ Creates 2d plane with values/string labels.
 **Output**
 
 <!-- <section class="img-box"> -->
-![HorizontalGrid](./img/horizontal-grid1.png)
-![HorizontalGrid](./img/horizontal-grid2.png)
+![HorizontalGrid](https://github.com/SMasiu/GraphJS/blob/master/img/horizontal-grid1.png?raw=true)
+![HorizontalGrid](https://github.com/SMasiu/GraphJS/blob/master/img/horizontal-grid2.png?raw=true)
 <!-- </section> -->
 ### VerticalGrid
 ### CoordinateSystem2dGrid
