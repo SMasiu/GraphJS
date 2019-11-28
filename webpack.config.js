@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    entry: path.join(__dirname, '/src/index.ts'),
+    entry: path.join(__dirname, 'index.ts'),
     output: {
         filename: 'graph.js',
         path: __dirname
