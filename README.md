@@ -1,44 +1,23 @@
-<link href="readme-style.css" rel="stylesheet"></link>
+# GraphJS
+# Documentation is not fully redy yet
 
-<h1 style="
-        text-align: center;
-        border-bottom: 1px solid #ccc;
-    ">GraphJS</h1>
+* [About](#about)
+* [Installation](#installation)
+* [Example](#example)
+* [Documentation](#documentation)
+* [Links](#)
 
-<nav>
-    <ul style="
-            display: flex;
-            justify-content: center;
-            list-style-type: none;
-        ">
-        <li><a href="#about" style="padding: 10px 20px;">About</a></li>
-        <li><a href="#installation" style="padding: 10px 20px;">Installation</a></li>
-        <li><a href="#example" style="padding: 10px 20px;">Example</a></li>
-        <li><a href="#documentation" style="padding: 10px 20px;">Documentation</a></li>
-        <li><a href="#" style="padding: 10px 20px;">Links</a></li>
-    </ul>
-</nav>
-
-<h1 id="about" style="
-        text-align: center;
-        border-bottom: 1px solid #ccc;
-    ">About</h1>
+# About {#about}
 
 GraphJS is javascript library to create flexible graphs. It uses pure javascript to draw charts on canvas.
 
-<h1 id="installation" style="
-        text-align: center;
-        border-bottom: 1px solid #ccc;
-    ">Installation</h1>
+# Installation {#installation}
 
 ```bash
     npm install web-graphs
 ```
 
-<h1 id="example" style="
-        text-align: center;
-        border-bottom: 1px solid #ccc;
-    ">Example</h1>
+# Example {#example}
 
 **Code**
 
@@ -74,34 +53,17 @@ GraphJS is javascript library to create flexible graphs. It uses pure javascript
 
 **Output**
 
-<img src="img/example.png" style="
-    margin: auto;
-    display: block;
-    max-width: 1000px;
-">
+![Example](./img/example.png)
 
-<h1 id="documentation" style="
-        text-align: center;
-        border-bottom: 1px solid #ccc;
-    ">Documentation</h1>
+# Documentation {#documentation}
 
-<nav>
-    <ul style="
-        display: flex;
-        justify-content: center;
-        list-style-type: none;
-    ">
-        <li><a style="padding: 10px 20px;">Labels</a></li>
-        <li><a style="padding: 10px 20px;">Grids</a></li>
-        <li><a style="padding: 10px 20px;">Charts</a></li>
-        <li><a style="padding: 10px 20px;">Factors</a></li>
-    </ul>
-</nav>
 
-<h2 style="
-        text-align: center;
-        border-bottom: 1px solid #ccc;
-    ">Labels</h2>
+* [Labels](#)
+* [Grids](#)
+* [Charts](#)
+* [Factors](#)
+
+## Labels
 
 ### **String label**
 It will create named ranges.
@@ -119,11 +81,7 @@ It will create named ranges.
 
 **Output**
 
-<img src="img/string-label.png" style="
-    margin: auto;
-    display: block;
-    max-width: 1000px;
-">
+![StringLabel](./img/string-label.png)
 
 ### **Value label**
 It is using to determinate points how the charts should be draw.
@@ -144,11 +102,7 @@ It is using to determinate points how the charts should be draw.
 
 **Output**
 
-<img src="img/value-label.png" style="
-    margin: auto;
-    display: block;
-    max-width: 1000px;
-">
+![ValueLabel](./img/value-label.png)
 
 ### **Flex label**
 It is same thing as ValueLabel but it will automativly change its start, end and step according to charts values.
@@ -168,11 +122,7 @@ It is same thing as ValueLabel but it will automativly change its start, end and
 
 **Output**
 
-<img src="img/value-label.png" style="
-    margin: auto;
-    display: block;
-    max-width: 1000px;
-">
+![FlexLabel](./img/value-label.png)
 
 ### **Percent label**
 It is using to determinate points how the charts should be draw. It takes values from 0 to 100.
@@ -190,11 +140,7 @@ It is using to determinate points how the charts should be draw. It takes values
 
 **Output**
 
-<img src="img/percent-label.png" style="
-    margin: auto;
-    display: block;
-    max-width: 1000px;
-">
+![PercentLabel](./img/percent-label.png)
 
 ## Grids
 
@@ -237,16 +183,8 @@ Creates 2d plane with values/string labels.
 **Output**
 
 <!-- <section class="img-box"> -->
-<img src="img/horizontal-grid1.png" style="
-    margin: auto;
-    display: block;
-    max-width: 1000px;
-">
-<img src="img/horizontal-grid2.png" style="
-    margin: auto;
-    display: block;
-    max-width: 1000px;
-">
+![HorizontalGrid](./img/horizontal-grid1.png)
+![HorizontalGrid](./img/horizontal-grid2.png)
 <!-- </section> -->
 ### VerticalGrid
 ### CoordinateSystem2dGrid
