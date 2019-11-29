@@ -316,7 +316,7 @@ let grid = new NoGrid(canvas);
 
 ## Charts
 
-### [LineChart](https://github.com/SMasiu/GraphJS/tree/master/documentation/line-chart.md)
+### LineChart
 
 ### ColumnChart
 
