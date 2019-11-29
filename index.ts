@@ -21,4 +21,25 @@ import RowChart from "./src/charts/row-chart";
 
 let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector('canvas');
 
-let grid = new NoGrid(canvas)
+let grid = new HorizontalGrid(canvas, {
+    left: new FlexLabel(100, 0, 10),
+    bottom: new StringLabel(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'])
+})
+
+let chart = new LineChart({
+    smooth: true,
+    fill: true,
+    values: [{
+        color: 'red',
+        values: [10,50,40,70,80,60,75,90]
+    },{
+        color: 'orange',
+        values: [-10,-20,-40,-70,-50,-60,-90, -70]
+    }]
+});
+
+grid.addCharts({
+    line: chart
+});
+
+grid.draw();
