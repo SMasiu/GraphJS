@@ -1,0 +1,9 @@
+img/
+node_modules/
+relese/
+src/
+build-npm.ts
+index.html
+index.ts
+main.css
+test.ts
