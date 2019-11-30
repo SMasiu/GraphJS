@@ -21,16 +21,21 @@ import RowChart from "./src/charts/row-chart";
 
 let canvas = <HTMLCanvasElement>document.querySelector('canvas');
 
-let chart = new RoundChart({
+let chart = new SameDirectionRoundChart({
+    labels: new StringLabel(['cats','dogs','snakes','birds']),
+    centerValue: '76.3%',
     values: [{
-        color: '#E60400',
+        color: '#E61700',
         values: 40
     },{
-        color: '#FF6A00',
-        values: 30
+        color: '#2155BF',
+        values: 60
     },{
-        color: ['#801B70','#FF36E1'],
-        values: 30
+        color: ['#1D8012','#2DC21C'],
+        values: 70
+    },{
+        color: '#C23167',
+        values: 90
     }]
 })
 

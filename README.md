@@ -726,8 +726,88 @@ let chart = new PolygonChart({
 
 **Output**
 
-![RangeChart](https://github.com/SMasiu/GraphJS/blob/master/img/polygon-chart.png?raw=true)
+![PolygonChart](https://github.com/SMasiu/GraphJS/blob/master/img/polygon-chart.png?raw=true)
 
 ### RoundChart
+
+* **values** - Each object in array reprezents piece of circle.
+* **labels** -
+* **centerValue** -
+* **changingSize** -
+* **blankCenter** -
+* **itemsMargin** -
+* **canvas** -
+* **changingStepSize** -
+* **centerRadius** - 
+* **factors** - [more about facotrs]()
+
+**Example 1**
+
+**Code**
+
+```typescript
+RoundChart({
+    values?: [{
+        color: string | string[],
+        values: number,
+        id?: number | string,
+        name?: string
+    }],
+    labels?: StringLabel,
+    centerValue?: string,
+    changingSize?: boolean,
+    blankCenter?: boolean,
+    itemsMargin?: number,
+    canvas?: HTMLCanvasElement,
+    changingStepSize?: number,
+    centerRadius?: number,
+    factors?: ChartFactor
+});
+
+let chart = new RoundChart({
+    values: [{
+        color: '#E60400',
+        values: 40
+    },{
+        color: '#FF6A00',
+        values: 30
+    },{
+        color: ['#801B70','#FF36E1'],
+        values: 30
+    }]
+});
+```
+
+**Output**
+
+![RoundChart](https://github.com/SMasiu/GraphJS/blob/master/img/round-chart1.png?raw=true)
+
+**Example 2**
+
+**Code**
+
+```typescript
+let chart = new RoundChart({
+    blankCenter: true,
+    centerValue: '100%',
+    changingSize: true,
+    itemsMargin: 10,
+    labels: new StringLabel(['dogs', 'cats', 'snakes']),
+    values: [{
+        color: '#E60400',
+        values: 40
+    },{
+        color: '#FF6A00',
+        values: 30
+    },{
+        color: ['#801B70','#FF36E1'],
+        values: 30
+    }]
+});
+```
+
+**Output**
+
+![RoundChart](https://github.com/SMasiu/GraphJS/blob/master/img/round-chart2.png?raw=true)
 
 ### SameDirectionRoundChart
