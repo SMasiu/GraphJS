@@ -21,24 +21,14 @@ import RowChart from "./src/charts/row-chart";
 
 let canvas = <HTMLCanvasElement>document.querySelector('canvas');
 
-let chart = new RangeChart({
+let chart = new PolygonChart({
     values: [{
-        values: [0, 100],
-        color: '#E6372E'
-    },{
-        values: [50, [-40,10]],
-        color: '#1954C2'
-    },{
-        values: [[Infinity,70]],
-        color: ['#80182B','#FF3056'],
-        under: true
-    },{
-        values: [[Infinity, Infinity]],
-        color: '#3CC247'
+        color: 'red',
+        values: [100,80,65,70,50]
     }]
 })
 
-let grid = new CoordinateSystem1dGrid(canvas, new ValueLabel(-100, 100, 20))
+let grid = new PolygonGrid(canvas, new StringLabel(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']))
 grid.addCharts({
     chart,
 })

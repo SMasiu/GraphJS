@@ -593,6 +593,8 @@ let chart = new RowChart({
     1. **color** - If you pass string it take its value as color. If you pass string array it will create gradient from this colors.
     2. **values** - Array of coordinates. First item is x coordinate and second item is y coordinate.
     3. **radius** - Radius of the buble.
+    4. **id** - By this id you will be able to manage you item.
+    5. **name** - It is the title of your item. It will allow you automaticly create label from your chart.
 * **factor** - [more about facotrs]()
 
 **Code**
@@ -602,10 +604,12 @@ BubleChart({
     values?: [{
         color: string | string[],
         values: number[],
-        radius: number
+        radius: number,
+        id?: string | number,
+        name?: string
     }],
     factor?: ChartFactor
-})
+});
 
 let chart = new BubleChart({
     values: [{
@@ -642,7 +646,75 @@ let chart = new BubleChart({
 
 ### RangeChart
 
+* **values** - Each object in array is single line or pionts.
+    **Item object:**
+    1. **color** - If you pass string it take its value as color. If you pass string array it will create gradient from this colors.
+    2. **values** - If you pass number array you will create points on grid. If you pass array of number array you will create ranges where start is first item of nested array and end is the second one.
+    3. **under** - If you set this value to true line will be below grid.
+    4. **id** - By this id you will be able to manage you item.
+    5. **name** - It is the title of your item. It will allow you automaticly create label from your chart.
+* **factor** - [more about facotrs]()
+
+**Code**
+
+```typescript
+RangeChart({
+    values: [{
+        color: string | string[],
+        values: [number | number[]],
+        under?: boolean,
+        id?: number | string,
+        name?: string
+    }],
+    factor: ChartFactor
+});
+
+let chart = new RangeChart({
+    values: [{
+        values: [0, 100],
+        color: '#E6372E'
+    },{
+        values: [50, [-40,10]],
+        color: '#1954C2'
+    },{
+        values: [[Infinity,70]],
+        color: ['#80182B','#FF3056'],
+        under: true
+    },{
+        values: [[Infinity, Infinity]],
+        color: '#3CC247'
+    }]
+});
+```
+
+**Output**
+
+![RangeChart](https://github.com/SMasiu/GraphJS/blob/master/img/range-chart.png?raw=true)
+
 ### PolygonChart
+
+**Code**
+
+```typescript
+PolygonGrid({
+    values: [{
+        color: string | string[],
+        values: number[]
+    }],
+    dots: boolean,
+    fill: boolean,
+    factor: ChartFactor
+});
+
+let chart = new PolygonChart({
+    values: [{
+        color: 'red',
+        values: [100,80,65,70,50]
+    }]
+});
+```
+
+**Output**
 
 ### RoundChart
 
