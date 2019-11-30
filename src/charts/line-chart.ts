@@ -4,6 +4,7 @@ import Circle from "../shapes/circle";
 import Line from "../shapes/line";
 import HorizontalGrid from "../grids/horizontal-grid";
 import { LINE_CHART } from "../types/chart-names";
+import { createLineGradientVert } from "../functions/gradient";
 
 class LineChart extends Chart implements LineCharType {
 
@@ -27,16 +28,9 @@ class LineChart extends Chart implements LineCharType {
     }
 
     createGradient(x: number, xE: number, colors: string[]) {
-        const { ctx } = this;
-        let grd = (<CanvasRenderingContext2D>ctx).createLinearGradient(0, x, 0, x + xE);
-        let step = 1 / (colors.length - 1);
-        let cStep = 0;
-        for(let c of colors) {
-            grd.addColorStop(cStep, c);
-            cStep += step;
-        }
-        return grd;
+        return createLineGradientVert(<CanvasRenderingContext2D>this.ctx, x, xE, colors);
     }
+
     drawChart() {
 
         if(this.parent && this.ctx) {

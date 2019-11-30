@@ -4,7 +4,7 @@ import Rect from "../shapes/rect";
 import HorizontalGrid from "../grids/horizontal-grid";
 import getColumnSize from "../functions/column-size";
 import { COLUMN_CHART } from "../types/chart-names";
-import { createLineGradient } from "../functions/gradient";
+import { createLineGradientVert } from "../functions/gradient";
 
 class ColumnChart extends Chart implements ColumnChartType {
 
@@ -18,15 +18,15 @@ class ColumnChart extends Chart implements ColumnChartType {
     correspondToSecondary: string;
     identifier = COLUMN_CHART;
 
-    constructor({values, correspondTo, correspondToSecondary}: ColumnChartInputType) {
-        super();
+    constructor({values, correspondTo, correspondToSecondary, factor}: ColumnChartInputType) {
+        super(factor);
         this.content = values || [];
         this.correspondTo = correspondTo || '';
         this.correspondToSecondary = correspondToSecondary || '';
     }
 
     createGradient(x: number, xE: number, colors: string[]) {
-        return createLineGradient(<CanvasRenderingContext2D>this.ctx, x, xE, colors);
+        return createLineGradientVert(<CanvasRenderingContext2D>this.ctx, x, xE, colors);
     }
     
     drawChart() {
@@ -82,7 +82,7 @@ class ColumnChart extends Chart implements ColumnChartType {
                     let itemH = height - h - (height - y0position) - lW;
                     let startH = h - minusStart;
                     let color = this.getColor(<string | string[]>item.color, startH, itemH);
-
+                    console.log(color)
                     new Rect(ctx, offsetX + step / 2 - itemSize / 2, startH, itemSize, itemH, {color, lineWidth}).draw();
                 } else if (item.type === 'group') {
                     let values: number[] = <number[]>item.values;

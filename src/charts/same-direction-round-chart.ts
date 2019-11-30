@@ -14,8 +14,8 @@ class SameDirectionRoundChart extends Chart implements SameDirectionRoundChartTy
     itemMargin: number;
     identifier = SAME_DIRECTION_ROUND_CHART;
 
-    constructor({labels, values, centerValue, canvas, itemMargin}: SameDirectionRoundChartInputType = {}) {
-        super();
+    constructor({labels, values, centerValue, canvas, itemMargin, factor}: SameDirectionRoundChartInputType = {}) {
+        super(factor);
         if (canvas) {
             this.parent = new NoGrid(canvas);
             this.ctx = this.parent.ctx;

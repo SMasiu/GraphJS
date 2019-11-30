@@ -17,8 +17,8 @@ class RangeChart extends Chart implements RangeChartType {
     reversedValues = false;
     identifier = RANGE_CHART;
 
-    constructor({values}: RangeChartInputType = {}) {
-        super();
+    constructor({values, factor}: RangeChartInputType = {}) {
+        super(factor);
         this.content = values || [];
     }
     createGradient(x: number, xE: number, colors: string[]) {

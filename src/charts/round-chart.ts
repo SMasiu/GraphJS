@@ -32,8 +32,8 @@ class RoundChart extends Chart implements RoundChartType {
         }
         return grd;
     }
-    constructor({centerValue, values, changingSize, blankCenter, itemsMargin, labels, canvas, changingStepSize, centerRadius}: RoundChartInputType) {
-        super();
+    constructor({centerValue, values, changingSize, blankCenter, itemsMargin, labels, canvas, changingStepSize, centerRadius, factor}: RoundChartInputType) {
+        super(factor);
         if(canvas) {
             this.parent = new NoGrid(canvas);
             this.ctx = this.parent.ctx;

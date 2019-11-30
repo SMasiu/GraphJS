@@ -123,6 +123,7 @@ export interface BubleChartType {
 
 export interface BubleChartInputType {
     values?: CoordinateValuesType[];
+    factor?: ChartFactor
 }
 
 export interface ChartOptions {
@@ -137,6 +138,7 @@ export interface SameDirectionRoundChartInputType {
     labels?: StringLabel;
     canvas?: HTMLCanvasElement;
     itemMargin?: number;
+    factor?: ChartFactor;
 }
 
 export interface RoundChartInputType {
@@ -149,10 +151,12 @@ export interface RoundChartInputType {
     canvas?: HTMLCanvasElement;
     centerRadius?: number;
     changingStepSize?: number;
+    factor?: ChartFactor;
 }
 
 export interface RangeChartInputType {
     values?: RangeValueType[];
+    factor?: ChartFactor;
 }
 
 export interface ChartInput {
@@ -178,10 +182,12 @@ export interface ColumnChartInputType {
     values?: GroupItemType[];
     correspondTo?: string;
     correspondToSecondary?: string;
+    factor?: ChartFactor;
 }
 
 export interface RowChartInputType {
     values?: GroupItemType[];
     correspondTo?: string;
     correspondToSecondary?: string;
+    factor?: ChartFactor;
 }

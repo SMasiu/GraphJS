@@ -445,9 +445,70 @@ let chart = new LineChart({
 
 ### ColumnChart
 
+* **values** - Each object in array is single item or item group.
+    **Item object:**
+    1. **type:**
+        * 'simpe' - single column. 
+        * 'group' - items group placed next to each other.
+        * 'stacked-group' - items group put on each other
+    2. **color** - If its simple item you can use string or string array. If you use string it take its value as color. If you pass string array it will create gradient from this colors.
+    If its group or stacked-group you should use array string of colors same as in simple item. Each item color will be aply to the value with same iterator.
+    3. **values** - If you are using simle item you shuold use number. Otherwise you should use array of numbers.
+    4. **margin** - You can only use it if item's type is group. If you don't want to have margin between items in group use **margin: 'collapse'**. Otherwise leave it blank.
+    5. **direction** - You can only use it if item's type is stacked-group. You can't use negative numbers in stacked-group but if you want to make them negative use **direction: 'reverse'**.
+* **correspondTo** - By this you can choose to witch label it will be corresponding to.
+* **correspondToSecondary** - By this you can choose witch label will be signature label.
+* **factor** - [more about facotrs]()
+
 **Code**
 
+```typescript
+ColumnChart({
+    values?: [{
+        type: string,
+        color: string | string[] | [string | string[]],
+        values: number | number[],
+        margin?: string
+        direction?: string
+    }],
+    correspondTo?: string,
+    correspondToSecondary?: string,
+    factor?: ChartFactor
+});
+
+let chart = new ColumnChart({
+    values: [{
+        type: 'simple',
+        color: '#FF2212',
+        values: 60
+    },{
+        type: 'simple',
+        color: ['red','black'],
+        values: 70
+    },{
+        type: 'group',
+        color: ['#FF2212','#3164C2'],
+        values: [30, 50]
+    },{
+        type: 'group',
+        color: ['#FF2212','#3164C2'],
+        values: [80, 70],
+        margin: 'collapse'
+    },{
+        type: 'stacked-group',
+        color: ['#FF2212','#3164C2'],
+        values: [20, 80],
+    },{
+        type: 'stacked-group',
+        color: [['#FF2212','black'],['#3164C2','black']],
+        values: [60, 40]
+    }]
+});
+```
+
 **Output**
+
+![ColumnChart](https://github.com/SMasiu/GraphJS/blob/master/img/column-chart.png?raw=true)
 
 ### RowChart
 

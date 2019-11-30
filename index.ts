@@ -28,7 +28,7 @@ let chart = new ColumnChart({
         values: 60
     },{
         type: 'simple',
-        color: '#FF2212',
+        color: ['#FF2212','#801204'],
         values: 70
     },{
         type: 'group',
@@ -45,8 +45,8 @@ let chart = new ColumnChart({
         values: [20, 80],
     },{
         type: 'stacked-group',
-        color: ['#FF2212','#3164C2'],
-        values: [60, 40],
+        color: [['#FF2212','#801204'],['#3164C2','#1B0E80']],
+        values: [60, 40]
     }]
 })
 

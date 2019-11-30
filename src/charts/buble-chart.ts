@@ -20,8 +20,8 @@ class BubleChart extends Chart implements BubleChartType {
     reversedValuesX: boolean = false;
     reversedValuesY: boolean = false;
     identifier = BUBLE_CHART;
-    constructor({values}: BubleChartInputType) {
-        super();
+    constructor({values, factor}: BubleChartInputType) {
+        super(factor);
         this.content = values || [];
     }
 

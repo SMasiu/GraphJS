@@ -20,8 +20,8 @@ class RowChart extends Chart implements RowChartType {
     correspondTo: string;
     correspondToSecondary: string;
 
-    constructor({values, correspondTo, correspondToSecondary}: RowChartInputType) {
-        super();
+    constructor({values, correspondTo, correspondToSecondary, factor}: RowChartInputType) {
+        super(factor);
         this.content = values || [];
         this.correspondTo = correspondTo || '';
         this.correspondToSecondary = correspondToSecondary || '';
