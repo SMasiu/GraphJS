@@ -92,7 +92,7 @@ export interface SameDirectionRoundChartType {
 
 export interface RangeValueType {
     color: string | string[] | any;
-    values: number[] | number[][],
+    values: number[] | number[][] | any,
     under?: boolean
     name?: string;
 }

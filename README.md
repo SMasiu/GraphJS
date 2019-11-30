@@ -456,6 +456,8 @@ let chart = new LineChart({
     3. **values** - If you are using simle item you shuold use number. Otherwise you should use array of numbers.
     4. **margin** - You can only use it if item's type is group. If you don't want to have margin between items in group use **margin: 'collapse'**. Otherwise leave it blank.
     5. **direction** - You can only use it if item's type is stacked-group. You can't use negative numbers in stacked-group but if you want to make them negative use **direction: 'reverse'**.
+    6. **id** - By this id you will be able to manage you item.
+    7. **name** - It is the title of your item. It will allow you automaticly create label from your chart.
 * **correspondTo** - By this you can choose to witch label it will be corresponding to.
 * **correspondToSecondary** - By this you can choose witch label will be signature label.
 * **factor** - [more about facotrs]()
@@ -468,8 +470,10 @@ ColumnChart({
         type: string,
         color: string | string[] | [string | string[]],
         values: number | number[],
-        margin?: string
-        direction?: string
+        margin?: string,
+        direction?: string,
+        id?: string | number,
+        name?: string
     }],
     correspondTo?: string,
     correspondToSecondary?: string,
@@ -483,7 +487,7 @@ let chart = new ColumnChart({
         values: 60
     },{
         type: 'simple',
-        color: ['red','black'],
+        color: ['#FF2212','#801204'],
         values: 70
     },{
         type: 'group',
@@ -500,7 +504,7 @@ let chart = new ColumnChart({
         values: [20, 80],
     },{
         type: 'stacked-group',
-        color: [['#FF2212','black'],['#3164C2','black']],
+        color: [['#FF2212','#801204'],['#3164C2','#1B0E80']],
         values: [60, 40]
     }]
 });
@@ -512,7 +516,129 @@ let chart = new ColumnChart({
 
 ### RowChart
 
+* **values** - Each object in array is single item or item group.
+    **Item object:**
+    1. **type:**
+        * 'simpe' - single column. 
+        * 'group' - items group placed next to each other.
+        * 'stacked-group' - items group put on each other
+    2. **color** - If its simple item you can use string or string array. If you use string it take its value as color. If you pass string array it will create gradient from this colors.
+    If its group or stacked-group you should use array string of colors same as in simple item. Each item color will be aply to the value with same iterator.
+    3. **values** - If you are using simle item you shuold use number. Otherwise you should use array of numbers.
+    4. **margin** - You can only use it if item's type is group. If you don't want to have margin between items in group use **margin: 'collapse'**. Otherwise leave it blank.
+    5. **direction** - You can only use it if item's type is stacked-group. You can't use negative numbers in stacked-group but if you want to make them negative use **direction: 'reverse'**.
+    6. **id** - By this id you will be able to manage you item.
+    7. **name** - It is the title of your item. It will allow you automaticly create label from your chart.
+* **correspondTo** - By this you can choose to witch label it will be corresponding to.
+* **correspondToSecondary** - By this you can choose witch label will be signature label.
+* **factor** - [more about facotrs]()
+
+**Code**
+
+```typescript
+RowChart({
+    values?: [{
+        type: string,
+        color: string | string[] | [string | string[]],
+        values: number | number[],
+        margin?: string,
+        direction?: string,
+        id?: string | number,
+        name?: string
+    }],
+    correspondTo?: string,
+    correspondToSecondary?: string,
+    factor?: ChartFactor
+});
+
+
+let chart = new RowChart({
+    values: [{
+        type: 'simple',
+        color: '#FF2212',
+        values: 60
+    },{
+        type: 'simple',
+        color: ['#801204','#FF2212'],
+        values: 70
+    },{
+        type: 'group',
+        color: ['#FF2212','#3164C2'],
+        values: [30, 50]
+    },{
+        type: 'group',
+        color: ['#FF2212','#3164C2'],
+        values: [80, 70],
+        margin: 'collapse'
+    },{
+        type: 'stacked-group',
+        color: ['#FF2212','#3164C2'],
+        values: [20, 80],
+    },{
+        type: 'stacked-group',
+        color: [['#801204','#FF2212'],['#1B0E80','#3164C2']],
+        values: [60, 40]
+    }]
+});
+```
+
+**Output**
+
+![RowChart](https://github.com/SMasiu/GraphJS/blob/master/img/row-chart.png?raw=true)
+
 ### BubleChart
+
+* **values** - Each object in array is single buble.
+    **Item object:**
+    1. **color** - If you pass string it take its value as color. If you pass string array it will create gradient from this colors.
+    2. **values** - Array of coordinates. First item is x coordinate and second item is y coordinate.
+    3. **radius** - Radius of the buble.
+* **factor** - [more about facotrs]()
+
+**Code**
+
+```typescript
+BubleChart({
+    values?: [{
+        color: string | string[],
+        values: number[],
+        radius: number
+    }],
+    factor?: ChartFactor
+})
+
+let chart = new BubleChart({
+    values: [{
+        values: [40, 50],
+        color: '#E61B00',
+        radius: 40
+    },{
+        values: [-40, 20],
+        color: '#BF009F',
+        radius: 160
+    },{
+        values: [20, 70],
+        color: '#1D4CC2',
+        radius: 50
+    },{
+        values: [-10, 20],
+        color: '#00C22D',
+        radius: 100
+    },{
+        values: [-40, -50],
+        color: '#FF9500',
+        radius: 10
+    },{
+        values: [20, -60],
+        color: ['#C2445B','#80182B'],
+        radius: 60
+    }]
+});
+```
+
+**Output**
+
+![BubleChart](https://github.com/SMasiu/GraphJS/blob/master/img/buble-chart.png?raw=true)
 
 ### RangeChart
 

@@ -21,40 +21,24 @@ import RowChart from "./src/charts/row-chart";
 
 let canvas = <HTMLCanvasElement>document.querySelector('canvas');
 
-let chart = new ColumnChart({
+let chart = new RangeChart({
     values: [{
-        type: 'simple',
-        color: '#FF2212',
-        values: 60
+        values: [0, 100],
+        color: '#E6372E'
     },{
-        type: 'simple',
-        color: ['#FF2212','#801204'],
-        values: 70
+        values: [50, [-40,10]],
+        color: '#1954C2'
     },{
-        type: 'group',
-        color: ['#FF2212','#3164C2'],
-        values: [30, 50]
+        values: [[Infinity,70]],
+        color: ['#80182B','#FF3056'],
+        under: true
     },{
-        type: 'group',
-        color: ['#FF2212','#3164C2'],
-        values: [80, 70],
-        margin: 'collapse'
-    },{
-        type: 'stacked-group',
-        color: ['#FF2212','#3164C2'],
-        values: [20, 80],
-    },{
-        type: 'stacked-group',
-        color: [['#FF2212','#801204'],['#3164C2','#1B0E80']],
-        values: [60, 40]
+        values: [[Infinity, Infinity]],
+        color: '#3CC247'
     }]
 })
 
-let grid = new HorizontalGrid(canvas, {
-    left: new ValueLabel(100, 0, 10),
-    bottom: new StringLabel(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'])
-})
-
+let grid = new CoordinateSystem1dGrid(canvas, new ValueLabel(-100, 100, 20))
 grid.addCharts({
     chart,
 })
