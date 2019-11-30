@@ -445,6 +445,10 @@ let chart = new LineChart({
 
 ### ColumnChart
 
+**Code**
+
+**Output**
+
 ### RowChart
 
 ### BubleChart

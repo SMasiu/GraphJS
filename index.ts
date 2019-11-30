@@ -21,75 +21,42 @@ import RowChart from "./src/charts/row-chart";
 
 let canvas = <HTMLCanvasElement>document.querySelector('canvas');
 
-let chart1 = new LineChart({
+let chart = new ColumnChart({
     values: [{
+        type: 'simple',
         color: '#FF2212',
-        values: [170,190,185,195,200,180,190,170]
+        values: 60
+    },{
+        type: 'simple',
+        color: '#FF2212',
+        values: 70
+    },{
+        type: 'group',
+        color: ['#FF2212','#3164C2'],
+        values: [30, 50]
+    },{
+        type: 'group',
+        color: ['#FF2212','#3164C2'],
+        values: [80, 70],
+        margin: 'collapse'
+    },{
+        type: 'stacked-group',
+        color: ['#FF2212','#3164C2'],
+        values: [20, 80],
+    },{
+        type: 'stacked-group',
+        color: ['#FF2212','#3164C2'],
+        values: [60, 40],
     }]
 })
-
-let chart2 = new LineChart({
-    dashLine: [10, 5],
-    values: [{
-        color: '#C229AD',
-        values: [150,180,145,185,170,150,170,150]
-    }]
-})
-
-let chart3 = new LineChart({
-    smooth: true,
-    values: [{
-        color: '#59BF0B',
-        values: [120,150,115,155,150,130,160,130]
-    }]
-})
-
-let chart4 = new LineChart({
-    dots: true,
-    values: [{
-        color: '#3D48EB',
-        values: [110,120,95,125,130,110,120,100]
-    }]
-})
-
-let chart5 = new LineChart({
-    dots: true,
-    values: [{
-        color: '#007785',
-        values: [[90,75,70],[80,90,80,70],[85, 60],80,[70, 60],[70, 80, 70, 60],[60, 70, 50, 80, 50, 40], 60]
-    }]
-})
-
-let chart6 = new LineChart({
-    fill: true,
-    values: [{
-        color: '#E8786D',
-        values: [40,60,25,65,30,50,40,10]
-    }]
-})
-
-let chart7 = new LineChart({
-    fill: true,
-    values: [{
-        color: ['#C21585', '#E62802'],
-        values: [-40,-50,-45,-35,-20,-40,-10,-20]
-    }]
-})
-
 
 let grid = new HorizontalGrid(canvas, {
-    left: new ValueLabel(200, -50, 10),
-    bottom: new StringLabel(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'])
+    left: new ValueLabel(100, 0, 10),
+    bottom: new StringLabel(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'])
 })
 
 grid.addCharts({
-    chart1,
-    chart2,
-    chart3,
-    chart4,
-    chart5,
-    chart6,
-    chart7  
+    chart,
 })
 
 grid.draw()
