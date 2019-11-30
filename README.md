@@ -318,6 +318,131 @@ let grid = new NoGrid(canvas);
 
 ### LineChart
 
+It creates lines on your grid.
+
+* **values** - Each object in array is single line. 
+    **Item object:**
+    1. **color** - If you pass string it take its value as color. If you pass string array it will create gradient from this colors.
+    2. **values** - If you pass number array the values will be pointing to the begining of the range. If you pass nested array it will be pointing to values between the range. You can see it in chart5.
+    3. **id** - By this id you will be able to manage you item.
+    4. **name** - It is the title of your item. It will allow you automaticly create label from your chart.
+* **dashLine** - It takes array of number. It wors same as dash line in canvas.
+* **smooth** - It somooths your line naturally.
+* **dots** - It creates dots on the vertex.
+* **fill** - It fills your line to the 0 point.
+* **correspondTo** - By this you can choose to witch label it will be corresponding to.
+* **factor** - [more about facotrs]()
+
+
+**Example 1**
+
+**Code**
+
+```typescript
+LineChart({
+    values?: [{
+        color: string | string[]
+        values: [number | number[]]
+        id?: string | number,
+        name?: string
+    }],
+    dashLine?: number[],
+    smooth?: boolean,
+    dots?: boolean,
+    fill?: boolean,
+    correspondTo?: string,
+    factor?: ChartFactor
+});
+
+let chart1 = new LineChart({
+    values: [{
+        color: '#FF2212',
+        values: [170,190,185,195,200,180,190,170]
+    }]
+});
+
+let chart2 = new LineChart({
+    dashLine: [10, 5],
+    values: [{
+        color: '#C229AD',
+        values: [150,180,145,185,170,150,170,150]
+    }]
+});
+
+let chart3 = new LineChart({
+    smooth: true,
+    values: [{
+        color: '#59BF0B',
+        values: [120,150,115,155,150,130,160,130]
+    }]
+});
+
+let chart4 = new LineChart({
+    dots: true,
+    values: [{
+        color: '#3D48EB',
+        values: [110,120,95,125,130,110,120,100]
+    }]
+});
+
+let chart5 = new LineChart({
+    dots: true,
+    values: [{
+        color: '#007785',
+        values: [[90,75,70],[80,90,80,70],[85, 60],80,[70, 60],[70, 80, 70, 60],[60, 70, 50, 80, 50, 40], 60]
+    }]
+});
+
+let chart6 = new LineChart({
+    fill: true,
+    values: [{
+        color: '#E8786D',
+        values: [40,60,25,65,30,50,40,10]
+    }]
+});
+
+let chart7 = new LineChart({
+    fill: true,
+    values: [{
+        color: ['#C21585', '#E62802'],
+        values: [-40,-50,-45,-35,-20,-40,-10,-20]
+    }]
+});
+```
+
+**Output**
+
+![LineChart](https://github.com/SMasiu/GraphJS/blob/master/img/line-chart1.png?raw=true)
+
+**Example 2**
+
+You can also create many charts in one LineChart. They will have same properties like smooth, dots, fill and dashLine.
+
+**Code**
+```typescript
+let chart = new LineChart({
+    smooth: true,
+    dots: true,
+    values: [{
+        color: '#FF2212',
+        values: [70,90,85,95,100,80,90,70]
+    },{
+        color: '#3164C2',
+        values: [40,50,35,50,50,30,70,40]
+    },{
+        color: ['#44C219', '#138000'],
+        values: [20,-40,-85,-95,-40,-20,30,50]
+    },{
+        color: '#B30EC2',
+        values: [-70,-40,-35,-5,10,-20,-40,-70]
+    }]
+})
+```
+
+**Output**
+
+![LineChart](https://github.com/SMasiu/GraphJS/blob/master/img/line-chart2.png?raw=true)
+
 ### ColumnChart
 
 ### RowChart
