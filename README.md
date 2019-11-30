@@ -58,12 +58,12 @@ grid.draw();
 <h1 id="documentation">Documentation</h1>
 
 
-* [Labels](#)
-* [Grids](#)
-* [Charts](#)
-* [Factors](#)
+* [Labels](#labels)
+* [Grids](#grids)
+* [Charts](#charts)
+* [Factors](#factors)
 
-## Labels
+<h2 id="labels">Labels</h2>
 
 ### **String label**
 It will create named ranges.
@@ -141,7 +141,8 @@ let label = new PercentLabel(20, {reverse: true});
 **Output**
 
 ![PercentLabel](https://github.com/SMasiu/GraphJS/blob/master/img/percent-label.png?raw=true)
-## Grids
+
+<h2 id="grids">Grids</h2>
 
 ### HorizontalGrid
 
@@ -314,7 +315,7 @@ NoGrid(canvas: HTMLCanvasElement);
 let grid = new NoGrid(canvas);
 ```
 
-## Charts
+<h2 id="charts">Charts</h2>
 
 ### LineChart
 
@@ -731,14 +732,19 @@ let chart = new PolygonChart({
 ### RoundChart
 
 * **values** - Each object in array reprezents piece of circle.
-* **labels** -
-* **centerValue** -
-* **changingSize** -
-* **blankCenter** -
-* **itemsMargin** -
-* **canvas** -
-* **changingStepSize** -
-* **centerRadius** - 
+    **Item object:**
+    1. **color** - If you pass string it take its value as color. If you pass string array it will create gradient from this colors.
+    2. **values** - This value determines the size of the circle piece. It is given as a percentage.
+    3. **id** - By this id you will be able to manage you item.
+    4. **name** - It is the title of your item. It will allow you automaticly create label from your chart.
+* **labels** - Creates labels around the chart.
+* **centerValue** - Adds some string to the center of the chart.
+* **changingSize** - Each next item will be a little bit smaller.
+* **blankCenter** - Creates empty space in the center of the chart.
+* **itemsMargin** - Creates some spacing between items.
+* **canvas** - HTML canvas element.
+* **changingStepSize** - Specifies how item will be changing his size.
+* **centerRadius** - Specifies size of the blank center. It is given as number from 0 to 1.
 * **factors** - [more about facotrs]()
 
 **Example 1**
@@ -811,3 +817,91 @@ let chart = new RoundChart({
 ![RoundChart](https://github.com/SMasiu/GraphJS/blob/master/img/round-chart2.png?raw=true)
 
 ### SameDirectionRoundChart
+
+* **values** - Each object in array reprezents single item.
+    **Item object:**
+    1. **color** - If you pass string it take its value as color. If you pass string array it will create gradient from this colors.
+    2. **values** - This value determines the size of the circle. It is given as a percentage.
+    3. **id** - By this id you will be able to manage you item.
+    4. **name** - It is the title of your item. It will allow you automaticly create label from your chart.
+* **lables** - Creates items label.
+* **centerValue** - Adds some string to the center of the chart.
+* **canvas** - HTML canvas element.
+* **itemMargin** - Margin between items.
+* **factor** - [more about facotrs]()
+
+**Example 1**
+
+**Code**
+
+```typescript
+SameDirectionRoundChart({
+    values?: {
+        color: string | string[],
+        values: number,
+        id?: number | string,
+        name?: string,
+    },
+    lables?: StringLabel,
+    centerValue?: string,
+    canvas?: HTMLCanvasElement,
+    itemMargin?: number,
+    factor?: ChartFactor
+});
+
+let chart = new SameDirectionRoundChart({
+    values: [{
+        color: '#E61700',
+        values: 40
+    },{
+        color: '#2155BF',
+        values: 60
+    },{
+        color: ['#1D8012','#2DC21C'],
+        values: 70
+    },{
+        color: '#C23167',
+        values: 90
+    }]
+});
+```
+
+**Output**
+
+![SameDirectionRoundChart](https://github.com/SMasiu/GraphJS/blob/master/img/same-direction-round-chart1.png?raw=true)
+
+**Exapmle 2**
+
+**Code**
+
+```typescript
+let chart = new SameDirectionRoundChart({
+    labels: new StringLabel(['cats','dogs','snakes','birds']),
+    centerValue: '76.3%',
+    values: [{
+        color: '#E61700',
+        values: 40
+    },{
+        color: '#2155BF',
+        values: 60
+    },{
+        color: ['#1D8012','#2DC21C'],
+        values: 70
+    },{
+        color: '#C23167',
+        values: 90
+    }]
+});
+```
+
+**Output**
+
+![SameDirectionRoundChart](https://github.com/SMasiu/GraphJS/blob/master/img/same-direction-round-chart2.png?raw=true)
+
+<h2 id="factors">Factors</h2>
+
+### GridFactor
+
+### ChartFactor
+
+### Default factors
