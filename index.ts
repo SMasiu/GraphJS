@@ -21,14 +21,20 @@ import RowChart from "./src/charts/row-chart";
 
 let canvas = <HTMLCanvasElement>document.querySelector('canvas');
 
-let chart = new PolygonChart({
+let chart = new RoundChart({
     values: [{
-        color: 'red',
-        values: [100,80,65,70,50]
+        color: '#E60400',
+        values: 40
+    },{
+        color: '#FF6A00',
+        values: 30
+    },{
+        color: ['#801B70','#FF36E1'],
+        values: 30
     }]
 })
 
-let grid = new PolygonGrid(canvas, new StringLabel(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']))
+let grid = new NoGrid(canvas)
 grid.addCharts({
     chart,
 })

@@ -659,14 +659,14 @@ let chart = new BubleChart({
 
 ```typescript
 RangeChart({
-    values: [{
+    values?: [{
         color: string | string[],
         values: [number | number[]],
         under?: boolean,
         id?: number | string,
         name?: string
     }],
-    factor: ChartFactor
+    factor?: ChartFactor
 });
 
 let chart = new RangeChart({
@@ -693,17 +693,27 @@ let chart = new RangeChart({
 
 ### PolygonChart
 
+* **values** - Each object in array is single polygon.
+    **Item object:**
+    1. **color** - If you pass string it take its value as color. If you pass string array it will create gradient from this colors.
+    2. **values** - It takes number array where each item in array points to the vertex.
+    3. **id** - By this id you will be able to manage you item.
+    4. **name** - It is the title of your item. It will allow you automaticly create label from your chart.
+* **factor** - [more about facotrs]()
+
 **Code**
 
 ```typescript
 PolygonGrid({
-    values: [{
+    values?: [{
         color: string | string[],
-        values: number[]
+        values: number[],
+        id?: number | string,
+        name?: string
     }],
-    dots: boolean,
-    fill: boolean,
-    factor: ChartFactor
+    dots?: boolean,
+    fill?: boolean,
+    factor?: ChartFactor
 });
 
 let chart = new PolygonChart({
@@ -715,6 +725,8 @@ let chart = new PolygonChart({
 ```
 
 **Output**
+
+![RangeChart](https://github.com/SMasiu/GraphJS/blob/master/img/polygon-chart.png?raw=true)
 
 ### RoundChart
 

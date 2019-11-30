@@ -61,8 +61,8 @@ class RoundChart extends Chart implements RoundChartType {
             parent.margin = {
                 left: 200,
                 right: 200,
-                top: 50,
-                bottom: 50
+                top: 100,
+                bottom: 100
             }
             parent.setUpDrawArea();
             const {centerX, centerY, width, height} = parent.drawArea;
