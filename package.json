@@ -1,6 +1,6 @@
 {
   "name": "web-graphs",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "graph and charts for websites",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -15,8 +15,8 @@
   "author": "Szymon Maśko",
   "license": "ISC",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/SMasiu/GraphJS"
+    "type": "git",
+    "url": "https://github.com/SMasiu/GraphJS"
   },
   "dependencies": {},
   "devDependencies": {
