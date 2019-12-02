@@ -18,23 +18,7 @@ class FlexLabel extends ValueLabel {
 
     resize(newMin: number, newMax: number) {
         
-        
         let {max, min, step} = this;
-        let x = Math.abs(newMax) + Math.abs(newMin);
-        let count = x / step;
-        let i = 0;
-        let last = step;
-        while (count > 10 && i < 100) {
-            step += 10;
-            count = x / step;
-            if(Math.abs(newMax) % step === 0 && Math.abs(newMin) % step === 0 && this.toLabel().findIndex( v => v === 0 ) !== -1) {
-                last = step;
-            }
-            i++;
-        }
-
-        this.step = last;
-        step = last;
 
         if(newMax > max) {
             while(newMax > max) {
@@ -57,6 +41,26 @@ class FlexLabel extends ValueLabel {
                 min += step;
             }   
             this.setNew('end', min);
+        }
+        newMax = Math.ceil(newMax / 10) * 10;
+        newMin = Math.floor(newMin / 10) * 10;
+        let x = Math.abs(newMax) + Math.abs(newMin);
+        let minStep = Math.round(x / 100) * 10;
+        let lastStep = step;
+        step = minStep;
+        this.step = step;
+        newMax += step - (newMax % step);
+        newMin -= step + (newMin % step);
+        if(newMax !== NaN && newMin === NaN) {
+            if(this.start > this.end) {
+                this.start = newMax;
+                this.end = newMin;
+            } else {
+                this.start = newMin;
+                this.end = newMax;
+            }
+        } else {
+            this.step = lastStep;
         }
         this.values = this.toLabel();
     }

@@ -10,7 +10,16 @@
   "keywords": [
     "graph",
     "chart",
-    "canvas"
+    "canvas",
+    "diagram",
+    "grid",
+    "column",
+    "polygon",
+    "row",
+    "round",
+    "pie chart",
+    "coordinate",
+    "range"
   ],
   "author": "Szymon Maśko",
   "license": "ISC",
