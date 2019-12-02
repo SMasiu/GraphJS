@@ -355,6 +355,7 @@ If you don't know how to create single chart you can find it below.
 * **addItemContent** - Add item to your chart content and returne it.
 * **updateItemContent** - Updates item in your chart content by id and returnes it.
 * **deleteItemContent** - Deletes item from your chart content by id and returnes it.
+* **createLabel** - Appends labels generated from names of your items to element that you specify.
 * **draw** - If your chart can be assigned to NoGrid you don't have to create new NoGrid and pass it to this grid. You can simply pass canvas to your chart and use this method.
 * **content** - You can find here all your values that are in your chart.
 * **disable** - By this value you can control if your chart will be displayed on the grid.
@@ -367,6 +368,7 @@ let newItem = chart.addItemContent({color: '#f00', values: [20,40,65,30,10], id:
 let updatedItem = chart.updateItemContent(1, {color: '#0f0'});
 let deletedItem = chart.deleteItemContent(2);
 
+chart.createLabel(document.body);
 chart.draw();
 let content = chart.content;
 chart.disable = true;
@@ -1039,3 +1041,64 @@ By modifying this object you can affect styles for all your grids or charts.
 
 **DEFAULT_GRID_FACTOR** - default factor for grid. It's GridFactor instance.
 **DEFAULT_CHART_FACTOR** - default factor for charts. It's ChartFactor instance.
+
+## More
+
+### Combained chart example
+
+**Code**
+
+```typescript
+let grid = new HorizontalGrid(canvas, {
+    left: new FlexLabel(100, 0, 10),
+    bottom: new StringLabel(['2019','2020','2021','2022','2023'])
+});
+grid.addCharts({
+    columns: new ColumnChart({
+        values: [{
+            type: 'group',
+            color: [['#E62200','#801300'],['#0B89BF','#085C80']],
+            values: [30, 40],
+            margin: 'collapse'
+        },{
+            type: 'group',
+            color: [['#E62200','#801300'],['#0B89BF','#085C80']],
+            values: [50, 30],
+            margin: 'collapse'
+        },{
+            type: 'group',
+            color: [['#E62200','#801300'],['#0B89BF','#085C80']],
+            values: [80, 90],
+            margin: 'collapse'
+        },{
+            type: 'group',
+            color: [['#E62200','#801300'],['#0B89BF','#085C80']],
+            values: [100, 70],
+            margin: 'collapse'
+        },{
+            type: 'group',
+            color: [['#E62200','#801300'],['#0B89BF','#085C80']],
+            values: [95, 76],
+            margin: 'collapse'
+        }]
+    }),
+    lines: new LineChart({
+        dots: true,
+        smooth: true,
+        moveToCenter: true,
+        dashLine: [10, 5],
+        values: [{
+            color: ['#E62200','#801300'],
+            values: [30,50,80,100,95]
+        },{
+            color: ['#0B89BF','#085C80'],
+            values: [40,30,90,70,76]
+        }]
+    })
+})
+grid.draw();
+```
+
+**Output**
+
+![Example](https://github.com/SMasiu/GraphJS/blob/master/img/example2.png?raw=true)

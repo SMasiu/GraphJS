@@ -15,9 +15,10 @@ class LineChart extends Chart implements LineCharType {
     dashLine: number[];
     smooth: boolean;
     correspondTo: string;
+    moveToCenter: boolean;
     identifier = LINE_CHART;
 
-    constructor({values, fill, dots, dashLine, factor, smooth, correspondTo}: LineChartInputType = {}) {
+    constructor({values, fill, dots, dashLine, factor, smooth, correspondTo, moveToCenter}: LineChartInputType = {}) {
         super(factor);
         this.content = values || [];
         this.fill = fill || false;
@@ -25,6 +26,7 @@ class LineChart extends Chart implements LineCharType {
         this.dashLine = dashLine || [0];
         this.smooth = smooth || false;
         this.correspondTo = correspondTo || '';
+        this.moveToCenter = moveToCenter || false;
     }
 
     createGradient(x: number, xE: number, colors: string[]) {
@@ -81,7 +83,9 @@ class LineChart extends Chart implements LineCharType {
                 let step = width / (this.labelLen - 1);
                 let innerStep = 0;
                 let maxH = 0, minH = 0;
-
+                if(this.moveToCenter) {
+                    posX += step / 2;
+                }
                 for(let values of item.values) {
                     if(typeof values === 'number') {
                         let h = height - height * (values / (Math.abs(maxY) + Math.abs(minY))) - (height - y0position);

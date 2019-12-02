@@ -170,6 +170,7 @@ export interface LineChartInputType extends ChartInput {
     dashLine?: number[];
     smooth?: boolean;
     correspondTo?: string;
+    moveToCenter?: boolean;
 }
 
 export interface PolygonChartInputType extends ChartInput {
