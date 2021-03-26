@@ -1,12 +1,12 @@
-import Chart from './chart'
+import { Chart } from './chart'
 import { LineCharType, MultipleValuesItem, LineChartInputType } from '../types/charts.types'
-import Circle from '../shapes/circle'
-import Line from '../shapes/line'
-import HorizontalGrid from '../grids/horizontal-grid'
+import { Circle } from '../shapes/circle'
+import { Line } from '../shapes/line'
+import { HorizontalGrid } from '../grids/horizontal-grid'
 import { LINE_CHART } from '../types/chart-names'
 import { createLineGradientVert } from '../functions/gradient'
 
-class LineChart extends Chart implements LineCharType {
+export class LineChart extends Chart implements LineCharType {
   content: MultipleValuesItem[]
   fill: boolean
   dots: boolean
@@ -177,5 +177,3 @@ class LineChart extends Chart implements LineCharType {
     this.minValue = min
   }
 }
-
-export default LineChart

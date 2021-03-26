@@ -1,6 +1,6 @@
 import { LinePieceOptions } from '../types/shape.type'
 
-class LinePiece {
+export class LinePiece {
   color: string | CanvasGradient
   lineWidth: number
   opacity: number
@@ -49,5 +49,3 @@ class LinePiece {
     ctx.lineWidth = 1
   }
 }
-
-export default LinePiece

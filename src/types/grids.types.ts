@@ -1,8 +1,8 @@
-import Chart from '../charts/chart'
-import GridFactor from '../factors/grid-factor'
-import Label from '../labels/label'
-import ValueLabel from '../labels/value-label'
-import StringLabel from '../labels/string-label'
+import { Chart } from '../charts/chart'
+import { GridFactor } from '../factors/grid-factor'
+import { Label } from '../labels/label'
+import { ValueLabel } from '../labels/value-label'
+import { StringLabel } from '../labels/string-label'
 
 export interface GridType {
   canvas: HTMLCanvasElement

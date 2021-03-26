@@ -1,4 +1,4 @@
-abstract class Label {
+export abstract class Label {
   abstract identifier: 'percent' | 'value' | 'string' | 'flex'
   abstract toLabel(): any[]
   abstract values: any[]
@@ -15,5 +15,3 @@ abstract class Label {
     this.width = 0
   }
 }
-
-export default Label

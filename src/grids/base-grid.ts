@@ -1,11 +1,11 @@
 import { DrawArea, AllLabels, GridOptions, InputAllLabels } from '../types/grids.types'
-import clearDrawArea from '../types/draw-area'
-import Label from '../labels/label'
-import Grid from './grid'
-import Line from '../shapes/line'
-import FlexLabel from '../labels/flex-label'
+import { clearDrawArea } from '../types/draw-area'
+import { Label } from '../labels/label'
+import { Grid } from './grid'
+import { Line } from '../shapes/line'
+import { FlexLabel } from '../labels/flex-label'
 
-abstract class BaseGrid extends Grid {
+export abstract class BaseGrid extends Grid {
   drawArea: DrawArea
   y0position = 0
   x0position = 0
@@ -271,5 +271,3 @@ abstract class BaseGrid extends Grid {
     }
   }
 }
-
-export default BaseGrid

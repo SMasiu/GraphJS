@@ -1,6 +1,6 @@
 import { RectInput } from '../types/shape.type'
 
-class Rect {
+export class Rect {
   color: string | CanvasGradient
   fill: boolean
   lineWidth: number
@@ -31,5 +31,3 @@ class Rect {
     }
   }
 }
-
-export default Rect

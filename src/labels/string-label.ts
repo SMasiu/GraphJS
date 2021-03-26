@@ -1,6 +1,6 @@
-import Label from './label'
+import { Label } from './label'
 
-class StringLabel extends Label {
+export class StringLabel extends Label {
   identifier: 'string'
   values: string[]
 
@@ -22,5 +22,3 @@ class StringLabel extends Label {
     return values
   }
 }
-
-export default StringLabel

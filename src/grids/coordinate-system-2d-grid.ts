@@ -6,13 +6,13 @@ import {
   InputLabels
 } from '../types/grids.types'
 import { ROW_CHART, COLUMN_CHART, LINE_CHART, BUBBLE_CHART } from '../types/chart-names'
-import clearDrawArea from '../types/draw-area'
-import Grid from '../grids/grid'
-import Line from '../shapes/line'
-import FlexLabel from '../labels/flex-label'
-import Label from '../labels/label'
+import { clearDrawArea } from '../types/draw-area'
+import { Grid } from '../grids/grid'
+import { Line } from '../shapes/line'
+import { FlexLabel } from '../labels/flex-label'
+import { Label } from '../labels/label'
 
-class CoordinateSystem2dGrid extends Grid implements Coordinate2dGridType {
+export class CoordinateSystem2dGrid extends Grid implements Coordinate2dGridType {
   allowedCharts = [ROW_CHART, COLUMN_CHART, LINE_CHART, BUBBLE_CHART]
   labels: Label2dType
   mainLabel = 'both'
@@ -185,5 +185,3 @@ class CoordinateSystem2dGrid extends Grid implements Coordinate2dGridType {
     }
   }
 }
-
-export default CoordinateSystem2dGrid

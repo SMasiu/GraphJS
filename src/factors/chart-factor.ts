@@ -1,6 +1,6 @@
 import { ChartFactorOptions } from '../types/factor.type'
 
-class ChartFactor {
+export class ChartFactor {
   lineWidth: number
   opacity: number
   itemSize: number
@@ -16,5 +16,3 @@ class ChartFactor {
 }
 
 export const DEFAULT_CHART_FACTOR = new ChartFactor()
-
-export default ChartFactor

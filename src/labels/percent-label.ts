@@ -1,6 +1,6 @@
-import Label from './label'
+import { Label } from './label'
 
-class PercentLabel extends Label {
+export class PercentLabel extends Label {
   values: string[]
   identifier: 'percent'
 
@@ -26,5 +26,3 @@ class PercentLabel extends Label {
     return v
   }
 }
-
-export default PercentLabel

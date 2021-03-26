@@ -1,14 +1,14 @@
-import Chart from './chart'
+import { Chart } from './chart'
 import { RoundChartType, ValueColorType, RoundChartInputType } from '../types/charts.types'
-import Circle from '../shapes/circle'
-import CirclePoint from '../shapes/circle-point'
-import NoGrid from '../grids/no-grid'
-import StringLabel from '../labels/string-label'
-import Line from '../shapes/line'
+import { Circle } from '../shapes/circle'
+import { CirclePoint } from '../shapes/circle-point'
+import { NoGrid } from '../grids/no-grid'
+import { StringLabel } from '../labels/string-label'
+import { Line } from '../shapes/line'
 import { ROUND_CHART } from '../types/chart-names'
-import Grid from '../grids/grid'
+import { Grid } from '../grids/grid'
 
-class RoundChart extends Chart implements RoundChartType {
+export class RoundChart extends Chart implements RoundChartType {
   content: ValueColorType[]
   centerValue: string | null
   changingSize: boolean
@@ -149,5 +149,3 @@ class RoundChart extends Chart implements RoundChartType {
     }
   }
 }
-
-export default RoundChart

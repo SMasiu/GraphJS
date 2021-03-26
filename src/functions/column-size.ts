@@ -1,4 +1,4 @@
-const getColumnSize = (content: any[]) => {
+export const getColumnSize = (content: any[]) => {
   let arr: any = [...content]
   let max = 0,
     min = 0
@@ -24,5 +24,3 @@ const getColumnSize = (content: any[]) => {
   })
   return { min, max }
 }
-
-export default getColumnSize

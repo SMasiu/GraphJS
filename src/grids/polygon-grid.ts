@@ -1,12 +1,12 @@
 import { POLYGON_CHART } from '../types/chart-names'
 import { DrawArea, PolygonGridType, GridOptions } from '../types/grids.types'
-import clearDrawArea from '../types/draw-area'
-import CirclePoint from '../shapes/circle-point'
-import StringLabel from '../labels/string-label'
-import Grid from './grid'
-import Line from '../shapes/line'
+import { clearDrawArea } from '../types/draw-area'
+import { CirclePoint } from '../shapes/circle-point'
+import { StringLabel } from '../labels/string-label'
+import { Grid } from './grid'
+import { Line } from '../shapes/line'
 
-class PolygonGrid extends Grid implements PolygonGridType {
+export class PolygonGrid extends Grid implements PolygonGridType {
   allowedCharts = [POLYGON_CHART]
   drawArea: DrawArea
   labels: StringLabel
@@ -87,5 +87,3 @@ class PolygonGrid extends Grid implements PolygonGridType {
     this.ctx.translate(this.drawArea.startX, this.drawArea.startY)
   }
 }
-
-export default PolygonGrid

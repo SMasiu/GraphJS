@@ -1,6 +1,6 @@
-import ChartFactor from '../factors/chart-factor'
-import StringLabel from '../labels/string-label'
-import Grid from '../grids/grid'
+import { ChartFactor } from '../factors/chart-factor'
+import { StringLabel } from '../labels/string-label'
+import { Grid } from '../grids/grid'
 
 export interface ChartType {
   opacity: number

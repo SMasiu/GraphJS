@@ -4,8 +4,8 @@ module.exports = {
   entry: path.join(__dirname, 'index.ts'),
   mode: 'production',
   output: {
-    filename: 'graph.js',
-    path: __dirname
+    filename: 'index.js',
+    path: path.join(__dirname, 'dist')
   },
   module: {
     rules: [

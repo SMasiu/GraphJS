@@ -1,12 +1,12 @@
-import Chart from './chart'
+import { Chart } from './chart'
 import { RowChartType, RowChartInputType, GroupItemType } from '../types/charts.types'
-import VerticalGrid from '../grids/vertical-grid'
-import Rect from '../shapes/rect'
-import getColumnSize from '../functions/column-size'
+import { VerticalGrid } from '../grids/vertical-grid'
+import { Rect } from '../shapes/rect'
+import { getColumnSize } from '../functions/column-size'
 import { ROW_CHART } from '../types/chart-names'
 import { createLineGradient } from '../functions/gradient'
 
-class RowChart extends Chart implements RowChartType {
+export class RowChart extends Chart implements RowChartType {
   content: GroupItemType[]
   stepLen: number = 0
   minX: number = 0
@@ -173,5 +173,3 @@ class RowChart extends Chart implements RowChartType {
     return createLineGradient(<CanvasRenderingContext2D>this.ctx, x, xE, colors)
   }
 }
-
-export default RowChart

@@ -1,8 +1,8 @@
 import { ChartType } from '../types/charts.types'
-import ChartFactor, { DEFAULT_CHART_FACTOR } from '../factors/chart-factor'
-import Grid from '../grids/grid'
+import { ChartFactor, DEFAULT_CHART_FACTOR } from '../factors/chart-factor'
+import { Grid } from '../grids/grid'
 
-abstract class Chart implements ChartType {
+export abstract class Chart implements ChartType {
   opacity: number
   lineWidth: number
   ctx: CanvasRenderingContext2D | null
@@ -121,5 +121,3 @@ abstract class Chart implements ChartType {
     return index === -1 ? null : this.content.splice(index, 1)
   }
 }
-
-export default Chart

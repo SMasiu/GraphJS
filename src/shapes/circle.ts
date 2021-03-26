@@ -1,6 +1,6 @@
 import { CircleOptions } from '../types/shape.type'
 
-class Circle {
+export class Circle {
   offset: number
   angle: number
   color: string | CanvasGradient
@@ -29,4 +29,3 @@ class Circle {
     }
   }
 }
-export default Circle

@@ -1,12 +1,12 @@
 import { DrawArea, GridOptions } from '../types/grids.types'
-import clearDrawArea from '../types/draw-area'
-import ValueLabel from '../labels/value-label'
-import Grid from './grid'
-import Line from '../shapes/line'
-import FlexLabel from '../labels/flex-label'
+import { clearDrawArea } from '../types/draw-area'
+import { ValueLabel } from '../labels/value-label'
+import { Grid } from './grid'
+import { Line } from '../shapes/line'
+import { FlexLabel } from '../labels/flex-label'
 import { RANGE_CHART } from '../types/chart-names'
 
-class CoordinateSystem1dGrid extends Grid implements CoordinateSystem1dGrid {
+export class CoordinateSystem1dGrid extends Grid implements CoordinateSystem1dGrid {
   allowedCharts = [RANGE_CHART]
   drawArea: DrawArea
   labels: ValueLabel
@@ -90,5 +90,3 @@ class CoordinateSystem1dGrid extends Grid implements CoordinateSystem1dGrid {
     return label
   }
 }
-
-export default CoordinateSystem1dGrid

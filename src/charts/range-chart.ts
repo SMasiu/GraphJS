@@ -1,12 +1,12 @@
-import Chart from './chart'
+import { Chart } from './chart'
 import { RangeChartType, RangeValueType, RangeChartInputType } from '../types/charts.types'
-import CoordinateSystem1dGrid from '../grids/coordinate-system-1d-grid'
-import Circle from '../shapes/circle'
-import Line from '../shapes/line'
+import { CoordinateSystem1dGrid } from '../grids/coordinate-system-1d-grid'
+import { Circle } from '../shapes/circle'
+import { Line } from '../shapes/line'
 import { RANGE_CHART } from '../types/chart-names'
 import { createLineGradient } from '../functions/gradient'
 
-class RangeChart extends Chart implements RangeChartType {
+export class RangeChart extends Chart implements RangeChartType {
   content: RangeValueType[]
   min = 0
   max = 0
@@ -161,5 +161,3 @@ class RangeChart extends Chart implements RangeChartType {
     this.minValue = min
   }
 }
-
-export default RangeChart

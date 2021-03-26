@@ -1,6 +1,6 @@
-import ValueLabel from './value-label'
+import { ValueLabel } from './value-label'
 
-class FlexLabel extends ValueLabel {
+export class FlexLabel extends ValueLabel {
   constructor(start: number = 0, end: number = 100, step: number = 20) {
     super(start, end, step)
     this.flex = true
@@ -77,5 +77,3 @@ class FlexLabel extends ValueLabel {
     }
   }
 }
-
-export default FlexLabel

@@ -1,12 +1,12 @@
-import Chart from './chart'
+import { Chart } from './chart'
 import { ColumnChartType, ColumnChartInputType, GroupItemType } from '../types/charts.types'
-import Rect from '../shapes/rect'
-import HorizontalGrid from '../grids/horizontal-grid'
-import getColumnSize from '../functions/column-size'
+import { Rect } from '../shapes/rect'
+import { HorizontalGrid } from '../grids/horizontal-grid'
+import { getColumnSize } from '../functions/column-size'
 import { COLUMN_CHART } from '../types/chart-names'
 import { createLineGradientVert } from '../functions/gradient'
 
-class ColumnChart extends Chart implements ColumnChartType {
+export class ColumnChart extends Chart implements ColumnChartType {
   content: GroupItemType[]
   stepLen: number = 0
   minY: number = 0
@@ -154,5 +154,3 @@ class ColumnChart extends Chart implements ColumnChartType {
     this.minValue = min
   }
 }
-
-export default ColumnChart

@@ -1,7 +1,7 @@
 import { GridFactorOptions } from '../types/factor.type'
 import { Background, GridColors, FontOptions } from '../types/grids.types'
 
-class GridFactor {
+export class GridFactor {
   colors: GridColors
   font: FontOptions
   labelPadding: number
@@ -27,5 +27,3 @@ class GridFactor {
 }
 
 export const DEFAULT_GRID_FACTOR = new GridFactor()
-
-export default GridFactor

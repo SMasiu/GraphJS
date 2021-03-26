@@ -1,4 +1,4 @@
-import BaseGrid from './base-grid'
+import { BaseGrid } from './base-grid'
 import {
   AllLabels,
   VerticalGridType,
@@ -6,10 +6,10 @@ import {
   VerticalGridOptions
 } from '../types/grids.types'
 import { ROW_CHART } from '../types/chart-names'
-import Label from '../labels/label'
-import Line from '../shapes/line'
+import { Label } from '../labels/label'
+import { Line } from '../shapes/line'
 
-class VerticalGrid extends BaseGrid implements VerticalGridType {
+export class VerticalGrid extends BaseGrid implements VerticalGridType {
   allowedCharts = [ROW_CHART]
   labels: AllLabels
   mainLabel: 'top' | 'bottom'
@@ -72,5 +72,3 @@ class VerticalGrid extends BaseGrid implements VerticalGridType {
     }
   }
 }
-
-export default VerticalGrid

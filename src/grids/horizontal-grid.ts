@@ -5,11 +5,11 @@ import {
   HorizontalGridOptions
 } from '../types/grids.types'
 import { COLUMN_CHART, LINE_CHART } from '../types/chart-names'
-import BaseGrid from './base-grid'
-import Label from '../labels/label'
-import Line from '../shapes/line'
+import { BaseGrid } from './base-grid'
+import { Label } from '../labels/label'
+import { Line } from '../shapes/line'
 
-class HorizontalGrid extends BaseGrid implements HorizontalGridType {
+export class HorizontalGrid extends BaseGrid implements HorizontalGridType {
   allowedCharts = [COLUMN_CHART, LINE_CHART]
   labels: AllLabels
   mainLabel: 'left' | 'right'
@@ -72,5 +72,3 @@ class HorizontalGrid extends BaseGrid implements HorizontalGridType {
     }
   }
 }
-
-export default HorizontalGrid

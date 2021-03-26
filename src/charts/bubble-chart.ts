@@ -1,11 +1,11 @@
-import Chart from './chart'
+import { Chart } from './chart'
 import { BubbleChartType, BubbleChartInputType, CoordinateValuesType } from '../types/charts.types'
-import Circle from '../shapes/circle'
-import CoordinateSystem2dGrid from '../grids/coordinate-system-2d-grid'
+import { Circle } from '../shapes/circle'
+import { CoordinateSystem2dGrid } from '../grids/coordinate-system-2d-grid'
 import { BUBBLE_CHART } from '../types/chart-names'
 import { createLineGradient } from '../functions/gradient'
 
-class BubbleChart extends Chart implements BubbleChartType {
+export class BubbleChart extends Chart implements BubbleChartType {
   content: CoordinateValuesType[]
   maxX: number = 0
   minX: number = 0
@@ -108,5 +108,3 @@ class BubbleChart extends Chart implements BubbleChartType {
     this.maxValue = [maxX, maxY]
   }
 }
-
-export default BubbleChart

@@ -8,11 +8,11 @@ import {
   Label2dType,
   Background
 } from '../types/grids.types'
-import Chart from '../charts/chart'
-import GridFactor, { DEFAULT_GRID_FACTOR } from '../factors/grid-factor'
-import Label from '../labels/label'
+import { Chart } from '../charts/chart'
+import { GridFactor, DEFAULT_GRID_FACTOR } from '../factors/grid-factor'
+import { Label } from '../labels/label'
 
-abstract class Grid implements GridType {
+export abstract class Grid implements GridType {
   ctx: CanvasRenderingContext2D
   height: number
   width: number
@@ -147,5 +147,3 @@ abstract class Grid implements GridType {
     }
   }
 }
-
-export default Grid

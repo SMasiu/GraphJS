@@ -1,12 +1,12 @@
-import Chart from './chart'
+import { Chart } from './chart'
 import { PolygonCharType, MultipleValuesItem, PolygonChartInputType } from '../types/charts.types'
-import CirclePoint from '../shapes/circle-point'
-import Circle from '../shapes/circle'
-import Line from '../shapes/line'
+import { CirclePoint } from '../shapes/circle-point'
+import { Circle } from '../shapes/circle'
+import { Line } from '../shapes/line'
 import { POLYGON_CHART } from '../types/chart-names'
 import { createLineGradient } from '../functions/gradient'
 
-class PolygonChart extends Chart implements PolygonCharType {
+export class PolygonChart extends Chart implements PolygonCharType {
   content: MultipleValuesItem[]
   fill: boolean
   dots: boolean
@@ -59,5 +59,3 @@ class PolygonChart extends Chart implements PolygonCharType {
     }
   }
 }
-
-export default PolygonChart

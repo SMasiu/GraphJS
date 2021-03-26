@@ -1,17 +1,17 @@
-import Chart from './chart'
+import { Chart } from './chart'
 import {
   SameDirectionRoundChartInputType,
   SameDirectionRoundChartType,
   ValueColorType
 } from '../types/charts.types'
-import LinePiece from '../shapes/line-piece'
-import NoGrid from '../grids/no-grid'
-import StringLabel from '../labels/string-label'
+import { LinePiece } from '../shapes/line-piece'
+import { NoGrid } from '../grids/no-grid'
+import { StringLabel } from '../labels/string-label'
 import { SAME_DIRECTION_ROUND_CHART } from '../types/chart-names'
-import Grid from '../grids/grid'
-import Line from '../shapes/line'
+import { Grid } from '../grids/grid'
+import { Line } from '../shapes/line'
 
-class SameDirectionRoundChart extends Chart implements SameDirectionRoundChartType {
+export class SameDirectionRoundChart extends Chart implements SameDirectionRoundChartType {
   content: ValueColorType[]
   centerValue: string | null
   labels: StringLabel | null
@@ -117,5 +117,3 @@ class SameDirectionRoundChart extends Chart implements SameDirectionRoundChartTy
     }
   }
 }
-
-export default SameDirectionRoundChart

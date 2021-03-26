@@ -1,4 +1,4 @@
-class Line {
+export class Line {
   color: string | CanvasGradient
   close: boolean
   dashLine: number[]
@@ -58,5 +58,3 @@ class Line {
     ctx.setLineDash([0])
   }
 }
-
-export default Line

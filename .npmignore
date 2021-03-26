@@ -6,7 +6,7 @@ main.css
 test.ts
 tsconfig.json
 webpack.config.js
-graph.js
 README.md
 .gitignore
 .prettierrc
+src/

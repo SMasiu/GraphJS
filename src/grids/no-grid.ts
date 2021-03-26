@@ -1,10 +1,10 @@
 import { DrawArea, NoGridType } from '../types/grids.types'
-import clearDrawArea from '../types/draw-area'
-import StringLabel from '../labels/string-label'
-import Grid from './grid'
+import { clearDrawArea } from '../types/draw-area'
+import { StringLabel } from '../labels/string-label'
+import { Grid } from './grid'
 import { ROUND_CHART, SAME_DIRECTION_ROUND_CHART } from '../types/chart-names'
 
-class NoGrid extends Grid implements NoGridType {
+export class NoGrid extends Grid implements NoGridType {
   mainLabel = '0'
   allowedCharts = [ROUND_CHART, SAME_DIRECTION_ROUND_CHART]
   drawArea: DrawArea
@@ -39,5 +39,3 @@ class NoGrid extends Grid implements NoGridType {
     return null
   }
 }
-
-export default NoGrid

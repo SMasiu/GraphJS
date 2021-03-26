@@ -1,6 +1,6 @@
-import Label from './label'
+import { Label } from './label'
 
-class ValueLabel extends Label {
+export class ValueLabel extends Label {
   values: number[]
   identifier: 'value' = 'value'
 
@@ -57,5 +57,3 @@ class ValueLabel extends Label {
     return v
   }
 }
-
-export default ValueLabel

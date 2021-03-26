@@ -1,4 +1,4 @@
-class CirclePoint {
+export class CirclePoint {
   offset: number
   x: number
   y: number
@@ -22,5 +22,3 @@ class CirclePoint {
     return [this.x, this.y]
   }
 }
-
-export default CirclePoint
