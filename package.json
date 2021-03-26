@@ -1,6 +1,6 @@
 {
   "name": "web-graphs",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "description": "graph and charts for websites",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -22,11 +22,12 @@
     "coordinate",
     "range"
   ],
-  "author": "Szymon Maśko",
+  "author": "@SMasiu",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/SMasiu/GraphJS"
+    "url": "https://github.com/SMasiu/GraphJS",
+    "publish": "npm publish --access public"
   },
   "devDependencies": {
     "ts-loader": "^6.2.1",
