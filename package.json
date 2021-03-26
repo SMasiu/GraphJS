@@ -1,12 +1,13 @@
 {
   "name": "web-graphs",
-  "version": "1.0.10",
+  "version": "1.0.17",
   "description": "graph and charts for websites",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "start": "webpack-dev-server --mode development",
-    "build": "webpack"
+    "build": "tsc",
+    "deploy": "npm run build && npm publish --access public"
   },
   "keywords": [
     "graph",
@@ -26,8 +27,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/SMasiu/GraphJS",
-    "publish": "npm publish --access public"
+    "url": "https://github.com/SMasiu/GraphJS"
   },
   "devDependencies": {
     "ts-loader": "^6.2.1",
