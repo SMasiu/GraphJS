@@ -356,19 +356,16 @@ const grid = new NoGrid(canvas);
 
 <h2 id="charts">Charts</h2>
 
-List of methods that you can use on any chart:
-If you don't know how to create single chart you can find it below.
+List of properties/methods that you can use on any chart:
 
-**content** - It's a box were are all your that you passed to constructor or you've added later.
-
-- **getItemContent** - Returnes item from your content by id.
-- **addItemContent** - Add item to your chart content and returne it.
-- **updateItemContent** - Updates item in your chart content by id and returnes it.
-- **deleteItemContent** - Deletes item from your chart content by id and returnes it.
-- **createLabel** - Appends labels generated from names of your items to element that you specify.
-- **draw** - If your chart can be assigned to NoGrid you don't have to create new NoGrid and pass it to this grid. You can simply pass canvas to your chart and use this method.
-- **content** - You can find here all your values that are in your chart.
-- **disable** - By this value you can control if your chart will be displayed on the grid.
+- **content** - It's a list of data that have been assigned to this chart.
+- **getItemContent** - Return item from content by id.
+- **addItemContent** - Add item to the content and returns it.
+- **updateItemContent** - Update item in the content by id and return it.
+- **deleteItemContent** - Delete an item from the content by id and return it.
+- **createLabel** - Create labels based on each name in the content. Labels will be appended as a child to the element that you will pass as a parameter.
+- **draw** - If your char can be assigned to the NoGrid you don't have to create any grid. You can simply create a new chart and use this method, but you will have to pass a canvas element into it.
+- **disable** - By this value, you can control if your chart will be displayed on the grid.
 
 ```typescript
 const chart = new PolygonChart({ values: [{ color: '#00f', values: [10, 30, 40, 50, 20], id: 1 }] })
@@ -379,38 +376,36 @@ const updatedItem = chart.updateItemContent(1, { color: '#0f0' })
 const deletedItem = chart.deleteItemContent(2)
 
 chart.createLabel(document.body)
-chart.draw()
-const content = chart.content
+chart.draw(canvas)
 chart.disable = true
 ```
 
 ### LineChart
 
-[Click here to jump Chart methods](#charts)
-It creates lines on your grid.
+It draws a line chart on the grid.
 
-- **values** - Each object in array is single line.
+- **values** - An Array of objects where each object in the array represents a single line.
   **Item object:**
-  - **color** - If you pass string it take its value as color. If you pass string array it will create gradient from this colors.
-  - **values** - If you pass number array the values will be pointing to the begining of the range. If you pass nested array it will be pointing to values between the range. You can see it in chart5.
-  - **id** - By this id you will be able to manage you item.
-  - **name** - It is the title of your item. It will allow you automaticly create label from your chart.
-- **dashLine** - It takes array of number. It wors same as dash line in canvas.
-- **smooth** - It somooths your line naturally.
-- **dots** - It creates dots on the vertex.
-- **fill** - It fills your line to the 0 point.
-- **correspondTo** - By this you can choose to witch label it will be corresponding to.
-- **factor** - [more about facotrs](#factors)
+  - **color** - Color of the line. If you want to create gradient color you can simply pass an array of colors.
+  - **values** - It is an array of values. Each value can be either number or an array of numbers.
+  - **id** - With this id, you will be able to manage this item.
+  - **name** - It is the title of your item. It will allow you automatically create labels for this chart.
+- **dashLine** - It takes an array of numbers. It allows you to create a dashed line.
+- **smooth** - It makes the line smooth.
+- **dots** - It creates dots on each of the vertexes.
+- **fill** - It adds background to the line.
+- **correspondTo** - You can choose which label these chart values will be corresponding to.
+- **factor** - [more about factors](#factors)
 
 **Example 1**
 
 **Code**
 
 ```typescript
-interface LineChart({
+class LineChart({
     values?: [{
         color: string | string[]
-        values: [number | number[]]
+        values: number[] | number[][]
         id?: string | number,
         name?: string
     }],
@@ -425,7 +420,7 @@ interface LineChart({
 const chart1 = new LineChart({
     values: [{
         color: '#FF2212',
-        values: [170,190,185,195,200,180,190,170]
+        values: [170, 190, 185, 195, 200, 180, 190, 170]
     }]
 });
 
@@ -433,7 +428,7 @@ const chart2 = new LineChart({
     dashLine: [10, 5],
     values: [{
         color: '#C229AD',
-        values: [150,180,145,185,170,150,170,150]
+        values: [150, 180, 145, 185, 170, 150, 170, 150]
     }]
 });
 
@@ -441,7 +436,7 @@ const chart3 = new LineChart({
     smooth: true,
     values: [{
         color: '#59BF0B',
-        values: [120,150,115,155,150,130,160,130]
+        values: [120, 150, 115, 155, 150, 130, 160, 130]
     }]
 });
 
@@ -449,7 +444,7 @@ const chart4 = new LineChart({
     dots: true,
     values: [{
         color: '#3D48EB',
-        values: [110,120,95,125,130,110,120,100]
+        values: [110, 120, 95, 125, 130, 110, 120, 100]
     }]
 });
 
@@ -457,7 +452,7 @@ const chart5 = new LineChart({
     dots: true,
     values: [{
         color: '#007785',
-        values: [[90,75,70],[80,90,80,70],[85, 60],80,[70, 60],[70, 80, 70, 60],[60, 70, 50, 80, 50, 40], 60]
+        values: [[90, 75, 70], [80, 90, 80, 70], [85, 60], 80, [70, 60],[70, 80, 70, 60],[60, 70, 50, 80, 50, 40], 60]
     }]
 });
 
@@ -465,7 +460,7 @@ const chart6 = new LineChart({
     fill: true,
     values: [{
         color: '#E8786D',
-        values: [40,60,25,65,30,50,40,10]
+        values: [40, 60, 25, 65, 30, 50, 40, 10]
     }]
 });
 
@@ -473,7 +468,7 @@ const chart7 = new LineChart({
     fill: true,
     values: [{
         color: ['#C21585', '#E62802'],
-        values: [-40,-50,-45,-35,-20,-40,-10,-20]
+        values: [-40, -50, -45, -35, -20, -40, -10, -20]
     }]
 });
 ```
@@ -484,7 +479,7 @@ const chart7 = new LineChart({
 
 **Example 2**
 
-You can also create many charts in one LineChart. They will have same properties like smooth, dots, fill and dashLine.
+You can also create many charts in one LineChart. They will share properties with each other.
 
 **Code**
 
@@ -519,32 +514,29 @@ const chart = new LineChart({
 
 ### ColumnChart
 
-[Click here to jump Chart methods](#charts)
-
-- **values** - Each object in array is single item or item group.
+- **values** - An array of objects where each object in the array represents a single column or group of columns.
   **Item object:**
   - **type:**
-    - 'simpe' - single column.
-    - 'group' - items group placed next to each other.
-    - 'stacked-group' - items group put on each other
-  - **color** - If its simple item you can use string or string array. If you use string it take its value as color. If you pass string array it will create gradient from this colors.
-    If its group or stacked-group you should use array string of colors same as in simple item. Each item color will be aply to the value with same iterator.
-  - **values** - If you are using simle item you shuold use number. Otherwise you should use array of numbers.
-  - **margin** - You can only use it if item's type is group. If you don't want to have margin between items in group use **margin: 'collapse'**. Otherwise leave it blank.
-  - **direction** - You can only use it if item's type is stacked-group. You can't use negative numbers in stacked-group but if you want to make them negative use **direction: 'reverse'**.
-  - **id** - By this id you will be able to manage you item.
-  - **name** - It is the title of your item. It will allow you automaticly create label from your chart.
-- **correspondTo** - By this you can choose to witch label it will be corresponding to.
-- **correspondToSecondary** - By this you can choose witch label will be signature label.
-- **factor** - [more about facotrs](#factors)
+    - 'singe' - Single column
+    - 'group' - Group of items placed next to each other
+    - 'stacked-group' - Group of items placed on top of each other.
+  - **color** - Color of the line. If you want to create gradient color you can simply pass an array of colors. If the type of this item is different than single you have to pass an array of colors where each color corresponds to the column at the same index
+  - **values** - It type of this item is single it should be a number otherwise it should be an array of numbers.
+  - **margin** - You can remove the margin between columns in this group by using **margin: 'collapse'**.
+  - **direction** - You can't use negative numbers one type of this item is stacked-group but you can make them negative using **direction: 'reverse'**.
+  - **id** - With this id, you will be able to manage this item.
+  - **name** - It is the title of your item. It will allow you automatically create labels for this chart.
+- **correspondTo** - You can choose which label these chart values will be corresponding to.
+- **correspondToSecondary** - You can choose which label this chart will be corresponding to.
+- **factor** - [more about factors](#factors)
 
 **Code**
 
 ```typescript
-interface ColumnChart({
+class ColumnChart({
     values?: [{
         type: string,
-        color: string | string[] | [string | string[]],
+        color: string | string[] | string[][],
         values: number | number[],
         margin?: string,
         direction?: string,
@@ -563,24 +555,24 @@ const chart = new ColumnChart({
         values: 60
     },{
         type: 'simple',
-        color: ['#FF2212','#801204'],
+        color: ['#FF2212', '#801204'],
         values: 70
     },{
         type: 'group',
-        color: ['#FF2212','#3164C2'],
+        color: ['#FF2212', '#3164C2'],
         values: [30, 50]
     },{
         type: 'group',
-        color: ['#FF2212','#3164C2'],
+        color: ['#FF2212', '#3164C2'],
         values: [80, 70],
         margin: 'collapse'
     },{
         type: 'stacked-group',
-        color: ['#FF2212','#3164C2'],
+        color: ['#FF2212', '#3164C2'],
         values: [20, 80],
     },{
         type: 'stacked-group',
-        color: [['#FF2212','#801204'],['#3164C2','#1B0E80']],
+        color: [['#FF2212', '#801204'], ['#3164C2', '#1B0E80']],
         values: [60, 40]
     }]
 });
@@ -592,32 +584,29 @@ const chart = new ColumnChart({
 
 ### RowChart
 
-[Click here to jump Chart methods](#charts)
-
-- **values** - Each object in array is single item or item group.
+- **values** - An array of objects where each object in the array represents a single column or group of columns.
   **Item object:**
   - **type:**
-    - 'simpe' - single column.
-    - 'group' - items group placed next to each other.
-    - 'stacked-group' - items group put on each other
-  - **color** - If its simple item you can use string or string array. If you use string it take its value as color. If you pass string array it will create gradient from this colors.
-    If its group or stacked-group you should use array string of colors same as in simple item. Each item color will be aply to the value with same iterator.
-  - **values** - If you are using simle item you shuold use number. Otherwise you should use array of numbers.
-  - **margin** - You can only use it if item's type is group. If you don't want to have margin between items in group use **margin: 'collapse'**. Otherwise leave it blank.
-  - **direction** - You can only use it if item's type is stacked-group. You can't use negative numbers in stacked-group but if you want to make them negative use **direction: 'reverse'**.
-  - **id** - By this id you will be able to manage you item.
-  - **name** - It is the title of your item. It will allow you automaticly create label from your chart.
-- **correspondTo** - By this you can choose to witch label it will be corresponding to.
-- **correspondToSecondary** - By this you can choose witch label will be signature label.
-- **factor** - [more about facotrs](#factors)
+    - 'singe' - Single column
+    - 'group' - Group of items placed next to each other
+    - 'stacked-group' - Group of items placed on top of each other.
+  - **color** - Color of the line. If you want to create gradient color you can simply pass an array of colors. If the type of this item is different than single you have to pass an array of colors where each color corresponds to the column at the same index
+  - **values** - It type of this item is single it should be a number otherwise it should be an array of numbers.
+  - **margin** - You can remove the margin between columns in this group by using **margin: 'collapse'**.
+  - **direction** - You can't use negative numbers one type of this item is stacked-group but you can make them negative using **direction: 'reverse'**.
+  - **id** - With this id, you will be able to manage this item.
+  - **name** - It is the title of your item. It will allow you automatically create labels for this chart.
+- **correspondTo** - You can choose which label these chart values will be corresponding to.
+- **correspondToSecondary** - You can choose which label this chart will be corresponding to.
+- **factor** - [more about factors](#factors)
 
 **Code**
 
 ```typescript
-interface RowChart({
+class RowChart({
     values?: [{
         type: string,
-        color: string | string[] | [string | string[]],
+        color: string | string[] | string[][],
         values: number | number[],
         margin?: string,
         direction?: string,
@@ -637,24 +626,24 @@ const chart = new RowChart({
         values: 60
     },{
         type: 'simple',
-        color: ['#801204','#FF2212'],
+        color: ['#801204', '#FF2212'],
         values: 70
     },{
         type: 'group',
-        color: ['#FF2212','#3164C2'],
+        color: ['#FF2212', '#3164C2'],
         values: [30, 50]
     },{
         type: 'group',
-        color: ['#FF2212','#3164C2'],
+        color: ['#FF2212', '#3164C2'],
         values: [80, 70],
         margin: 'collapse'
     },{
         type: 'stacked-group',
-        color: ['#FF2212','#3164C2'],
+        color: ['#FF2212', '#3164C2'],
         values: [20, 80],
     },{
         type: 'stacked-group',
-        color: [['#801204','#FF2212'],['#1B0E80','#3164C2']],
+        color: [['#801204', '#FF2212'], ['#1B0E80', '#3164C2']],
         values: [60, 40]
     }]
 });
@@ -664,23 +653,21 @@ const chart = new RowChart({
 
 ![RowChart](https://github.com/SMasiu/GraphJS/blob/master/img/row-chart.png?raw=true)
 
-### BubleChart
+### BubbleChart
 
-[Click here to jump Chart methods](#charts)
-
-- **values** - Each object in array is single buble.
+- **values** - An array of objects where each object represents a single bubble.
   **Item object:**
-  - **color** - If you pass string it take its value as color. If you pass string array it will create gradient from this colors.
-  - **values** - Array of coordinates. First item is x coordinate and second item is y coordinate.
-  - **radius** - Radius of the buble.
-  - **id** - By this id you will be able to manage you item.
-  - **name** - It is the title of your item. It will allow you automaticly create label from your chart.
-- **factor** - [more about facotrs](#factors)
+  - **color** - Color of the bubble. If you want to create gradient color you can simply pass an array of colors.
+  - **values** - An array of coordinates. The first item is the x coordinate and the second item is the y coordinate.
+  - **radius** - Radius of the bubble.
+  - **id** - With this id, you will be able to manage this item.
+  - **name** - It is the title of your item. It will allow you automatically create labels for this chart.
+- **factor** - [more about factors](#factors)
 
 **Code**
 
 ```typescript
-interface BubleChart({
+class BubbleChart({
     values?: [{
         color: string | string[],
         values: number[],
@@ -691,7 +678,7 @@ interface BubleChart({
     factor?: ChartFactor
 });
 
-const chart = new BubleChart({
+const chart = new BubbleChart({
     values: [{
         values: [40, 50],
         color: '#E61B00',
@@ -714,7 +701,7 @@ const chart = new BubleChart({
         radius: 10
     },{
         values: [20, -60],
-        color: ['#C2445B','#80182B'],
+        color: ['#C2445B', '#80182B'],
         radius: 60
     }]
 });
@@ -722,28 +709,26 @@ const chart = new BubleChart({
 
 **Output**
 
-![BubleChart](https://github.com/SMasiu/GraphJS/blob/master/img/buble-chart.png?raw=true)
+![BubbleChart](https://github.com/SMasiu/GraphJS/blob/master/img/buble-chart.png?raw=true)
 
 ### RangeChart
 
-[Click here to jump Chart methods](#charts)
-
-- **values** - Each object in array is single line or pionts.
+- **values** - An array of objects where each object in the array represents either a single point or line.
   **Item object:**
-  - **color** - If you pass string it take its value as color. If you pass string array it will create gradient from this colors.
-  - **values** - If you pass number array you will create points on grid. If you pass array of number array you will create ranges where start is first item of nested array and end is the second one.
-  - **under** - If you set this value to true line will be below grid.
-  - **id** - By this id you will be able to manage you item.
-  - **name** - It is the title of your item. It will allow you automaticly create label from your chart.
-- **factor** - [more about facotrs](#factors)
+  - **color** - Color of the bubble. If you want to create gradient color you can simply pass an array of colors.
+  - **values** - It takes an array where each item can be either number or an array of numbers. If you pass the number you will create a point on the grid. If you pass an array of numbers you will create a range.
+  - **under** - If you set this value to the true line will be drawn below the grid.
+  - **id** - With this id, you will be able to manage this item.
+  - **name** - It is the title of your item. It will allow you automatically create labels for this chart.
+- **factor** - [more about factors](#factors)
 
 **Code**
 
 ```typescript
-interface RangeChart({
+class RangeChart({
     values?: [{
         color: string | string[],
-        values: [number | number[]],
+        values: number | number[],
         under?: boolean,
         id?: number | string,
         name?: string
@@ -755,11 +740,11 @@ const values: [{
         values: [0, 100],
         color: '#E6372E'
     },{
-        values: [50, [-40,10]],
+        values: [50, [-40, 10]],
         color: '#1954C2'
     },{
-        values: [[Infinity,70]],
-        color: ['#80182B','#FF3056'],
+        values: [[Infinity, 70]],
+        color: ['#80182B', '#FF3056'],
         under: true
     },{
         values: [[Infinity, Infinity]],
@@ -774,20 +759,18 @@ const values: [{
 
 ### PolygonChart
 
-[Click here to jump Chart methods](#charts)
-
-- **values** - Each object in array is single polygon.
+- **values** - An array of objects where each object in the array represents a single polygon.
   **Item object:**
-  - **color** - If you pass string it take its value as color. If you pass string array it will create gradient from this colors.
-  - **values** - It takes number array where each item in array points to the vertex.
-  - **id** - By this id you will be able to manage you item.
-  - **name** - It is the title of your item. It will allow you automaticly create label from your chart.
-- **factor** - [more about facotrs](#factors)
+  - **color** - Color of the item. If you want to create gradient color you can simply pass an array of colors.
+  - **values** - It takes an array of numbers where each item in the array represents the value from 0 to 100.
+  - **id** - With this id, you will be able to manage this item.
+  - **name** - It is the title of your item. It will allow you automatically create labels for this chart.
+- **factor** - [more about factors](#factors)
 
 **Code**
 
 ```typescript
-interface PolygonGrid({
+class PolygonGrid({
     values?: [{
         color: string | string[],
         values: number[],
@@ -801,8 +784,8 @@ interface PolygonGrid({
 
 const chart = new PolygonChart({
     values: [{
-        color: 'red',
-        values: [100,80,65,70,50]
+        color: '#f00',
+        values: [100, 80, 65, 70, 50]
     }]
 });
 ```
@@ -813,30 +796,28 @@ const chart = new PolygonChart({
 
 ### RoundChart
 
-[Click here to jump Chart methods](#charts)
-
-- **values** - Each object in array reprezents piece of circle.
+- **values** - An array of objects where each object in the array represents a piece of the circle.
   **Item object:**
-  - **color** - If you pass string it take its value as color. If you pass string array it will create gradient from this colors.
+  - **color** - Color of the item. If you want to create gradient color you can simply pass an array of colors.
   - **values** - This value determines the size of the circle piece. It is given as a percentage.
-  - **id** - By this id you will be able to manage you item.
-  - **name** - It is the title of your item. It will allow you automaticly create label from your chart.
+  - **id** - With this id, you will be able to manage this item.
+  - **name** - It is the title of your item. It will allow you automatically create labels for this chart.
 - **labels** - Creates labels around the chart.
 - **centerValue** - Adds some string to the center of the chart.
 - **changingSize** - Each next item will be a little bit smaller.
 - **blankCenter** - Creates empty space in the center of the chart.
 - **itemsMargin** - Creates some spacing between items.
 - **canvas** - HTML canvas element.
-- **changingStepSize** - Specifies how item will be changing his size.
-- **centerRadius** - Specifies size of the blank center. It is given as number from 0 to 1.
-- **factors** - [more about facotrs](#factors)
+- **changingStepSize** - Specifies how an item will be changing its size.
+- **centerRadius** - Specifies the size of the blank center. It is given as a number from 0 to 1.
+- **factors** - [more about factors](#factors)
 
 **Example 1**
 
 **Code**
 
 ```typescript
-interface RoundChart({
+class RoundChart({
     values?: [{
         color: string | string[],
         values: number,
@@ -862,7 +843,7 @@ const chart = new RoundChart({
         color: '#FF6A00',
         values: 30
     },{
-        color: ['#801B70','#FF36E1'],
+        color: ['#801B70', '#FF36E1'],
         values: 30
     }]
 });
@@ -906,33 +887,31 @@ const chart = new RoundChart({
 
 ### SameDirectionRoundChart
 
-[Click here to jump Chart methods](#charts)
-
-- **values** - Each object in array reprezents single item.
+- **values** - An array of objects where each object in the array represents a single item.
   **Item object:**
-  - **color** - If you pass string it take its value as color. If you pass string array it will create gradient from this colors.
-  - **values** - This value determines the size of the circle. It is given as a percentage.
-  - **id** - By this id you will be able to manage you item.
-  - **name** - It is the title of your item. It will allow you automaticly create label from your chart.
-- **lables** - Creates items label.
+  - **color** - Color of the item. If you want to create gradient color you can simply pass an array of colors.
+  - **values** - This value determines the size of the circle piece. It is given as a percentage.
+  - **id** - With this id, you will be able to manage this item.
+  - **name** - It is the title of your item. It will allow you automatically create labels for this chart.
+- **labels** - Creates label on top of each item.
 - **centerValue** - Adds some string to the center of the chart.
 - **canvas** - HTML canvas element.
-- **itemMargin** - Margin between items.
-- **factor** - [more about facotrs](#factors)
+- **itemMargin** - Add some margin between the items.
+- **factor** - [more about factors](#factors)
 
 **Example 1**
 
 **Code**
 
 ```typescript
-interface SameDirectionRoundChart({
+class SameDirectionRoundChart({
     values?: {
         color: string | string[],
         values: number,
         id?: number | string,
         name?: string,
     },
-    lables?: StringLabel,
+    labels?: StringLabel,
     centerValue?: string,
     canvas?: HTMLCanvasElement,
     itemMargin?: number,
@@ -947,7 +926,7 @@ const chart = new SameDirectionRoundChart({
         color: '#2155BF',
         values: 60
     },{
-        color: ['#1D8012','#2DC21C'],
+        color: ['#1D8012', '#2DC21C'],
         values: 70
     },{
         color: '#C23167',
@@ -960,7 +939,7 @@ const chart = new SameDirectionRoundChart({
 
 ![SameDirectionRoundChart](https://github.com/SMasiu/GraphJS/blob/master/img/same-direction-round-chart1.png?raw=true)
 
-**Exapmle 2**
+**Example 2**
 
 **Code**
 
@@ -995,29 +974,29 @@ const chart = new SameDirectionRoundChart({
 
 <h2 id="factors">Factors</h2>
 
-You can use factors to define your grids or charts styles. You can create new factor and apply it to the grid or chart. Or you can modify the default one that will affect all of them.
+You can use factors to define your grids or chart styles. You can create a new factor and apply it to the grid or chart. Or you can modify the default one that will affect all of them.
 
 ### GridFactor
 
-If you want to use it all you have to do is to create new instance of it and pass it to grid object.
+If you want to use it all you have to do is to create a new instance of it and pass it to the grid object.
 
 - **colors:**
-  - **primary** - It's a color of your main borders. Like separators between label and charts or position of your 0 value.
-  - **secondary** - It's a color of the rest of the borders.
+  - **primary** - It's the color of grid main borders, like separators between labels and charts or position of the grid at 0 value.
+  - **secondary** - It's the color of the rest of the borders.
 - **font:**
-  - **size** - Changes size of your font.
-  - **family** - Changes font family of your font.
-  - **color** - Changes color of your font.
+  - **size** - Changes size of the font.
+  - **family** - Changes font family of the font.
+  - **color** - Changes the color of the font.
 - **background:**
-  - **color** - Changes background color of your canvas.
-  - **image** - You can add image as a background. It's a path to your image.
+  - **color** - Changes the background color of the canvas.
+  - **image** - Add an image as a background. It's a path to your image.
   - **opacity** -
-- **labelPadding** - Defines size of maring between label and grid.
+- **labelPadding** - Defines the size of margins between labels and grid.
 
 **Code**
 
 ```typescript
-interface GridFactor({
+class GridFactor({
     colors?: {
         primary?: string;
         secondary?: string;
@@ -1038,18 +1017,18 @@ interface GridFactor({
 
 ### ChartFactor
 
-If you want to use it all you have to do is to create new instance of it and pass it to grid object.
+If you want to use it all you have to do is to create a new instance of it and pass it to the grid object.
 
-- **lineWidth** - Defines width of all charts lines.
-- **opacity** - Allows your to control transparency of your chart.
-- **itemSize** - Defines size of items like column width etc...
+- **lineWidth** - Defines the width of all chart lines.
+- **opacity** - Allows you to control the transparency of your chart.
+- **itemSize** - Defines the size of items like column width etc...
 - **dotBorder** - Creates space between dots and lines.
-- **dotRadius** - Defines radius of all dots on charts.
+- **dotRadius** - Defines radius of all dots on the charts.
 
 **Code**
 
 ```typescript
-interface ChartFactor({
+class ChartFactor({
     lineWidth?: number,
     opacity?: number,
     itemSize?: number,
@@ -1062,12 +1041,12 @@ interface ChartFactor({
 
 By modifying this object you can affect styles for all your grids or charts.
 
-**DEFAULT_GRID_FACTOR** - default factor for grid. It's GridFactor instance.
-**DEFAULT_CHART_FACTOR** - default factor for charts. It's ChartFactor instance.
+**DEFAULT_GRID_FACTOR** - Default factor for the grids. It's the GridFactor instance.
+**DEFAULT_CHART_FACTOR** - Default factor for the charts. It's the ChartFactor instance.
 
 ## More
 
-### Combained chart example
+### Combined chart example
 
 **Code**
 
@@ -1076,6 +1055,7 @@ const grid = new HorizontalGrid(canvas, {
   left: new FlexLabel(100, 0, 10),
   bottom: new StringLabel(['2019', '2020', '2021', '2022', '2023'])
 })
+
 grid.addCharts({
   columns: new ColumnChart({
     values: [
@@ -1143,6 +1123,7 @@ grid.addCharts({
     ]
   })
 })
+
 grid.draw()
 ```
 
