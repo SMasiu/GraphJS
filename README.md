@@ -15,12 +15,16 @@ GraphJS will draw for you a lot of types of charts. Just select grid, chart and 
 npm install web-graphs
 ```
 
-<h1 id="example"></h1>
+<h1 id="example">Example</h1>
 
 **Code**
 
 ```HTML
 <canvas width="1400" height="700"></canvas>
+```
+
+```typescript
+import { CoordinateSystem2dGrid, LineChart, ValueLabel, FlexLabel } from 'web-graphs'
 ```
 
 ```typescript
